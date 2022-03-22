@@ -11,4 +11,5 @@ public class Cabbage extends Plant {
 		MessageUtility.logConstractor("Cabbage", "Cabbage");
 	}
 
+
 }
