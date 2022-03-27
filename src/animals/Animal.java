@@ -16,18 +16,16 @@ public abstract class Animal extends Mobile implements IEdible  {
         this.name = name;
     }
 
+    public double move(Point p)
+    {
+        double d = super.move(p);
+        setWeight(this.weight-(d*this.weight*0.00025));
+        return d;
+    }
 
     public IDiet getDiet(){return diet;}
 
-    public void makeSound(){
-        if(roar_or_chew().equals("Roar"))
-            roar();
-
-        else
-            chew();
-    }
-
-    public abstract String roar_or_chew();
+    public abstract void makeSound();
 
     public boolean eat(IEdible ed){
         if(diet.canEat(ed.getFoodType())){

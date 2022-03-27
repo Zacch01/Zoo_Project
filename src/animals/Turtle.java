@@ -4,7 +4,7 @@ import diet.Herbivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Turtle extends Animal{
+public class Turtle extends Chew{
     private int age;
 
     public Turtle(String name){
@@ -25,9 +25,6 @@ public class Turtle extends Animal{
         MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
     }
 
-    public String roar_or_chew(){
-        return "Chew";
-    }
 
     public boolean setAge( int age)
     {

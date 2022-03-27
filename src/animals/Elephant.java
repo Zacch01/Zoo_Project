@@ -5,7 +5,7 @@ import food.EFoodType;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Elephant extends Animal{
+public class Elephant extends Chew{
     private double trunkLength;
 
     public Elephant(String name){
@@ -26,9 +26,6 @@ public class Elephant extends Animal{
         MessageUtility.logSound(getName(),"Trumpets with joy while flapping its ears, then chews");
     }
 
-    public String roar_or_chew(){
-        return "Chew";
-    }
 
     public boolean settrunkLength( double lenght)
     {

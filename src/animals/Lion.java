@@ -8,7 +8,7 @@ import utilities.MessageUtility;
 import java.util.Random;
 
 
-public class Lion extends Animal{
+public class Lion extends Roar{
     private int scarCount;
 
     public Lion(String name){
@@ -36,9 +36,6 @@ public class Lion extends Animal{
         MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }
 
-    public String roar_or_chew(){
-        return "Roar";
-    }
 
     public String toString() {
         return "[" + this.getClass().getSimpleName() + "] ";

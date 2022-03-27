@@ -5,7 +5,7 @@ import food.EFoodType;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Bear extends Animal{
+public class Bear extends Roar{
     private String furColor;
 
     public Bear(String name){
@@ -38,9 +38,7 @@ public class Bear extends Animal{
         return false;
     }
 
-    public String roar_or_chew(){
-        return "Roar";
-    }
+
 
     public void roar(){
         MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");

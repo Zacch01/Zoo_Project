@@ -12,6 +12,10 @@ public class Point {
             this.x=x;
             this.y=y;
         }
+        else{
+            this.x = 0;
+            this.y =0;
+        }
     }
     public boolean setpoint(int x,int y)
     {
@@ -31,5 +35,9 @@ public class Point {
     public int gety()
     {
         return this.y;
+    }
+
+    public static boolean checkBoundaries(Point pointToCheck){
+        return (xmin<= pointToCheck.getx() && pointToCheck.getx()<=xmax)&&(ymin<= pointToCheck.gety() && pointToCheck.gety() <=ymax);
     }
 }

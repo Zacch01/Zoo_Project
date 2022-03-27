@@ -4,7 +4,7 @@ import diet.Herbivore;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Giraffe extends Animal{
+public class Giraffe extends Chew{
     private double neckLength;
 
     public Giraffe(String name){
@@ -25,9 +25,6 @@ public class Giraffe extends Animal{
         MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
     }
 
-    public String roar_or_chew(){
-        return "Chew";
-    }
 
     public boolean setNeckLength( double lenght)
     {
