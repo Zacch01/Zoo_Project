@@ -7,16 +7,20 @@ public class Point {
     static private final int xmax = 800,ymax=600,xmin=0,ymin=0;
 
     public Point(int x, int y) {
-        if((xmin<=x && x<=xmax)&&(ymin<=y && y<=ymax))
-        {
-            this.x=x;
-            this.y=y;
-        }
-        else{
+        this.x = x;
+        this.y = y;
+        if (!checkBoundaries(this)){
             this.x = 0;
-            this.y =0;
+            this.y = 0;
         }
     }
+
+    public Point(Point point) {
+        this.x = point.getx();
+        this.y = point.gety();
+    }
+
+
     public boolean setpoint(int x,int y)
     {
         if((xmin<=x && x<=xmax)&&(ymin<=y && y<=ymax))

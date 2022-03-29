@@ -11,11 +11,10 @@ public class Bear extends Roar{
     public Bear(String name){
         super(name,new Point(100,5));
         setWeight(308.2);
-        this.furColor = "GRTY";
+        this.furColor = "GRAY";
         setdiet(new Carnivore());
         //a checker
     }
-
 
 
 
