@@ -6,7 +6,7 @@ import animals.Animal;
 
 public class Omnivore implements IDiet {
     public boolean canEat(EFoodType food) {
-        return food == EFoodType.MEAT || food == EFoodType.VEGETABLE;
+        return food != EFoodType.NOTFOOD;
     }
 
     public double eat(Animal animal, IEdible food) {

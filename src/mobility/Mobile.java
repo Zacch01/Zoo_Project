@@ -7,7 +7,10 @@ public abstract class Mobile implements Ilocatable {
 
     public Mobile(Point p)
     {
-        setLocation(p);
+        if(Point.checkBoundaries(p))
+            setLocation(p);
+        else
+            setLocation(new Point(0,0));
         this.totaldistance = 0;
     }
 

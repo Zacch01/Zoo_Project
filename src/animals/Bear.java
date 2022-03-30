@@ -13,7 +13,6 @@ public class Bear extends Roar{
         setWeight(308.2);
         this.furColor = "GRAY";
         setdiet(new Carnivore());
-        //a checker
     }
 
 

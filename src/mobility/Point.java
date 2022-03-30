@@ -9,10 +9,6 @@ public class Point {
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        if (!checkBoundaries(this)){
-            this.x = 0;
-            this.y = 0;
-        }
     }
 
     public Point(Point point) {
