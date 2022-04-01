@@ -76,7 +76,7 @@ public abstract class Animal extends Mobile implements IEdible  {
     public  boolean setWeight( double w){
         if (w<=0)
             return false;
-        this.weight += w;
+        this.weight = w;
         return true;
 
     }

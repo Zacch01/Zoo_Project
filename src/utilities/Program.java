@@ -70,7 +70,7 @@ public class Program {
 		animals = new ArrayList<>();
 		lion = new Lion("Simba");
 		animals.add(lion);
-		bear = new Bear("Baloo", "GRAY");
+		/*bear = new Bear("Baloo", "GRAY");
 		animals.add(bear);
 		elephant = new Elephant("Dumbo", 2);
 		animals.add(elephant);
@@ -78,7 +78,7 @@ public class Program {
 		animals.add(giraffe);
 		turtle = new Turtle("Rafael", 50);
 		animals.add(turtle);
-		animals.add(new Bear("Ted", "BROWN"));
+		animals.add(new Bear("Ted", "BROWN"));*/
 
 		food = new LinkedList<>();
 		food.add(new Cabbage());

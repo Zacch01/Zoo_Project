@@ -31,6 +31,8 @@ public class ZooActions {
     }
 
     public static void main(String[] args) {
+        Lion ln = new Lion("yuval");
+        Class st = ln.getClass();
         Scanner sc = new Scanner(System.in);
         int size = 0, choice,locationchoice,x,y;
         String name;
@@ -109,7 +111,7 @@ public class ZooActions {
                     System.out.println("Invalid choice, please try again");
                     locationchoice = sc.nextInt();
                 }
-                c = cl.loadClass(type);
+                c = cl.loadClass("animals."+type);
                 if (locationchoice == 1) {
                     Constructor con = c.getConstructor(String.class, Point.class);
                     System.out.print("\nPlease enter the location of the animal :\n\tx=");
@@ -149,18 +151,20 @@ public class ZooActions {
         }
         int timestoeat = size/2;
         Random rnd = new Random();
-        for(int i=0;i<timestoeat;i++)
-        {
+        for(int i=0;i<timestoeat;i++) {
             int rnd1 = rnd.nextInt(size);
-            while(zoo[rnd1]==null)
+            while (zoo[rnd1] == null)
                 rnd1 = rnd.nextInt(size);
             int rnd2 = rnd.nextInt(size);
-            while((rnd1 != rnd2) && (zoo[rnd2]==null)) // to avoid from eating my self
+            while ((rnd1 != rnd2) && (zoo[rnd2] == null)) // to avoid from eating my self
                 rnd2 = rnd.nextInt(size);
-            if (eat(zoo[rnd1],zoo[rnd2]))
-                System.out.println(zoo[rnd1].getName()+" eat "+zoo[rnd2].getName()+"the new weight is :"+zoo[rnd1].getWeight());
+            //There is no chenge in the weight
+            if (eat(zoo[rnd1], zoo[rnd2])) {
+                System.out.println(zoo[rnd1].getName() + " eat " + zoo[rnd2].getName() + "the new weight is :" + zoo[rnd1].getWeight());
+                zoo[rnd2]=null;
+            }
             else
-                System.out.println(zoo[rnd1]+"dont eat");
+                System.out.println(zoo[rnd1].getName()+"dont eat");
         }
 
 
