@@ -7,10 +7,16 @@ import food.IEdible;
 import mobility.Mobile;
 import mobility.Point;
 import java.util.Scanner;
+import java.util.Random;
 
 public class ZooActions {
     public static boolean eat(Object animal, IEdible food){
-        return true;
+        if (animal instanceof Animal)
+        {
+            Animal eatinganimal = (Animal) animal;
+            return eatinganimal.eat(food);
+        }
+        return false;
 
     }
 
@@ -120,14 +126,42 @@ public class ZooActions {
                 i = -1;
             }
         }
+        for (Animal animal : zoo)
+        {
+            int movetox,movetoy;
+            System.out.println("enter the point you want to move "+animal.getName()+"\n\t enter x=");
+            movetox = sc.nextInt();
+            System.out.print("y=");
+            movetoy = sc.nextInt();
+            while(!Point.checkBoundaries(new Point(movetox,movetoy)))
+            {
+                System.out.println("you enter point out of range : \nenter x between 0 to 800 and y between 0 to 600\n enter x=");
+                movetox = sc.nextInt();
+                System.out.print("y=");
+                movetoy = sc.nextInt();
+            }
+            Point tmppoint = new Point(movetox,movetoy);
+            if (move(animal,tmppoint))
+                System.out.println(animal.getName()+"is moved the new weight is :"+animal.getWeight());
+            else
+                System.out.println(animal.getName()+"is not moved");
 
-
-
-
-
-
-
-
+        }
+        int timestoeat = size/2;
+        Random rnd = new Random();
+        for(int i=0;i<timestoeat;i++)
+        {
+            int rnd1 = rnd.nextInt(size);
+            while(zoo[rnd1]==null)
+                rnd1 = rnd.nextInt(size);
+            int rnd2 = rnd.nextInt(size);
+            while((rnd1 != rnd2) && (zoo[rnd2]==null)) // to avoid from eating my self
+                rnd2 = rnd.nextInt(size);
+            if (eat(zoo[rnd1],zoo[rnd2]))
+                System.out.println(zoo[rnd1].getName()+" eat "+zoo[rnd2].getName()+"the new weight is :"+zoo[rnd1].getWeight());
+            else
+                System.out.println(zoo[rnd1]+"dont eat");
+        }
 
 
         sc.close();

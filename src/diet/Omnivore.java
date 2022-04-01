@@ -9,7 +9,8 @@ public class Omnivore implements IDiet {
         return food != EFoodType.NOTFOOD;
     }
 
-    public double eat(Animal animal, IEdible food) {
+
+        public double eat(Animal animal, IEdible food) {
         Carnivore crv = new Carnivore();
         Herbivore hrb = new Herbivore();
         if (canEat(food.getFoodType())) {
