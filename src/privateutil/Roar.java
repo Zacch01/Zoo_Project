@@ -1,8 +1,9 @@
-package animals;
+package privateutil;
 
+import animals.Animal;
 import mobility.Point;
 
-public abstract class Roar extends Animal{
+public abstract class Roar extends Animal {
     public Roar(String name, Point p){
         super(name,p);
     }
