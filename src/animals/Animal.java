@@ -109,9 +109,9 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @param diet is an IDiet representing the diet of the animal
      * @return True if the setter succeed, else False
      */
-    public boolean setdiet( IDiet diet){
+    public boolean setDiet(IDiet diet){
         this.diet = diet;
-        MessageUtility.logSetter(this.name,"setdiet",diet,true);
+        MessageUtility.logSetter(this.name,"setDiet",diet,true);
         return true;
     }
 
@@ -122,7 +122,6 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return The Animal's name
      */
     public  String getName(){
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getName", this.name);
         return this.name;
     }
 
@@ -143,6 +142,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @see EFoodType
      * @return The Animal's food type
      */
+    @Override
     public  EFoodType getFoodType(){
         MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.MEAT);
         return EFoodType.MEAT;
@@ -156,7 +156,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      */
     public boolean setName(String name){
         this.name = name;
-        MessageUtility.logSetter(this.name,"setName()",name,true);
+        MessageUtility.logSetter(this.name,"setName",name,true);
         return true;
     }
 
@@ -171,5 +171,4 @@ public abstract class Animal extends Mobile implements IEdible  {
 
 
     public abstract void makeSound();
-
 }

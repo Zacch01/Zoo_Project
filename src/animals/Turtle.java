@@ -29,7 +29,7 @@ public class Turtle extends Chew {
         MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
         setAge(1);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -45,7 +45,7 @@ public class Turtle extends Chew {
         MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
         setAge(1);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -83,6 +83,7 @@ public class Turtle extends Chew {
     /**
      * The sound and the action that the Turtle makes
      */
+    @Override
     public void chew(){
         MessageUtility.logSound(getName(),"Retracts its head in then eats quietly");
     }

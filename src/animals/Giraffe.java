@@ -29,7 +29,7 @@ public class Giraffe extends Chew {
         MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
         setNeckLength(1.5);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -45,7 +45,7 @@ public class Giraffe extends Chew {
         MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
         setNeckLength(1.5);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -84,6 +84,7 @@ public class Giraffe extends Chew {
     /**
      * The sound and the action that the Giraffe makes
      */
+    @Override
     public void chew(){
         MessageUtility.logSound(getName(),"Bleats and Stomps its legs, then chews");
     }

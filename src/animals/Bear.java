@@ -29,7 +29,7 @@ public class Bear extends Roar {
         MessageUtility.logConstractor("Bear", name);
         setWeight(308.2);
         setFurColor("GRAY");
-        setdiet(new Omnivore());
+        setDiet(new Omnivore());
     }
 
 
@@ -46,7 +46,7 @@ public class Bear extends Roar {
         MessageUtility.logConstractor("Bear", name);
         setWeight(308.2);
         setFurColor("GRAY");
-        setdiet(new Omnivore());
+        setDiet(new Omnivore());
     }
 
 
@@ -83,6 +83,7 @@ public class Bear extends Roar {
     /**
      * The sound and the action that the Bear makes
      */
+    @Override
     public void roar(){
         MessageUtility.logSound(getName(),"Stands on its hind legs, roars and scratches its belly");
     }

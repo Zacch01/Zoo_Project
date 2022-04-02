@@ -29,7 +29,7 @@ public class Elephant extends Chew {
         MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
         settrunkLength(1);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -45,7 +45,7 @@ public class Elephant extends Chew {
         MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
         settrunkLength(1);
-        setdiet(new Herbivore());
+        setDiet(new Herbivore());
     }
 
 
@@ -84,6 +84,7 @@ public class Elephant extends Chew {
     /**
      * The sound and the action that the Elephant makes
      */
+    @Override
     public void chew(){
         MessageUtility.logSound(getName(),"Trumpets with joy while flapping its ears, then chews");
     }

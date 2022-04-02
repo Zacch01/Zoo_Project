@@ -42,4 +42,13 @@ public class Herbivore implements IDiet{
         }
         return 0;
     }
+
+
+    /**
+     * Representation of the object as a string
+     *
+     * @return a String of the object data in the requested format
+     */
+    @Override
+    public String toString() {return "[" + this.getClass().getSimpleName() + "]";}
 }

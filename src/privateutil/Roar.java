@@ -27,6 +27,7 @@ public abstract class Roar extends Animal {
      * Function that defines an action
      * Call the function chew()
      */
+    @Override
     public void makeSound(){roar();}
 
     public abstract void roar();

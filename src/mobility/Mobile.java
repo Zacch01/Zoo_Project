@@ -22,10 +22,7 @@ public abstract class Mobile implements Ilocatable {
      */
     public Mobile(Point p)
     {
-        if(Point.checkBoundaries(p))
-            setLocation(p);
-        else
-            setLocation(new Point(0,0));
+        setLocation(p);
         this.totaldistance = 0;
     }
 
@@ -83,11 +80,13 @@ public abstract class Mobile implements Ilocatable {
      * @param p is an object Point that indicate a location
      * @return True if the location change, else False
      */
+    @Override
     public boolean setLocation(Point p) {
         if (Point.checkBoundaries(p)) {
             this.location = new Point(p);
             return true;
         }
+        this.location = new Point(0,0);
         return false;
     }
 

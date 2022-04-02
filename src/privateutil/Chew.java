@@ -29,6 +29,7 @@ public abstract class Chew extends Animal {
      * Function that defines an action
      * Call the function chew()
      */
+    @Override
     public void makeSound(){
         chew();
     }

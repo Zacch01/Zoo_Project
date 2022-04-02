@@ -33,7 +33,7 @@ public class Lion extends Roar {
         MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
         setScarCount(0);
-        setdiet(new Carnivore());
+        setDiet(new Carnivore());
     }
 
 
@@ -49,7 +49,7 @@ public class Lion extends Roar {
         MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
         setScarCount(0);
-        setdiet(new Carnivore());
+        setDiet(new Carnivore());
     }
 
 
@@ -102,6 +102,7 @@ public class Lion extends Roar {
      * @param food is a String representing the food type (an object of type EFoodType)
      * @return True if the eating was successful, else False
      */
+    @Override
     public boolean eat(IEdible food) {
         if (super.eat(food)) {
             Random rand = new Random();
@@ -118,6 +119,7 @@ public class Lion extends Roar {
     /**
      * The sound and the action that the Lion makes
      */
+    @Override
     public void roar(){
         MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }
