@@ -43,11 +43,7 @@ public abstract class Animal extends Mobile implements IEdible  {
     public double move(Point p)
     {
         double d = super.move(p);
-        if (d != 0)
-            MessageUtility.logBooleanFunction(this.name,"move",p,true);
-        else
-            MessageUtility.logBooleanFunction(this.name,"move",p,false);
-
+        MessageUtility.logBooleanFunction(this.name,"move",p, d != 0);
         setWeight(this.weight-(d*this.weight*0.00025));
         return d;
     }
