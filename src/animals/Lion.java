@@ -108,9 +108,4 @@ public class Lion extends Roar {
         MessageUtility.logSound(getName(),"Roars, then stretches and shakes its mane");
     }
 
-
-    public String toString() {
-        return "[" + this.getClass().getSimpleName() + "] ";
-    }
-
 }

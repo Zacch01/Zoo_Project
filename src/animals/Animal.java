@@ -28,7 +28,8 @@ public abstract class Animal extends Mobile implements IEdible  {
      */
     public Animal(String name, Point p){
         super(p);
-        this.name = name;
+        MessageUtility.logConstractor("Animal", name);
+        setName(name);
     }
 
 
@@ -42,6 +43,11 @@ public abstract class Animal extends Mobile implements IEdible  {
     public double move(Point p)
     {
         double d = super.move(p);
+        if (d != 0)
+            MessageUtility.logBooleanFunction(this.name,"move",p,true);
+        else
+            MessageUtility.logBooleanFunction(this.name,"move",p,false);
+
         setWeight(this.weight-(d*this.weight*0.00025));
         return d;
     }
@@ -58,10 +64,15 @@ public abstract class Animal extends Mobile implements IEdible  {
 
 
     public boolean eat(IEdible ed){
-        if(diet.canEat(ed.getFoodType())){
+        double gainWeight = diet.eat(this, ed);
+        if(gainWeight>0){
+            setWeight((this.getWeight()+gainWeight));
+            MessageUtility.logBooleanFunction(this.name,"eat", ed,true);
             makeSound();
             return true;
         }
+        MessageUtility.logBooleanFunction(this.name,"eat", ed,false);
+
         return false;
     }
 
@@ -74,9 +85,12 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return True if the setter succeed, else False
      */
     public  boolean setWeight( double w){
-        if (w<=0)
+        if (w<=0){
+            MessageUtility.logSetter(this.name,"setWeight",w,false);
             return false;
+        }
         this.weight = w;
+        MessageUtility.logSetter(this.name,"setWeight",w,true);
         return true;
 
     }
@@ -115,9 +129,15 @@ public abstract class Animal extends Mobile implements IEdible  {
 
     public void setName(String name){
         this.name = name;
-        // in main this need a void function but in her pdf it need bool
+        MessageUtility.logSetter(this.name,"setName()",name,true);
     }
 
+
     public abstract void makeSound();
+
+    public String toString() {
+        return "[" + this.getClass().getSimpleName() + "]: "+getName();
+    }
+
 
 }

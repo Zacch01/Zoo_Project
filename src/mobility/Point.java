@@ -86,4 +86,9 @@ public class Point {
      * @return True if the point in the valid border, else False
      */
     public static boolean checkBoundaries(Point pointToCheck){return (xmin<= pointToCheck.getx() && pointToCheck.getx()<=xmax)&&(ymin<= pointToCheck.gety() && pointToCheck.gety() <=ymax);}
+
+
+    public String toString() {
+        return "(" + this.getx() + "," + this.gety() + ")";
+    }
 }

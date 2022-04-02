@@ -31,8 +31,7 @@ public class ZooActions {
     }
 
     public static void main(String[] args) {
-        Lion ln = new Lion("yuval");
-        Class st = ln.getClass();
+        System.out.println(new Lion("aze"));
         Scanner sc = new Scanner(System.in);
         int size = 0, choice,locationchoice,x,y;
         String name;
@@ -103,6 +102,7 @@ public class ZooActions {
             try {
                 System.out.println("Please enter the animal you want to add: ");
                 String type = sc.next();
+                c = cl.loadClass("animals."+type);
                 System.out.println("How would you like to call it?");
                 name = sc.next();
                 System.out.print("\nDo you want to enter his location\n\t1 - Yes\n\t2 - No\n->");
@@ -111,7 +111,6 @@ public class ZooActions {
                     System.out.println("Invalid choice, please try again");
                     locationchoice = sc.nextInt();
                 }
-                c = cl.loadClass("animals."+type);
                 if (locationchoice == 1) {
                     Constructor con = c.getConstructor(String.class, Point.class);
                     System.out.print("\nPlease enter the location of the animal :\n\tx=");
@@ -131,9 +130,9 @@ public class ZooActions {
         for (Animal animal : zoo)
         {
             int movetox,movetoy;
-            System.out.println("enter the point you want to move "+animal.getName()+"\n\t enter x=");
+            System.out.print("enter the point you want to move "+animal.getName()+"\n\tx=");
             movetox = sc.nextInt();
-            System.out.print("y=");
+            System.out.print("\ty=");
             movetoy = sc.nextInt();
             while(!Point.checkBoundaries(new Point(movetox,movetoy)))
             {
