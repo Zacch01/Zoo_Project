@@ -28,7 +28,7 @@ public class Giraffe extends Chew {
         super(name,new Point(50,0));
         MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
-        setNeckLength(1.5);
+        this.neckLength =1.5;
         setDiet(new Herbivore());
     }
 
@@ -44,7 +44,24 @@ public class Giraffe extends Chew {
         super(name,new Point(p.getx(), p.gety()));
         MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
-        setNeckLength(1.5);
+        this.neckLength =1.5;
+        setDiet(new Herbivore());
+    }
+
+
+    /**
+     * The constructor of the object Giraffe, it sets the attributes of the object
+     * Note : Weight and Location have a default value
+     *
+     * @param name A String that represent the name of the Giraffe
+     * @param neckLength A Double that represent the neck's length of the Giraffe
+     */
+    public Giraffe(String name, double neckLength){
+        super(name,new Point(50,0));
+        MessageUtility.logConstractor("Giraffe", name);
+        setWeight(450);
+        if(!setNeckLength(neckLength))
+            setNeckLength(1.5);
         setDiet(new Herbivore());
     }
 
@@ -62,10 +79,10 @@ public class Giraffe extends Chew {
         if (neckLength<=2.5 && neckLength>=1)
         {
             this.neckLength = neckLength;
-            MessageUtility.logSetter(this.getName(), "setNeckLength", this.neckLength, true);
+            MessageUtility.logSetter(this.getName(), "setNeckLength", neckLength, true);
             return true;
         }
-        MessageUtility.logSetter(this.getName(), "setNeckLength", this.neckLength, false);
+        MessageUtility.logSetter(this.getName(), "setNeckLength", neckLength, false);
         return false;
     }
 

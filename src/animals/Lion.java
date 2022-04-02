@@ -31,7 +31,7 @@ public class Lion extends Roar {
         super(name,new Point(20,0));
         MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
-        setScarCount(0);
+        this.scarCount=0;
         setDiet(new Carnivore());
     }
 
@@ -47,7 +47,24 @@ public class Lion extends Roar {
         super(name,new Point(p.getx(), p.gety()));
         MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
-        setScarCount(0);
+        this.scarCount=0;
+        setDiet(new Carnivore());
+    }
+
+
+    /**
+     * The constructor of the object Lion, it sets the attributes of the object
+     * Note : Weight and the location have a default value
+     *
+     * @param name A String that represent the name of the Lion
+     * @param scarCount A Int that represent the scar's counter of the Lion
+     */
+    public Lion(String name, int scarCount){
+        super(name,new Point(20,0));
+        MessageUtility.logConstractor("Lion", name);
+        setWeight(408.2);
+        if(!setScarCount(scarCount))
+            setScarCount(0);
         setDiet(new Carnivore());
     }
 
@@ -63,7 +80,7 @@ public class Lion extends Roar {
     public boolean setScarCount(int scarCount) {
         if (scarCount >= 0) {
             this.scarCount = scarCount;
-            MessageUtility.logSetter(this.getName(), "setScarCount", this.scarCount, true);
+            MessageUtility.logSetter(this.getName(), "setScarCount", scarCount, true);
             return true;
         }
         MessageUtility.logSetter(this.getName(), "setScarCount", scarCount, false);
@@ -87,8 +104,9 @@ public class Lion extends Roar {
      * @see IEdible
      * @return The object's food type
      */
-    public EFoodType getFoodtype() {
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
+    @Override
+    public EFoodType getFoodType() {
+        MessageUtility.logGetter(this.getName(), "getFoodType", EFoodType.NOTFOOD);
         return EFoodType.NOTFOOD;
     }
 
@@ -107,7 +125,7 @@ public class Lion extends Roar {
             Random rand = new Random();
             int r = rand.nextInt(2);
             if (r == 1) {
-                setScarCount(getScarCount()+1);
+                setScarCount(this.scarCount+1);
             }
             return true;
         }

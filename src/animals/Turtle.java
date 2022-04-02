@@ -28,7 +28,7 @@ public class Turtle extends Chew {
         super(name,new Point(80,0));
         MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
-        setAge(1);
+        this.age=1;
         setDiet(new Herbivore());
     }
 
@@ -44,9 +44,27 @@ public class Turtle extends Chew {
         super(name,new Point(p.getx(), p.gety()));
         MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
-        setAge(1);
+        this.age=1;
         setDiet(new Herbivore());
     }
+
+
+    /**
+     * The constructor of the object Turtle, it sets the attributes of the object
+     * Note : Weight and location have a default value
+     *
+     * @param name A String that represent the name of the Turtle
+     * @param age A Point that represent the initial age of the Turtle
+     */
+    public Turtle(String name,int age){
+        super(name,new Point(80,0));
+        MessageUtility.logConstractor("Turtle", name);
+        setWeight(1);
+        if(!setAge(age))
+            setAge(1);
+        setDiet(new Herbivore());
+    }
+
 
 
     /**
@@ -62,10 +80,10 @@ public class Turtle extends Chew {
         if (age<=500 && age>=0)
         {
             this.age = age;
-            MessageUtility.logSetter(this.getName(), "setAge", this.age, true);
+            MessageUtility.logSetter(this.getName(), "setAge", age, true);
             return true;
         }
-        MessageUtility.logSetter(this.getName(), "setAge", this.age, false);
+        MessageUtility.logSetter(this.getName(), "setAge", age, false);
         return false;
     }
 

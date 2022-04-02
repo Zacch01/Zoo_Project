@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Herbivore;
+import diet.Omnivore;
 import mobility.Point;
 import privateutil.Chew;
 import utilities.MessageUtility;
@@ -28,7 +29,7 @@ public class Elephant extends Chew {
         super(name,new Point(50,90));
         MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
-        settrunkLength(1);
+        this.trunkLength=1;
         setDiet(new Herbivore());
     }
 
@@ -44,9 +45,27 @@ public class Elephant extends Chew {
         super(name,new Point(p.getx(), p.gety()));
         MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
-        settrunkLength(1);
+        this.trunkLength=1;
         setDiet(new Herbivore());
     }
+
+
+    /**
+     * The constructor of the object Bear, it sets the attributes of the object
+     * Note : Weight and the location have a default value
+     *
+     * @param name A String that represent the name of the Bear
+     * @param trunkLength A Double that represent the trunk's length of the Elephant
+     */
+    public Elephant(String name,double trunkLength){
+        super(name,new Point(50,90));
+        MessageUtility.logConstractor("Elephant", name);
+        setWeight(500);
+        if(!settrunkLength(trunkLength))
+            settrunkLength(1);
+        setDiet(new Herbivore());
+    }
+
 
 
     /**
@@ -62,10 +81,10 @@ public class Elephant extends Chew {
         if (trunkLength<=3 && trunkLength>=0.5)
         {
             this.trunkLength = trunkLength;
-            MessageUtility.logSetter(this.getName(), "setTrunkLength", this.trunkLength, true);
+            MessageUtility.logSetter(this.getName(), "setTrunkLength", trunkLength, true);
             return true;
         }
-        MessageUtility.logSetter(this.getName(), "setTrunkLength", this.trunkLength, false);
+        MessageUtility.logSetter(this.getName(), "setTrunkLength", trunkLength, false);
         return false;
     }
 

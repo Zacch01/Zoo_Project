@@ -43,8 +43,11 @@ public abstract class Animal extends Mobile implements IEdible  {
     public double move(Point p)
     {
         double d = super.move(p);
+        if(d!=0) {
+            double temp = getWeight();
+            setWeight(temp-(d*temp*0.00025));
+        }
         MessageUtility.logBooleanFunction(this.name,"move",p, d != 0);
-        setWeight(this.weight-(d*this.weight*0.00025));
         return d;
     }
 
@@ -55,7 +58,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return An object diet which represents the type of diet of the animal
      */
     public IDiet getDiet(){
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getDiet", this.diet);
+        MessageUtility.logGetter(this.name, "getDiet", this.diet);
         return this.diet;
     }
 
@@ -73,9 +76,9 @@ public abstract class Animal extends Mobile implements IEdible  {
     public boolean eat(IEdible food){
         double gainWeight = diet.eat(this, food);
         if(gainWeight>0){
-            setWeight((this.getWeight()+gainWeight));
-            MessageUtility.logBooleanFunction(this.name,"eat", food,true);
+            setWeight((this.weight+gainWeight));
             makeSound();
+            MessageUtility.logBooleanFunction(this.name,"eat", food,true);
             return true;
         }
         MessageUtility.logBooleanFunction(this.name,"eat", food,false);
@@ -132,7 +135,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return The Animal's weight
      */
     public  double getWeight(){
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getWeight", this.weight);
+        MessageUtility.logGetter(this.name, "getWeight", this.weight);
         return this.weight;
     }
 
@@ -144,7 +147,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      */
     @Override
     public  EFoodType getFoodType(){
-        MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.MEAT);
+        MessageUtility.logGetter(this.name, "getFoodType", EFoodType.MEAT);
         return EFoodType.MEAT;
     }
 
@@ -167,7 +170,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return a String of the object data in the requested format
      */
     @Override
-    public String toString() {return "[" + this.getClass().getSimpleName() + "]: "+getName();}
+    public String toString() {return "[" + this.getClass().getSimpleName() + "] "+getName();}
 
 
     public abstract void makeSound();

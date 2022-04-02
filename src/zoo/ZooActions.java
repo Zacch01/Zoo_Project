@@ -78,13 +78,13 @@ public class ZooActions {
         System.out.print("Enter the number of animals : ");
         size = sc.nextInt();
         while (size < 3) {
-            System.out.print("The number must be bigger than 2. Enter the number of animals : ");
+            System.out.print("The number must be bigger than or equal to 3. Enter the number of animals : ");
             size = sc.nextInt();
         }
         Animal[] zoo = new Animal[size];
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        System.out.println("In our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
+        System.out.println("\n\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
         /*
         for (int i = 0; i < size; i++) {
             System.out.println("Please select the animal number " + (i + 1));
@@ -140,7 +140,7 @@ public class ZooActions {
         */
         for (int i=0; i<size; i++) {
             try {
-                System.out.println("Please enter the animal you want to add: ");
+                System.out.println("\n\nPlease enter the animal you want to add: ");
                 String type = sc.next();
                 c = cl.loadClass("animals."+type);
                 System.out.println("How would you like to call it?");
@@ -151,6 +151,7 @@ public class ZooActions {
                     System.out.println("Invalid choice, please try again");
                     locationchoice = sc.nextInt();
                 }
+                System.out.print("\n");
                 if (locationchoice == 1) {
                     Constructor con = c.getConstructor(String.class, Point.class);
                     System.out.print("\nPlease enter the location of the animal :\n\tx=");
@@ -197,7 +198,7 @@ public class ZooActions {
             int rnd2 = rnd.nextInt(size);
             while ((rnd1 != rnd2) && (zoo[rnd2] == null)) // to avoid from eating my self
                 rnd2 = rnd.nextInt(size);
-            //There is no chenge in the weight
+            //There is no change in the weight
             if (eat(zoo[rnd1], zoo[rnd2])) {
                 System.out.println(zoo[rnd1].getName() + " eat " + zoo[rnd2].getName() + "the new weight is :" + zoo[rnd1].getWeight());
                 zoo[rnd2]=null;
