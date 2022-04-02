@@ -1,6 +1,5 @@
 package food;
 
-import diet.IDiet;
 
 /**
  * An enum file to save the different types of food that available in the zoo

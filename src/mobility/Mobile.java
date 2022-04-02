@@ -1,7 +1,6 @@
 package mobility;
 
 
-import utilities.MessageUtility;
 
 /**
  * Abstract class that defines the mobility

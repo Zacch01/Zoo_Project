@@ -1,7 +1,6 @@
 package animals;
 
 import diet.Carnivore;
-import diet.IDiet;
 import food.IEdible;
 import mobility.Point;
 import food.EFoodType;
