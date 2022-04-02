@@ -26,8 +26,9 @@ public class Turtle extends Chew {
      */
     public Turtle(String name){
         super(name,new Point(80,0));
+        MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
-        this.age = 1;
+        setAge(1);
         setdiet(new Herbivore());
     }
 
@@ -41,8 +42,9 @@ public class Turtle extends Chew {
      */
     public Turtle(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
-        this.age = 1;
+        setAge(1);
         setdiet(new Herbivore());
     }
 
@@ -60,8 +62,10 @@ public class Turtle extends Chew {
         if (age<=500 && age>=0)
         {
             this.age = age;
+            MessageUtility.logSetter(this.getName(), "setAge", this.age, true);
             return true;
         }
+        MessageUtility.logSetter(this.getName(), "setAge", this.age, false);
         return false;
     }
 

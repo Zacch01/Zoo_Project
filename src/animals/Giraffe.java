@@ -26,8 +26,9 @@ public class Giraffe extends Chew {
      */
     public Giraffe(String name){
         super(name,new Point(50,0));
+        MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
-        this.neckLength = 1.5;
+        setNeckLength(1.5);
         setdiet(new Herbivore());
     }
 
@@ -41,8 +42,9 @@ public class Giraffe extends Chew {
      */
     public Giraffe(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
-        this.neckLength = 1.5;
+        setNeckLength(1.5);
         setdiet(new Herbivore());
     }
 
@@ -60,8 +62,10 @@ public class Giraffe extends Chew {
         if (neckLength<=2.5 && neckLength>=1)
         {
             this.neckLength = neckLength;
+            MessageUtility.logSetter(this.getName(), "setNeckLength", this.neckLength, true);
             return true;
         }
+        MessageUtility.logSetter(this.getName(), "setNeckLength", this.neckLength, false);
         return false;
     }
 

@@ -26,8 +26,9 @@ public class Bear extends Roar {
      */
     public Bear(String name){
         super(name,new Point(100,5));
+        MessageUtility.logConstractor("Bear", name);
         setWeight(308.2);
-        this.furColor = "GRAY";
+        setFurColor("GRAY");
         setdiet(new Omnivore());
     }
 
@@ -42,8 +43,9 @@ public class Bear extends Roar {
      */
     public Bear(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        MessageUtility.logConstractor("Bear", name);
         setWeight(308.2);
-        this.furColor = "GRAY";
+        setFurColor("GRAY");
         setdiet(new Omnivore());
     }
 
@@ -60,8 +62,10 @@ public class Bear extends Roar {
     {
         if(color.equals("GRAY")|| color.equals("BLACK")|| color.equals("WHITE")) {
             this.furColor = color;
+            MessageUtility.logSetter(this.getName(), "setFurColor", this.furColor, true);
             return true;
         }
+        MessageUtility.logSetter(this.getName(), "setFurColor", furColor, false);
         return false;
     }
 

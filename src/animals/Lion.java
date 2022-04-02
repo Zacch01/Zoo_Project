@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Carnivore;
+import diet.IDiet;
 import food.IEdible;
 import mobility.Point;
 import food.EFoodType;
@@ -29,10 +30,10 @@ public class Lion extends Roar {
      */
     public Lion(String name){
         super(name,new Point(20,0));
+        MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
-        this.scarCount = 0;
+        setScarCount(0);
         setdiet(new Carnivore());
-        //a checker
     }
 
 
@@ -45,10 +46,10 @@ public class Lion extends Roar {
      */
     public Lion(String name, Point p){
         super(name,new Point(p.getx(), p.gety()));
+        MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
-        this.scarCount = 0;
+        setScarCount(0);
         setdiet(new Carnivore());
-        //a checker
     }
 
 
@@ -82,14 +83,27 @@ public class Lion extends Roar {
     }
 
 
+    /**
+     * Getter method for know the food type of the Lion
+     * @see IEdible
+     * @return The object's food type
+     */
     public EFoodType getFoodtype() {
         MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
         return EFoodType.NOTFOOD;
     }
 
 
-    public boolean eat(IEdible ed) {
-        if (super.eat(ed)) {
+
+    /**
+     * Calls the eat method (from Animal) with the food given.
+     * If the eating was successful, then the number of scars has a chance in two to increase (+1)
+     * @see Animal
+     * @param food is a String representing the food type (an object of type EFoodType)
+     * @return True if the eating was successful, else False
+     */
+    public boolean eat(IEdible food) {
+        if (super.eat(food)) {
             Random rand = new Random();
             int r = rand.nextInt(2);
             if (r == 1) {

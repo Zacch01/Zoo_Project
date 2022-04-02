@@ -26,8 +26,9 @@ public class Elephant extends Chew {
      */
     public Elephant(String name){
         super(name,new Point(50,90));
+        MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
-        this.trunkLength = 1;
+        settrunkLength(1);
         setdiet(new Herbivore());
     }
 
@@ -41,8 +42,9 @@ public class Elephant extends Chew {
      */
     public Elephant(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
-        this.trunkLength = 1;
+        settrunkLength(1);
         setdiet(new Herbivore());
     }
 
@@ -60,8 +62,10 @@ public class Elephant extends Chew {
         if (trunkLength<=3 && trunkLength>=0.5)
         {
             this.trunkLength = trunkLength;
+            MessageUtility.logSetter(this.getName(), "setTrunkLength", this.trunkLength, true);
             return true;
         }
+        MessageUtility.logSetter(this.getName(), "setTrunkLength", this.trunkLength, false);
         return false;
     }
 

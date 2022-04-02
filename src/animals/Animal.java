@@ -54,21 +54,31 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @see IDiet
      * @return An object diet which represents the type of diet of the animal
      */
-    public IDiet getDiet(){return diet;}
+    public IDiet getDiet(){
+        MessageUtility.logGetter(this.getClass().getSimpleName(), "getDiet", this.diet);
+        return this.diet;
+    }
 
 
 
-
-    public boolean eat(IEdible ed){
-        double gainWeight = diet.eat(this, ed);
+    /**
+     * Calls the eat method (from interface IDiet) with the food given.
+     * It returns the weight gained form the action. The eating was successful if the weight is greater than zero.
+     * If the eating was successful, then the weight of the animal is update and calls the function makeSound, else nothing.
+     *
+     * @see IEdible,IDiet
+     * @param food is a String representing the food type (an object of type EFoodType)
+     * @return True if the eating was successful, else False
+     */
+    public boolean eat(IEdible food){
+        double gainWeight = diet.eat(this, food);
         if(gainWeight>0){
             setWeight((this.getWeight()+gainWeight));
-            MessageUtility.logBooleanFunction(this.name,"eat", ed,true);
+            MessageUtility.logBooleanFunction(this.name,"eat", food,true);
             makeSound();
             return true;
         }
-        MessageUtility.logBooleanFunction(this.name,"eat", ed,false);
-
+        MessageUtility.logBooleanFunction(this.name,"eat", food,false);
         return false;
     }
 
@@ -77,33 +87,44 @@ public abstract class Animal extends Mobile implements IEdible  {
      * Setter method for the attribute weight
      * return True if the weight intake is in the valid range (greater than zero), else False
      *
-     * @param w is a Double representing of the weight intake of the Animal
+     * @param weight is a Double representing of the weight intake of the Animal
      * @return True if the setter succeed, else False
      */
-    public  boolean setWeight( double w){
-        if (w<=0){
-            MessageUtility.logSetter(this.name,"setWeight",w,false);
+    public  boolean setWeight( double weight){
+        if (weight<=0){
+            MessageUtility.logSetter(this.name,"setWeight",weight,false);
             return false;
         }
-        this.weight = w;
-        MessageUtility.logSetter(this.name,"setWeight",w,true);
+        this.weight = weight;
+        MessageUtility.logSetter(this.name,"setWeight",weight,true);
         return true;
 
     }
 
 
-
-    public boolean setdiet( IDiet d){
-        this.diet = d;
+    /**
+     * Setter method for the attribute diet
+     * return True if the diet is in the valid options, else False
+     * Note : diet can only be Omnivore, Herbivore or Carnivore
+     * @param diet is an IDiet representing the diet of the animal
+     * @return True if the setter succeed, else False
+     */
+    public boolean setdiet( IDiet diet){
+        this.diet = diet;
+        MessageUtility.logSetter(this.name,"setdiet",diet,true);
         return true;
     }
+
 
     /**
      * Getter method for the attribute name
      *
      * @return The Animal's name
      */
-    public  String getName(){return this.name;}
+    public  String getName(){
+        MessageUtility.logGetter(this.getClass().getSimpleName(), "getName", this.name);
+        return this.name;
+    }
 
 
     /**
@@ -111,7 +132,10 @@ public abstract class Animal extends Mobile implements IEdible  {
      *
      * @return The Animal's weight
      */
-    public  double getWeight(){return this.weight;}
+    public  double getWeight(){
+        MessageUtility.logGetter(this.getClass().getSimpleName(), "getWeight", this.weight);
+        return this.weight;
+    }
 
 
     /**
@@ -119,21 +143,33 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @see EFoodType
      * @return The Animal's food type
      */
-    public  EFoodType getFoodType(){return EFoodType.MEAT;}
+    public  EFoodType getFoodType(){
+        MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.MEAT);
+        return EFoodType.MEAT;
+    }
 
 
-
-    public void setName(String name){
+    /**
+     * Setter method for the attribute name
+     * @param name is a String representing the name of the Animal
+     * @return True if the setter succeed, else False
+     */
+    public boolean setName(String name){
         this.name = name;
         MessageUtility.logSetter(this.name,"setName()",name,true);
+        return true;
     }
+
+
+    /**
+     * Representation of the object as a string
+     *
+     * @return a String of the object data in the requested format
+     */
+    @Override
+    public String toString() {return "[" + this.getClass().getSimpleName() + "]: "+getName();}
 
 
     public abstract void makeSound();
-
-    public String toString() {
-        return "[" + this.getClass().getSimpleName() + "]: "+getName();
-    }
-
 
 }

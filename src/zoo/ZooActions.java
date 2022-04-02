@@ -4,12 +4,30 @@ import java.lang.reflect.*;
 import java.lang.*;
 import animals.*;
 import food.IEdible;
+import diet.*;
 import mobility.Mobile;
 import mobility.Point;
 import java.util.Scanner;
 import java.util.Random;
 
+
+/**
+ * Class for the action in the zoo
+ * Runner class, contains the main method
+ * @version 17.0.2
+ * @author Attias Zaccharie, Amar Yuval
+ */
 public class ZooActions {
+    /**
+     * Getting an animal and a food, and check to which animal Object belong,
+     * and check if the animal can eat the food given,
+     * If it can return True, else False
+     *
+     * @param animal is an object Animal representing an animal
+     * @param food is a String representing the food type (an object of type EFoodType)
+     * @see IDiet
+     * @return True if it can eat, else False
+     */
     public static boolean eat(Object animal, IEdible food){
         if (animal instanceof Animal)
         {
@@ -20,18 +38,40 @@ public class ZooActions {
 
     }
 
+
+
+    /**
+     * Getting an animal and a point, and check to which animal Object belong,
+     * check if the point is valid, and make move the animal to this point
+     * If it can return True, else False
+     *
+     * @param animal is an Animal object representing animal
+     * @param point is an object Point that indicate a location
+     * @see Mobile
+     * @return True if the animal have moved, else False
+     */
     public static boolean move(Object animal, Point point){
         if(!(animal instanceof Mobile)&&!(Point.checkBoundaries(point)))
             return false;
-        Animal animal2 = (Animal) animal;
-        animal2.move(point);
+        Animal typeofanimal = (Animal) animal;
+        typeofanimal.move(point);
         //try exeption
-
         return true;
     }
 
+
+    /**
+     * Main function
+     * Initialize an animal array with a minimum of 3 animals.
+     * For each animal in the array, it makes an attempt to use the move method.
+     * After that, raffles references of two animals at a time (a predator and a prey).
+     * The predator makes an attempt to eat its prey.
+     * If it's possible, then it eats it. Else there is no change.
+     *
+     * @see Animal,IDiet,Mobile
+     * @param args set of arguments from the command line.
+     */
     public static void main(String[] args) {
-        System.out.println(new Lion("aze"));
         Scanner sc = new Scanner(System.in);
         int size = 0, choice,locationchoice,x,y;
         String name;
