@@ -7,6 +7,8 @@ import food.IEdible;
 import diet.*;
 import mobility.Mobile;
 import mobility.Point;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -81,7 +83,8 @@ public class ZooActions {
             System.out.print("The number must be bigger than or equal to 3. Enter the number of animals : ");
             size = sc.nextInt();
         }
-        Animal[] zoo = new Animal[size];
+        ArrayList<Animal> zoo = new ArrayList<Animal>();
+        //Animal[] zoo = new Animal[size];
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
         System.out.println("\n\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
@@ -158,10 +161,12 @@ public class ZooActions {
                     x = sc.nextInt();
                     System.out.print("y=");
                     y = sc.nextInt();
-                    zoo[i] = (Animal) con.newInstance(name, new Point(x, y));
+                    zoo.add((Animal) con.newInstance(name, new Point(x, y)));
+                    //zoo[i] = (Animal) con.newInstance(name, new Point(x, y));
                 } else {
                     Constructor con = c.getConstructor(String.class);
-                    zoo[i] = (Animal) con.newInstance(name);
+                    zoo.add((Animal) con.newInstance(name));
+                    //zoo[i] = (Animal) con.newInstance(name);
                 }
             } catch (Exception e) {
                 System.out.println("You make an error. Try again");
@@ -184,27 +189,29 @@ public class ZooActions {
             }
             Point tmppoint = new Point(movetox,movetoy);
             if (move(animal,tmppoint))
-                System.out.println(animal.getName()+"is moved the new weight is :"+animal.getWeight());
+                System.out.println(animal.getName()+" is moved the new weight is :"+animal.getWeight());
             else
-                System.out.println(animal.getName()+"is not moved");
+                System.out.println(animal.getName()+" is not moved");
 
         }
         int timestoeat = size/2;
         Random rnd = new Random();
         for(int i=0;i<timestoeat;i++) {
-            int rnd1 = rnd.nextInt(size);
-            while (zoo[rnd1] == null)
-                rnd1 = rnd.nextInt(size);
-            int rnd2 = rnd.nextInt(size);
-            while ((rnd1 != rnd2) && (zoo[rnd2] == null)) // to avoid from eating my self
-                rnd2 = rnd.nextInt(size);
+            int dynmsize=zoo.size();
+            int rnd1 = rnd.nextInt(dynmsize);
+            while (zoo.get(rnd1) == null)
+                rnd1 = rnd.nextInt(dynmsize);
+            int rnd2 = rnd.nextInt(dynmsize);
+            while ((rnd1 != rnd2) && (zoo.get(rnd2) == null)) // to avoid from eating my self
+                rnd2 = rnd.nextInt(dynmsize);
             //There is no change in the weight
-            if (eat(zoo[rnd1], zoo[rnd2])) {
-                System.out.println(zoo[rnd1].getName() + " eat " + zoo[rnd2].getName() + "the new weight is :" + zoo[rnd1].getWeight());
-                zoo[rnd2]=null;
+            if (eat(zoo.get(rnd1), zoo.get(rnd2))) {
+                System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + "the new weight is :" + zoo.get(rnd1).getWeight());
+                zoo.remove(rnd2);
+                //zoo[rnd2]=null;
             }
             else
-                System.out.println(zoo[rnd1].getName()+"dont eat");
+                System.out.println(zoo.get(rnd1).getName()+" dont eat");
         }
 
 
