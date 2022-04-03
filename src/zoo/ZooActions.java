@@ -41,7 +41,6 @@ public class ZooActions {
     }
 
 
-
     /**
      * Getting an animal and a point, and check to which animal Object belong,
      * check if the point is valid, and make move the animal to this point
@@ -70,6 +69,7 @@ public class ZooActions {
      *
      * @see Animal,IDiet,Mobile
      * @param args set of arguments from the command line.
+     * @exception
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -85,59 +85,7 @@ public class ZooActions {
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
         System.out.println("\n\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
-        /*
-        for (int i = 0; i < size; i++) {
-            System.out.println("Please select the animal number " + (i + 1));
-            System.out.println("1. Lion");
-            System.out.println("2. Bear");
-            System.out.println("3. Giraffe");
-            System.out.println("4. Turtle");
-            System.out.println("5. Elephant");
-            System.out.println("6. Exit");
-            System.out.print("Choose an option: ");
-            choice = sc.nextInt();
 
-            while (choice < 0 || choice > 6) {
-                System.out.println("Invalid choice, please try again");
-                choice = sc.nextInt();
-            }
-            if (choice == 6)
-                System.exit(1);
-
-            System.out.println("\nPlease enter the animal name");
-            name = sc.next();
-
-
-            System.out.print("\nDo you want to enter his location\n\t1 - Yes\n\t2 - No\n->");
-            locationchoice = sc.nextInt();
-            while (locationchoice != 1 && locationchoice != 2) {
-                System.out.println("Invalid choice, please try again");
-                locationchoice = sc.nextInt();
-            }
-            if (locationchoice == 1){
-                System.out.print("\nPlease enter the location of the animal :\n\tx=");
-                x = sc.nextInt();
-                System.out.print("y=");
-                y = sc.nextInt();
-                switch (choice) {
-                    case 1 -> zoo[i] = new Lion(name, new Point(x, y));
-                    case 2 -> zoo[i] = new Bear(name, new Point(x, y));
-                    case 3 -> zoo[i] = new Giraffe(name, new Point(x, y));
-                    case 4 -> zoo[i] = new Turtle(name, new Point(x, y));
-                    case 5 -> zoo[i] = new Elephant(name, new Point(x, y));
-                }
-            }
-            else {
-                switch (choice) {
-                    case 1 -> zoo[i] = new Lion(name);
-                    case 2 -> zoo[i] = new Bear(name);
-                    case 3 -> zoo[i] = new Giraffe(name);
-                    case 4 -> zoo[i] = new Turtle(name);
-                    case 5 -> zoo[i] = new Elephant(name);
-                }
-            }
-        }
-        */
         for (int i=0; i<size; i++) {
             try {
                 System.out.println("\n\nPlease enter the animal you want to add: ");
