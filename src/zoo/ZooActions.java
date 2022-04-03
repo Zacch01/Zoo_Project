@@ -53,12 +53,10 @@ public class ZooActions {
      * @return True if the animal have moved, else False
      */
     public static boolean move(Object animal, Point point){
-        if(!(animal instanceof Mobile)&&!(Point.checkBoundaries(point)))
+        if(animal instanceof Animal)
             return false;
         Animal typeofanimal = (Animal) animal;
-        typeofanimal.move(point);
-        //try exeption
-        return true;
+        return typeofanimal.move(point)!=0;
     }
 
 
@@ -84,7 +82,6 @@ public class ZooActions {
             size = sc.nextInt();
         }
         ArrayList<Animal> zoo = new ArrayList<Animal>();
-        //Animal[] zoo = new Animal[size];
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
         System.out.println("\n\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
@@ -159,14 +156,12 @@ public class ZooActions {
                     Constructor con = c.getConstructor(String.class, Point.class);
                     System.out.print("\nPlease enter the location of the animal :\n\tx=");
                     x = sc.nextInt();
-                    System.out.print("y=");
+                    System.out.print("\ty=");
                     y = sc.nextInt();
-                    zoo.add((Animal) con.newInstance(name, new Point(x, y)));
-                    //zoo[i] = (Animal) con.newInstance(name, new Point(x, y));
+                    zoo.add((Animal) con.newInstance(name, new Point(x, y)));;
                 } else {
                     Constructor con = c.getConstructor(String.class);
                     zoo.add((Animal) con.newInstance(name));
-                    //zoo[i] = (Animal) con.newInstance(name);
                 }
             } catch (Exception e) {
                 System.out.println("You make an error. Try again");
@@ -176,17 +171,10 @@ public class ZooActions {
         for (Animal animal : zoo)
         {
             int movetox,movetoy;
-            System.out.print("enter the point you want to move "+animal.getName()+"\n\tx=");
+            System.out.print("\n\nEnter the point you want to move "+animal.getName()+"\n\tx=");
             movetox = sc.nextInt();
             System.out.print("\ty=");
             movetoy = sc.nextInt();
-            while(!Point.checkBoundaries(new Point(movetox,movetoy)))
-            {
-                System.out.println("you enter point out of range : \nenter x between 0 to 800 and y between 0 to 600\n enter x=");
-                movetox = sc.nextInt();
-                System.out.print("y=");
-                movetoy = sc.nextInt();
-            }
             Point tmppoint = new Point(movetox,movetoy);
             if (move(animal,tmppoint))
                 System.out.println(animal.getName()+" is moved the new weight is :"+animal.getWeight());
@@ -199,14 +187,12 @@ public class ZooActions {
         for(int i=0;i<timestoeat;i++) {
             int dynmsize=zoo.size();
             int rnd1 = rnd.nextInt(dynmsize);
-            while (zoo.get(rnd1) == null)
-                rnd1 = rnd.nextInt(dynmsize);
             int rnd2 = rnd.nextInt(dynmsize);
-            while ((rnd1 != rnd2) && (zoo.get(rnd2) == null)) // to avoid from eating my self
+            while (rnd1 == rnd2) // to avoid from eating my self
                 rnd2 = rnd.nextInt(dynmsize);
             //There is no change in the weight
             if (eat(zoo.get(rnd1), zoo.get(rnd2))) {
-                System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + "the new weight is :" + zoo.get(rnd1).getWeight());
+                System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + " the new weight is :" + zoo.get(rnd1).getWeight());
                 zoo.remove(rnd2);
                 //zoo[rnd2]=null;
             }

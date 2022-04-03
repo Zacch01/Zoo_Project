@@ -43,6 +43,8 @@ public class Bear extends Roar {
      */
     public Bear(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        if(!Point.checkBoundaries(p))
+            setLocation(new Point(100,5));
         MessageUtility.logConstractor("Bear", name);
         setWeight(308.2);
         this.furColor="GRAY";

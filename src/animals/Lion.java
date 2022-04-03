@@ -45,6 +45,8 @@ public class Lion extends Roar {
      */
     public Lion(String name, Point p){
         super(name,new Point(p.getx(), p.gety()));
+        if(!Point.checkBoundaries(p))
+            setLocation(new Point(20,0));
         MessageUtility.logConstractor("Lion", name);
         setWeight(408.2);
         this.scarCount=0;

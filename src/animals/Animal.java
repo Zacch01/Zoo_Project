@@ -125,6 +125,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return The Animal's name
      */
     public  String getName(){
+        MessageUtility.logGetter(this.name, "getName", this.name);
         return this.name;
     }
 
@@ -170,7 +171,7 @@ public abstract class Animal extends Mobile implements IEdible  {
      * @return a String of the object data in the requested format
      */
     @Override
-    public String toString() {return "[" + this.getClass().getSimpleName() + "] "+getName();}
+    public String toString() {return "[" + this.getClass().getSimpleName() + "] "+this.name;}
 
 
     public abstract void makeSound();

@@ -42,6 +42,8 @@ public class Turtle extends Chew {
      */
     public Turtle(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        if(!Point.checkBoundaries(p))
+            setLocation(new Point(80,0));
         MessageUtility.logConstractor("Turtle", name);
         setWeight(1);
         this.age=1;

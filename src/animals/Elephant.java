@@ -43,6 +43,8 @@ public class Elephant extends Chew {
      */
     public Elephant(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        if(!Point.checkBoundaries(p))
+            setLocation(new Point(50,90));
         MessageUtility.logConstractor("Elephant", name);
         setWeight(500);
         this.trunkLength=1;

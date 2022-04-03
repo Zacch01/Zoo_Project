@@ -42,6 +42,8 @@ public class Giraffe extends Chew {
      */
     public Giraffe(String name,Point p){
         super(name,new Point(p.getx(), p.gety()));
+        if(!Point.checkBoundaries(p))
+            setLocation(new Point(50,0));
         MessageUtility.logConstractor("Giraffe", name);
         setWeight(450);
         this.neckLength =1.5;
