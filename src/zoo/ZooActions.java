@@ -9,6 +9,7 @@ import mobility.Mobile;
 import mobility.Point;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -83,6 +84,7 @@ public class ZooActions {
             size = sc.nextInt();
         }
         ArrayList<Animal> zoo = new ArrayList<Animal>();
+        ArrayList<String> validaniaml = new ArrayList<String>(Arrays.asList("Lion", "Bear", "Giraffe", "Turtle", "Elephant"));
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
         System.out.println("\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.");
@@ -91,6 +93,11 @@ public class ZooActions {
             try {
                 System.out.println("\nPlease enter the animal you want to add: ");
                 String type = sc.next();
+                while (!validaniaml.contains(type))
+                {
+                    System.out.println("\nPlease make sure you enter the name in a right way : ");
+                    type = sc.next();
+                }
                 c = cl.loadClass("animals."+type);
                 System.out.println("How would you like to call it?");
                 name = sc.next();
