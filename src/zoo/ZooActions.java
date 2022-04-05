@@ -52,10 +52,12 @@ public class ZooActions {
      * @return True if the animal have moved, else False
      */
     public static boolean move(Object animal, Point point){
-        if(animal instanceof Animal)
-            return false;
-        Animal typeofanimal = (Animal) animal;
-        return typeofanimal.move(point)!=0;
+        if(animal instanceof Animal) {
+            Animal typeofanimal = (Animal) animal;
+            return typeofanimal.move(point)!=0;
+        }
+        return false;
+
     }
 
 
@@ -69,13 +71,12 @@ public class ZooActions {
      *
      * @see Animal,IDiet,Mobile
      * @param args set of arguments from the command line.
-     * @exception
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int size = 0, choice,locationchoice,x,y;
         String name;
-        System.out.print("Enter the number of animals : ");
+        System.out.print("\nEnter the number of animals : ");
         size = sc.nextInt();
         while (size < 3) {
             System.out.print("The number must be bigger than or equal to 3. Enter the number of animals : ");
@@ -84,11 +85,11 @@ public class ZooActions {
         ArrayList<Animal> zoo = new ArrayList<Animal>();
         Class c;
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        System.out.println("\n\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.\n");
+        System.out.println("\nIn our Zoo, we have Lion, Bear, Giraffe, Turtle Elephant.");
 
         for (int i=0; i<size; i++) {
             try {
-                System.out.println("\n\nPlease enter the animal you want to add: ");
+                System.out.println("\nPlease enter the animal you want to add: ");
                 String type = sc.next();
                 c = cl.loadClass("animals."+type);
                 System.out.println("How would you like to call it?");
@@ -112,22 +113,22 @@ public class ZooActions {
                     zoo.add((Animal) con.newInstance(name));
                 }
             } catch (Exception e) {
-                System.out.println("You make an error. Try again");
+                System.out.println("You make an error. Try again.");
                 i = -1;
             }
         }
         for (Animal animal : zoo)
         {
             int movetox,movetoy;
-            System.out.print("\n\nEnter the point you want to move "+animal.getName()+"\n\tx=");
+            System.out.print("\n\nEnter the point you want to move:"+animal.getName()+"\n\tx=");
             movetox = sc.nextInt();
             System.out.print("\ty=");
             movetoy = sc.nextInt();
             Point tmppoint = new Point(movetox,movetoy);
             if (move(animal,tmppoint))
-                System.out.println(animal.getName()+" is moved the new weight is :"+animal.getWeight());
+                System.out.println(animal.getName()+" moved. Its new weight is :"+animal.getWeight());
             else
-                System.out.println(animal.getName()+" is not moved");
+                System.out.println(animal.getName()+" not moved");
 
         }
         int timestoeat = size/2;
@@ -140,12 +141,11 @@ public class ZooActions {
                 rnd2 = rnd.nextInt(dynmsize);
             //There is no change in the weight
             if (eat(zoo.get(rnd1), zoo.get(rnd2))) {
-                System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + " the new weight is :" + zoo.get(rnd1).getWeight());
+                System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + ". Its new weight is :" + zoo.get(rnd1).getWeight());
                 zoo.remove(rnd2);
-                //zoo[rnd2]=null;
             }
             else
-                System.out.println(zoo.get(rnd1).getName()+" dont eat");
+                System.out.println(zoo.get(rnd1).getName()+" didn't eat");
         }
 
 
