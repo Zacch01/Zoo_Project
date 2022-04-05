@@ -75,7 +75,8 @@ public class ZooActions {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int size = 0, choice,locationchoice,x,y;
+        int size = 0, choice,locationchoice,x,y,attributeschoice=0;
+        double length;
         String name;
         System.out.print("\nEnter the number of animals : ");
         size = sc.nextInt();
@@ -101,7 +102,7 @@ public class ZooActions {
                 c = cl.loadClass("animals."+type);
                 System.out.println("How would you like to call it?");
                 name = sc.next();
-                System.out.print("\nDo you want to enter his location\n\t1 - Yes\n\t2 - No\n->");
+                System.out.print("\nDo you want to enter his location?\n\t1 - Yes\n\t2 - No\n->");
                 locationchoice = sc.nextInt();
                 while (locationchoice != 1 && locationchoice != 2) {
                     System.out.println("Invalid choice, please try again");
@@ -110,14 +111,80 @@ public class ZooActions {
                 System.out.print("\n");
                 if (locationchoice == 1) {
                     Constructor con = c.getConstructor(String.class, Point.class);
-                    System.out.print("\nPlease enter the location of the animal :\n\tx=");
+                    System.out.print("Please enter the location of the animal :\n\tx=");
                     x = sc.nextInt();
                     System.out.print("\ty=");
                     y = sc.nextInt();
+                    if(!Point.checkBoundaries(new Point(x,y)))
+                        System.out.println("\nYour details were invalid. "+name+" has been placed in its predefined location for it.");
                     zoo.add((Animal) con.newInstance(name, new Point(x, y)));;
                 } else {
                     Constructor con = c.getConstructor(String.class);
                     zoo.add((Animal) con.newInstance(name));
+                }
+
+                System.out.print("\nDo you want to set the "+name+"'s weight?\n\t1 - Yes\n\t2 - No\n->");
+                attributeschoice = sc.nextInt();
+                while (attributeschoice != 1 && attributeschoice != 2) {
+                    System.out.println("Invalid choice, please try again");
+                    attributeschoice = sc.nextInt();
+                }
+                if(attributeschoice==1) {
+                    System.out.print("\nPlease enter the "+name+"'s weight(greater than 0)\n\t->");
+                    double weight = sc.nextInt();
+                    if (!zoo.get(i).setWeight(weight))
+                        System.out.print("\nYour details were invalid. "+name+"'s weighs is now its predefined weight for it.");
+                }
+
+                System.out.print("\nDo you want to set the ");
+                switch (type) {
+                    case "Bear" -> System.out.print("fur color ");
+                    case "Elephant" -> System.out.print("trunk length ");
+                    case "Giraffe" -> System.out.print("neck length ");
+                    case "Lion" -> System.out.print("number of scar ");
+                    case "Turtle" -> System.out.print("age ");
+                }
+                System.out.print("of "+name+"?\n\t1 - Yes\n\t2 - No\n->");
+                attributeschoice = sc.nextInt();
+                while (attributeschoice != 1 && attributeschoice != 2) {
+                    System.out.println("Invalid choice, please try again");
+                    attributeschoice = sc.nextInt();
+                }
+                if(attributeschoice==1) {
+                    System.out.print("\nPlease enter the "+name+"'s ");
+                    switch (type) {
+                        case "Bear" -> {
+                            System.out.print("fur color (Gray,White,Black): ");
+                            String color = sc.next();
+                            if (!((Bear) (zoo.get(i))).setFurColor(color))
+                                System.out.println("\nYour details were invalid. " + name + "'s color is now gray.");
+                        }
+                        case "Elephant" -> {
+                            System.out.print("trunk length (between 0.5 and 3): ");
+                            length = sc.nextDouble();
+                            if (!((Elephant) (zoo.get(i))).settrunkLength(length))
+                                System.out.println("\nYour details were invalid. " + name + "'s trunk length is now 1m.");
+                        }
+                        case "Giraffe" -> {
+                            System.out.print("neck length (between 1 and 2.5): ");
+                            length = sc.nextDouble();
+                            if (!((Giraffe) (zoo.get(i))).setNeckLength(length))
+                                System.out.println("\nYour details were invalid. " + name + "'s neck length is now 1.5m.");
+                        }
+                        case "Lion" -> {
+                            System.out.print("number of scar (greater than or equal to 0): ");
+                            int scar = sc.nextInt();
+                            if (!((Lion) (zoo.get(i))).setScarCount(scar))
+                                System.out.println("\nYour details were invalid. " + name + "'s number of scar is now 0.");
+                        }
+                        case "Turtle" -> {
+                            System.out.print("age : ");
+                            int age = sc.nextInt();
+                            if (!((Turtle) (zoo.get(i))).setAge(age))
+                                System.out.println("\nYour details were invalid. " + name + "'s age is now 1.");
+                        }
+                    }
+                    System.out.print("\n");
                 }
             } catch (Exception e) {
                 System.out.println("You make an error. Try again.");
@@ -154,9 +221,6 @@ public class ZooActions {
             else
                 System.out.println(zoo.get(rnd1).getName()+" didn't eat");
         }
-
-
         sc.close();
-
     }
 }
