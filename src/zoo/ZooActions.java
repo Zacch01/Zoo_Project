@@ -214,6 +214,7 @@ public class ZooActions {
             while (rnd1 == rnd2) // to avoid from eating my self
                 rnd2 = rnd.nextInt(dynmsize);
             //There is no change in the weight
+            System.out.println(zoo.get(rnd1)+" is trying to eat "+zoo.get(rnd2));
             if (eat(zoo.get(rnd1), zoo.get(rnd2))) {
                 System.out.println(zoo.get(rnd1).getName() + " eat " + zoo.get(rnd2).getName() + ". Its new weight is :" + zoo.get(rnd1).getWeight());
                 zoo.remove(rnd2);
