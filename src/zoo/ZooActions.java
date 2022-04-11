@@ -223,5 +223,6 @@ public class ZooActions {
                 System.out.println(zoo.get(rnd1).getName()+" didn't eat");
         }
         sc.close();
+
     }
 }
