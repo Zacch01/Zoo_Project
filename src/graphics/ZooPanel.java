@@ -1,0 +1,59 @@
+package graphics;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ZooPanel extends JPanel implements Runnable, ActionListener {
+    private JPanel actionPanel;
+    private JDialog addAnimalDialog;
+    @Override
+    public void run() {
+
+    }
+    public ZooPanel(){
+        actionPanel = new JPanel();
+        JButton addanimal = new JButton("Add Animal");
+        JButton moveanimal = new JButton("Move Animal");
+        JButton clear = new JButton("Clear");
+        JButton food = new JButton("Food");
+        JButton info = new JButton("Info");
+        JButton exit = new JButton("Exit");
+
+        addanimal.addActionListener(this);
+        moveanimal.addActionListener(this);
+        clear.addActionListener(this);
+        food.addActionListener(this);
+        info.addActionListener(this);
+        exit.addActionListener(this);
+
+
+
+
+        actionPanel.add(addanimal);
+        actionPanel.add(moveanimal);
+        actionPanel.add(clear);
+        actionPanel.add(food);
+        actionPanel.add(info);
+        actionPanel.add(exit);
+
+
+
+        this.add(actionPanel);
+
+
+
+
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        switch (e.getActionCommand()){
+            case "Exit":System.exit(0);
+                break;
+        }
+    }
+
+}
