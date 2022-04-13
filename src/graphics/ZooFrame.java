@@ -2,16 +2,28 @@ package graphics;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
-public class ZooFrame extends JFrame {
+
+
+
+public class ZooFrame extends JFrame implements  ActionListener{
     private final JMenuBar menuBar;
     private final JPanel zooPanel;
+    private BufferedImage img = null;
+    private JLabel label;
+
+
+
 
     public ZooFrame(){
-        this.setTitle("Zoo");
+        super("Zoo");
         zooPanel = new ZooPanel();
-        this.add(zooPanel, BorderLayout.PAGE_END);
-        this.setSize(800,800);
+
+
+
 
         menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -20,7 +32,7 @@ public class ZooFrame extends JFrame {
         JMenu background = new JMenu("Background");
         JMenuItem image = new JMenuItem("Image");
         JMenuItem green = new JMenuItem("Green");
-        JMenuItem none = new JMenuItem("none");
+        JMenuItem none = new JMenuItem("None");
         background.add(image);
         background.add(green);
         background.add(none);
@@ -32,13 +44,77 @@ public class ZooFrame extends JFrame {
         menuBar.add(help);
 
 
+        exit.addActionListener(this);
+        image.addActionListener(this);
+        green.addActionListener(this);
+        none.addActionListener(this);
+        help2.addActionListener(this);
 
+
+
+        label = new JLabel();
+        this.add(label);
+        this.setLayout(new BorderLayout());
+        this.add(zooPanel, BorderLayout.SOUTH);
+        this.setSize(800,600);
         this.add(menuBar,BorderLayout.PAGE_START);
 
 
 
 
+
     }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        switch (e.getActionCommand()) {
+            case "Exit" -> System.exit(0);
+            case "Help" -> JOptionPane.showMessageDialog(null, "Home Work 2\nGUI", "Message", JOptionPane.INFORMATION_MESSAGE);
+            case "Green" -> {
+                this.remove(label);
+                this.getContentPane().setBackground(Color.green);
+            }
+            case "None" -> {
+                this.remove(label);
+                this.getContentPane().setBackground(null);
+            }
+            case "Image" -> {
+
+                /*ImageIcon background=new ImageIcon("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png");
+                Image img=background.getImage();
+                Image temp=img.getScaledInstance(1920,800,Image.SCALE_SMOOTH);
+                background=new ImageIcon(temp);
+                JLabel back=new JLabel(background);
+                back.setLayout(new BorderLayout());
+
+                back.setBounds(0,0,1920,800);
+                this.add(back);*/
+                /*t
+                try {
+                    final Image backgroundImage = javax.imageio.ImageIO.read(new File("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png"));
+                    this.setContentPane(new JPanel() {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.drawImage(backgroundImage, 0, 0, null);
+                    }
+                });
+                    this.setLayout(new BorderLayout());
+                    this.add(zooPanel, BorderLayout.PAGE_END);
+                    this.add(menuBar,BorderLayout.PAGE_START);
+                } catch (IOException a) {
+                    throw new RuntimeException(a);
+                }*/
+                this.remove(label);
+                this.getContentPane().setBackground(null);
+                label = new JLabel("", new ImageIcon("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png"), SwingConstants.CENTER);
+                label.setBounds(0, 0, 800, 600);
+                this.add(label);
+            }
+        }
+
+    }
+
     public static void main(String[] args){
         JFrame frame = new ZooFrame();
 
@@ -46,5 +122,6 @@ public class ZooFrame extends JFrame {
         frame.setVisible(true);
     }
 }
+
 
 

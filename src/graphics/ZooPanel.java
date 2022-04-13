@@ -6,13 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ZooPanel extends JPanel implements Runnable, ActionListener {
+public class ZooPanel extends JPanel implements  ActionListener {
     private JPanel actionPanel;
     private JDialog addAnimalDialog;
-    @Override
-    public void run() {
 
-    }
     public ZooPanel(){
         actionPanel = new JPanel();
         JButton addanimal = new JButton("Add Animal");
@@ -40,6 +37,8 @@ public class ZooPanel extends JPanel implements Runnable, ActionListener {
         actionPanel.add(exit);
 
 
+        actionPanel.setBackground(Color.BLUE);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         this.add(actionPanel);
 
@@ -53,6 +52,7 @@ public class ZooPanel extends JPanel implements Runnable, ActionListener {
         switch (e.getActionCommand()){
             case "Exit":System.exit(0);
                 break;
+
         }
     }
 
