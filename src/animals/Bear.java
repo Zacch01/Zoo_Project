@@ -18,6 +18,13 @@ public class Bear extends Roar {
     private String furColor;
 
 
+    public Bear(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
+        super("Bear", new Point(100, 5), animalSize, horizontalspeed, verticalspeed, animalSize * 1.5, animalColor);
+        this.furColor="GRAY";
+        setDiet(new Omnivore());
+        this.loadImages("bea_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+    }
+
     /**
      * The constructor of the object Bear, it sets the attributes of the object
      * Note : Weight,Location and the fur color have a default value

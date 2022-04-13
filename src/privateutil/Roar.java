@@ -12,6 +12,11 @@ import mobility.Point;
  * @see Animal
  */
 public abstract class Roar extends Animal {
+
+    public Roar (String name, Point location, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalColor) {
+        super(name,location, animalSize, horizontalspeed, verticalspeed, weight, animalColor);
+    }
+
     /**
      * Constructor of the object Roar : it sets the attributes of the object
      *

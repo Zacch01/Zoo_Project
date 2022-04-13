@@ -13,6 +13,11 @@ import mobility.Point;
  * @see Animal
  */
 public abstract class Chew extends Animal {
+
+    public Chew (String name, Point location, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalColor) {
+        super(name,location, animalSize, horizontalspeed, verticalspeed, weight, animalColor);
+    }
+
     /**
      * Constructor of the object Chew : it sets the attributes of the object
      *

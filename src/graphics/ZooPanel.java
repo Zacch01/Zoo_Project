@@ -1,13 +1,17 @@
 package graphics;
 
+import animals.Animal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ZooPanel extends JPanel implements  ActionListener {
     private JPanel actionPanel;
     private JDialog addAnimalDialog;
+    private ArrayList<Animal> Animallist;
 
     public ZooPanel(){
         actionPanel = new JPanel();
@@ -51,7 +55,14 @@ public class ZooPanel extends JPanel implements  ActionListener {
         switch (e.getActionCommand()){
             case "Exit":System.exit(0);
                 break;
-            case "Add Animal":AddAnimalDialog dialog = new AddAnimalDialog();
+            case "Add Animal":
+                if(Animallist.size()==10)
+                    JOptionPane.showMessageDialog(null, "You cannot add more than 10 animals.", "Message", JOptionPane.WARNING_MESSAGE);
+                else {
+                    AddAnimalDialog addanimaldialog = new AddAnimalDialog(Animallist);
+                }
+                break;
+            case "Move Animal":MoveAnimalDialog moveanimaldialog = new MoveAnimalDialog(Animallist);
                 break;
         }
     }

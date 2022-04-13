@@ -18,6 +18,13 @@ public class Giraffe extends Chew {
     private double neckLength;
 
 
+    public Giraffe(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
+        super("Giraffe", new Point(50, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 2.2, animalColor);
+        this.neckLength =1.5;
+        setDiet(new Herbivore());
+        this.loadImages("grf_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+    }
+
     /**
      * The constructor of the object Giraffe, it sets the attributes of the object
      * Note : Weight,Location and the neck length have a default value

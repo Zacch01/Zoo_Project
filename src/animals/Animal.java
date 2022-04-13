@@ -9,8 +9,11 @@ import mobility.Mobile;
 import mobility.Point;
 import utilities.MessageUtility;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -36,6 +39,48 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int eatCount;
     private ZooPanel pan;
     private BufferedImage img1, img2;
+
+
+    public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor) {
+        super(p);
+
+        this.name = name;
+        this.size = animalSize;
+        this.horSpeed = horizontalspeed;
+        this.verSpeed = verticalspeed;
+        this.col = Color.getColor(animalcolor);
+        this.weight = weight;
+        this.coordChanged = false;
+        this.x_dir = 1;
+        this.y_dir = 1;
+        this.eatCount=0;
+    }
+
+    public final static String PICTURE_PATH = "C:\\Users\\zacch\\IdeaProjects\\untitled\\src\\graphics\\assignment2_pictures\\";
+    public void loadImages(String nm) {
+        try { img1 = ImageIO.read(new File(PICTURE_PATH + nm)); }
+        catch (IOException e) { System.out.println("Cannot load image");
+            System.out.println(e.toString());}
+    }
+
+    public void drawObject (Graphics g) {
+        g.setColor(col);
+        if(x_dir==1)// giraffe goes to the right side
+            g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
+        else // giraffe goes to the left side
+            g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
+    }
+
+    public String getColor() {return this.col.toString(); }
+    public String getAnimalName() { return this.name; }
+    public int getSize() { return this.size; }
+    public void eatInc() {this.eatCount++; }
+    public int getEatCount() {return this.eatCount; }
+    public boolean getChanges () {return this.coordChanged; }
+    public void setChanges (boolean state) {this.coordChanged = state; }
+    public int getHorSpeed() { return this.horSpeed; }
+    public int getVerSpeed() { return this.verSpeed; }
+
 
 
     /**
@@ -191,6 +236,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     @Override
     public String toString() {return "[" + this.getClass().getSimpleName() + "] "+this.name;}
 
+    public String getanimal(){return this.name + ", "+this.size+ ", "+this.col ;}
 
     public abstract void makeSound();
 }

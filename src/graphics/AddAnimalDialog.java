@@ -1,15 +1,17 @@
 package graphics;
 
+import animals.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class AddAnimalDialog extends JDialog {
     private final String[] animalTypes = {"Lion", "Bear", "Giraffe", "Elephant", "Turtle"};
     private final String[] animalColors = {"Natural", "Red", "Blue"};
 
-    public AddAnimalDialog(){
+    public AddAnimalDialog(ArrayList<Animal> Animallist){
         this.setTitle("Add Animal");
         this.setSize(500,300);
         this.setVisible(true);
@@ -118,12 +120,20 @@ public class AddAnimalDialog extends JDialog {
                 else if(Integer.parseInt(textspeedvField.getText())<1|| Integer.parseInt(textspeedvField.getText())>10)
                     JOptionPane.showMessageDialog(null, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
-
-
+                    switch (animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex())) {
+                        case "Bear" -> Animallist.add(new Bear(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                        case "Elephant" -> Animallist.add(new Elephant(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                        case "Giraffe" -> Animallist.add(new Giraffe(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                        case "Lion" -> Animallist.add(new Lion(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                        case "Turtle" -> Animallist.add(new Turtle(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                    }
+                    JOptionPane.showMessageDialog(null, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                 }
             }
         });
 
     }
+
+
 }

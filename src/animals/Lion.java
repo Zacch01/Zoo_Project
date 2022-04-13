@@ -20,6 +20,13 @@ import java.util.Random;
 public class Lion extends Roar {
     private int scarCount;
 
+    public Lion(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
+        super("Lion", new Point(20, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.8, animalColor);
+        this.scarCount=0;
+        setDiet(new Carnivore());
+        this.loadImages("lio_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+    }
+
 
     /**
      * The constructor of the object Lion, it sets the attributes of the object

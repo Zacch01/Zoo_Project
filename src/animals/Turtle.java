@@ -18,6 +18,13 @@ public class Turtle extends Chew {
     private int age;
 
 
+    public Turtle(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
+        super("Turtle", new Point(80, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.5, animalColor);
+        this.age=1;
+        setDiet(new Herbivore());
+        this.loadImages("trt_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+    }
+
     /**
      * The constructor of the object Turtle, it sets the attributes of the object
      * Note : Weight,Location and the age have a default value

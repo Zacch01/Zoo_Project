@@ -19,6 +19,14 @@ public class Elephant extends Chew {
     private double trunkLength;
 
 
+
+    public Elephant(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
+        super("Elephant", new Point(50, 90), animalSize, horizontalspeed, verticalspeed, animalSize * 10, animalColor);
+        this.trunkLength=1;
+        setDiet(new Herbivore());
+        this.loadImages("elf_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+    }
+
     /**
      * The constructor of the object Elephant, it sets the attributes of the object
      * Note : Weight,Location and the trunk length have a default value
