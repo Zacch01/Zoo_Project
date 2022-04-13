@@ -1,11 +1,13 @@
 package graphics;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-
+import java.io.File;
+import java.io.IOException;
 
 
 
@@ -58,6 +60,7 @@ public class ZooFrame extends JFrame implements  ActionListener{
         this.add(zooPanel, BorderLayout.SOUTH);
         this.setSize(800,600);
         this.add(menuBar,BorderLayout.PAGE_START);
+        this.setResizable(false);
 
 
 

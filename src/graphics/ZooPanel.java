@@ -1,7 +1,6 @@
 package graphics;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +51,8 @@ public class ZooPanel extends JPanel implements  ActionListener {
         switch (e.getActionCommand()){
             case "Exit":System.exit(0);
                 break;
-
+            case "Add Animal":AddAnimalDialog dialog = new AddAnimalDialog();
+                break;
         }
     }
 
