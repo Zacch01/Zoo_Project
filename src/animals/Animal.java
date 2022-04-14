@@ -41,7 +41,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private BufferedImage img1, img2;
 
 
-    public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor) {
+    public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor,ZooPanel pan) {
         super(p);
 
         this.name = name;
@@ -50,13 +50,13 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.verSpeed = verticalspeed;
         this.col = animalcolor;
         this.weight = weight;
-        this.coordChanged = false;
+        this.coordChanged = true;
         this.x_dir = 1;
         this.y_dir = 1;
         this.eatCount=0;
+        this.pan =pan;
     }
 
-    public final static String PICTURE_PATH = "C:\\Users\\zacch\\IdeaProjects\\untitled\\src\\graphics\\assignment2_pictures\\";
     public void loadImages(String nm) {
         try { img1 = ImageIO.read(new File(PICTURE_PATH + nm)); }
         catch (IOException e) { System.out.println("Cannot load image");
@@ -69,6 +69,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
         else // giraffe goes to the left side
             g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
+
     }
 
     public String getColor(){return this.col; }
@@ -111,9 +112,15 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         if(d!=0) {
             double temp = getWeight();
             setWeight(temp-(d*temp*0.00025));
+            setChanges(true);
+            if(getLocation().getx()<=p.getx())
+                this.x_dir=1;
+            else
+                this.x_dir=-1;
         }
         MessageUtility.logBooleanFunction(this.name,"move",p, d != 0);
         return d;
+
     }
 
 

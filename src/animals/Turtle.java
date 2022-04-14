@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Herbivore;
+import graphics.ZooPanel;
 import mobility.Point;
 import privateutil.Chew;
 import utilities.MessageUtility;
@@ -18,8 +19,8 @@ public class Turtle extends Chew {
     private int age;
 
 
-    public Turtle(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
-        super("Turtle", new Point(80, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.5, animalColor);
+    public Turtle(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
+        super("Turtle", new Point(80, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.5, animalColor,pan);
         this.age=1;
         setDiet(new Herbivore());
         this.loadImages("trt_" + animalColor.toLowerCase().charAt(0) + "_1.png");

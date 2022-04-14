@@ -1,6 +1,7 @@
 package privateutil;
 
 import animals.Animal;
+import graphics.ZooPanel;
 import mobility.Point;
 
 
@@ -14,8 +15,8 @@ import mobility.Point;
  */
 public abstract class Chew extends Animal {
 
-    public Chew (String name, Point location, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalColor) {
-        super(name,location, animalSize, horizontalspeed, verticalspeed, weight, animalColor);
+    public Chew (String name, Point location, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalColor, ZooPanel pan) {
+        super(name,location, animalSize, horizontalspeed, verticalspeed, weight, animalColor,pan);
     }
 
     /**

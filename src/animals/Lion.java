@@ -2,6 +2,7 @@ package animals;
 
 import diet.Carnivore;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import food.EFoodType;
 import privateutil.Roar;
@@ -20,8 +21,8 @@ import java.util.Random;
 public class Lion extends Roar {
     private int scarCount;
 
-    public Lion(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
-        super("Lion", new Point(20, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.8, animalColor);
+    public Lion(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
+        super("Lion", new Point(20, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.8, animalColor,pan);
         this.scarCount=0;
         setDiet(new Carnivore());
         this.loadImages("lio_" + animalColor.toLowerCase().charAt(0) + "_1.png");

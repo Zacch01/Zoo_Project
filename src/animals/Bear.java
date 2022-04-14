@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Omnivore;
+import graphics.ZooPanel;
 import mobility.Point;
 import privateutil.Roar;
 import utilities.MessageUtility;
@@ -18,8 +19,8 @@ public class Bear extends Roar {
     private String furColor;
 
 
-    public Bear(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
-        super("Bear", new Point(100, 5), animalSize, horizontalspeed, verticalspeed, animalSize * 1.5, animalColor);
+    public Bear(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
+        super("Bear", new Point(100, 5), animalSize, horizontalspeed, verticalspeed, animalSize * 1.5, animalColor, pan);
         this.furColor="GRAY";
         setDiet(new Omnivore());
         this.loadImages("bea_" + animalColor.toLowerCase().charAt(0) + "_1.png");

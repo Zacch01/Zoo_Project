@@ -10,8 +10,9 @@ import java.util.ArrayList;
 public class AddAnimalDialog extends JDialog {
     private final String[] animalTypes = {"Lion", "Bear", "Giraffe", "Elephant", "Turtle"};
     private final String[] animalColors = {"Natural", "Red", "Blue"};
+    private ZooPanel zoopanel;
 
-    public AddAnimalDialog(ArrayList<Animal> Animallist){
+    public AddAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Add Animal");
         this.setSize(500,300);
         this.setVisible(true);
@@ -19,6 +20,7 @@ public class AddAnimalDialog extends JDialog {
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         this.setLocation(150,150);
         this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.PAGE_AXIS));
+        this.zoopanel = zoopanel;
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -121,11 +123,11 @@ public class AddAnimalDialog extends JDialog {
                     JOptionPane.showMessageDialog(null, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
                     switch (animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex())) {
-                        case "Bear" -> Animallist.add(new Bear(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
-                        case "Elephant" -> Animallist.add(new Elephant(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
-                        case "Giraffe" -> Animallist.add(new Giraffe(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
-                        case "Lion" -> Animallist.add(new Lion(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
-                        case "Turtle" -> Animallist.add(new Turtle(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex())));
+                        case "Bear" -> Animallist.add(new Bear(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                        case "Elephant" -> Animallist.add(new Elephant(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                        case "Giraffe" -> Animallist.add(new Giraffe(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                        case "Lion" -> Animallist.add(new Lion(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                        case "Turtle" -> Animallist.add(new Turtle(Integer.parseInt(textField.getText()), textspeedField.getText().length(), textspeedvField.getText().length(), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
                     }
                     JOptionPane.showMessageDialog(null, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     dispose();

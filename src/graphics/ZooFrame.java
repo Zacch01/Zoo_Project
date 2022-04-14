@@ -22,7 +22,7 @@ public class ZooFrame extends JFrame implements  ActionListener{
 
     public ZooFrame(){
         super("Zoo");
-        zooPanel = new ZooPanel();
+
 
 
 
@@ -57,13 +57,12 @@ public class ZooFrame extends JFrame implements  ActionListener{
         label = new JLabel();
         this.add(label);
         this.setLayout(new BorderLayout());
-        this.add(zooPanel, BorderLayout.SOUTH);
         this.setSize(800,600);
         this.add(menuBar,BorderLayout.PAGE_START);
         this.setResizable(false);
 
-
-
+        zooPanel = new ZooPanel(this);
+        this.add(zooPanel, BorderLayout.SOUTH);
 
 
     }

@@ -1,6 +1,7 @@
 package animals;
 
 import diet.Herbivore;
+import graphics.ZooPanel;
 import mobility.Point;
 import privateutil.Chew;
 import utilities.MessageUtility;
@@ -18,8 +19,8 @@ public class Giraffe extends Chew {
     private double neckLength;
 
 
-    public Giraffe(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
-        super("Giraffe", new Point(50, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 2.2, animalColor);
+    public Giraffe(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
+        super("Giraffe", new Point(50, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 2.2, animalColor,pan);
         this.neckLength =1.5;
         setDiet(new Herbivore());
         this.loadImages("grf_" + animalColor.toLowerCase().charAt(0) + "_1.png");

@@ -2,6 +2,7 @@ package animals;
 
 import diet.Herbivore;
 import diet.Omnivore;
+import graphics.ZooPanel;
 import mobility.Point;
 import privateutil.Chew;
 import utilities.MessageUtility;
@@ -20,8 +21,8 @@ public class Elephant extends Chew {
 
 
 
-    public Elephant(int animalSize, int horizontalspeed, int verticalspeed, String animalColor) {
-        super("Elephant", new Point(50, 90), animalSize, horizontalspeed, verticalspeed, animalSize * 10, animalColor);
+    public Elephant(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
+        super("Elephant", new Point(50, 90), animalSize, horizontalspeed, verticalspeed, animalSize * 10, animalColor,pan);
         this.trunkLength=1;
         setDiet(new Herbivore());
         this.loadImages("elf_" + animalColor.toLowerCase().charAt(0) + "_1.png");

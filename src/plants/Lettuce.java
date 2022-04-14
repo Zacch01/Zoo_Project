@@ -1,5 +1,6 @@
 package plants;
 
+import graphics.ZooPanel;
 import utilities.MessageUtility;
 
 /**
@@ -10,6 +11,13 @@ import utilities.MessageUtility;
  * @see Plant
  */
 public class Lettuce extends Plant {
+
+	public Lettuce(ZooPanel pan){
+		super(pan);
+		this.loadImages("lettuce.png");
+	}
+
+
 	/**
 	 * Constructor of the object Lettuce
 	 */
