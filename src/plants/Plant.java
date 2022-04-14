@@ -16,7 +16,8 @@ import utilities.MessageUtility;
  * @author Attias Zaccharie, Amar Yuval
  * @see Ilocatable
  */
-public abstract class Plant implements IEdible, Ilocatable, IDrawable {
+public abstract class Plant implements IEdible, Ilocatable//, IDrawable
+{
 	private double height;
 	private Point location;
 	private double weight;

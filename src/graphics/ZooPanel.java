@@ -22,6 +22,8 @@ public class ZooPanel extends JPanel implements  ActionListener {
         JButton info = new JButton("Info");
         JButton exit = new JButton("Exit");
 
+        Animallist = new ArrayList<Animal>();
+
         addanimal.addActionListener(this);
         moveanimal.addActionListener(this);
         clear.addActionListener(this);
@@ -62,7 +64,12 @@ public class ZooPanel extends JPanel implements  ActionListener {
                     AddAnimalDialog addanimaldialog = new AddAnimalDialog(Animallist);
                 }
                 break;
-            case "Move Animal":MoveAnimalDialog moveanimaldialog = new MoveAnimalDialog(Animallist);
+            case "Move Animal":
+                if(Animallist.size()==0)
+                    JOptionPane.showMessageDialog(null, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
+                else {
+                    MoveAnimalDialog moveanimaldialog = new MoveAnimalDialog(Animallist);
+                }
                 break;
         }
     }

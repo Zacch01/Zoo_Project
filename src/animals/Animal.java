@@ -29,7 +29,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private IDiet diet;
     private final int EAT_DISTANCE = 5;
     private int size;
-    private Color col;
+    private String col;
     private int horSpeed;
     private int verSpeed;
     private boolean coordChanged;
@@ -48,7 +48,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.size = animalSize;
         this.horSpeed = horizontalspeed;
         this.verSpeed = verticalspeed;
-        this.col = Color.getColor(animalcolor);
+        this.col = animalcolor;
         this.weight = weight;
         this.coordChanged = false;
         this.x_dir = 1;
@@ -64,14 +64,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     }
 
     public void drawObject (Graphics g) {
-        g.setColor(col);
+        g.setColor(Color.RED);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(x_dir==1)// giraffe goes to the right side
             g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
         else // giraffe goes to the left side
             g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
     }
 
-    public String getColor() {return this.col.toString(); }
+    public String getColor(){return this.col; }
     public String getAnimalName() { return this.name; }
     public int getSize() { return this.size; }
     public void eatInc() {this.eatCount++; }
@@ -80,6 +80,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public void setChanges (boolean state) {this.coordChanged = state; }
     public int getHorSpeed() { return this.horSpeed; }
     public int getVerSpeed() { return this.verSpeed; }
+
+    public String getanimal(){return this.name + ", "+this.size+ ", "+this.col ;}
 
 
 
@@ -236,7 +238,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     @Override
     public String toString() {return "[" + this.getClass().getSimpleName() + "] "+this.name;}
 
-    public String getanimal(){return this.name + ", "+this.size+ ", "+this.col ;}
 
     public abstract void makeSound();
 }
