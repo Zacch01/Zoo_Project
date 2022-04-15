@@ -23,10 +23,6 @@ public class ZooFrame extends JFrame implements  ActionListener{
     public ZooFrame(){
         super("Zoo");
 
-
-
-
-
         menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
         JMenuItem exit = new JMenuItem("Exit");
@@ -63,7 +59,6 @@ public class ZooFrame extends JFrame implements  ActionListener{
 
         zooPanel = new ZooPanel(this);
         this.add(zooPanel, BorderLayout.SOUTH);
-
 
     }
 
@@ -118,10 +113,11 @@ public class ZooFrame extends JFrame implements  ActionListener{
     }
 
     public static void main(String[] args){
-        JFrame frame = new ZooFrame();
+        ZooFrame frame = new ZooFrame();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.zooPanel.manageZoo();
     }
 }
 
