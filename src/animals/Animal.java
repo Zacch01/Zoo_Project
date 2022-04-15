@@ -27,7 +27,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private String name;
     private double weight;
     private IDiet diet;
-    private final int EAT_DISTANCE = 5;
+    private final int EAT_DISTANCE = 10;
     private int size;
     private String col;
     private int horSpeed;
@@ -64,10 +64,9 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     }
 
     public void drawObject (Graphics g) {
-        g.setColor(Color.RED);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(x_dir==1)// giraffe goes to the right side
+        if(x_dir==1)//right side
             g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
-        else // giraffe goes to the left side
+        else //left side
             g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
 
     }
