@@ -152,6 +152,11 @@ public class ZooPanel extends JPanel implements  ActionListener {
         super.paintComponent(g);
         if(img!=null)
             g.drawImage(img,0,0,getWidth(),getHeight(), this);
+        if(Animallist.size()!=0){
+            for(Animal animal :Animallist)
+                animal.drawObject(g);
+        }
+
     }
 
 
