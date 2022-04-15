@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ZooFrame extends JFrame implements  ActionListener{
     private final JMenuBar menuBar;
-    private final JPanel zooPanel;
+    private final ZooPanel zooPanel;
     private BufferedImage img = null;
     private JLabel label;
 

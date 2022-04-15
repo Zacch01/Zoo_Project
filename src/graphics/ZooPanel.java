@@ -122,8 +122,9 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
     public void manageZoo() {
         while (true) {
-            if (isChange())
-                repaint();
+            if (isChange()){
+                System.out.println("!!");
+                repaint();}
             for (Animal animalpreda : Animallist)
             {
                 for (Animal animalpreay : Animallist) {
@@ -150,8 +151,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        if(img!=null)
-            g.drawImage(img,0,0,getWidth(),getHeight(), this);
         if(Animallist.size()!=0){
             for(Animal animal :Animallist)
                 animal.drawObject(g);
