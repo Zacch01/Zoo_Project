@@ -95,8 +95,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
                 table.setFillsViewportHeight(true);
                 infoframe.add(new JScrollPane(table),BorderLayout.CENTER);
 
-
-
                 infoframe.setLocation((this.f.getSize().width/2)-250,-50+this.f.getSize().height/2);
                 table.getColumnModel().getColumn(0).setHeaderValue("Animal");
                 table.getColumnModel().getColumn(1).setHeaderValue("Color");
@@ -104,11 +102,14 @@ public class ZooPanel extends JPanel implements  ActionListener {
                 table.getColumnModel().getColumn(3).setHeaderValue("Hor. Speed");
                 table.getColumnModel().getColumn(4).setHeaderValue("Ver. Speed");
                 table.getColumnModel().getColumn(5).setHeaderValue("Eat Counter");
-                table.setValueAt("Total",Animallist.size(),1);
+
                 int total =0;
                 for(Animal an : Animallist)
                     total+= an.getEatCount();
-                table.setValueAt(total,Animallist.size(),5);
+                JTable footer = new JTable(1, 6);
+                footer.setValueAt("Total",0,0);
+                footer.setValueAt(total,0,5);
+                infoframe.add(footer,BorderLayout.SOUTH);
 
                 infoframe.pack();
                 infoframe.setVisible(true);
