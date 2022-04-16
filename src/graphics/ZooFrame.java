@@ -103,8 +103,10 @@ public class ZooFrame extends JFrame implements  ActionListener{
                     throw new RuntimeException(a);
                 }*/
                 this.remove(label);
+                // Image imgtt = new ImageIcon(this.getClass().getResource("savanna.png")).getImage();
                 this.getContentPane().setBackground(null);
-                label = new JLabel("", new ImageIcon("C:\\Users\\PC\\Desktop\\assignment2_pictures\\savanna.png"), SwingConstants.CENTER);
+                //label = new JLabel("", new ImageIcon("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png"), SwingConstants.CENTER);
+                label = new JLabel("", new ImageIcon(this.getClass().getResource("/savanna.png")), SwingConstants.CENTER);
                 label.setBounds(0, 0, 800, 600);
                 this.add(label);
             }
