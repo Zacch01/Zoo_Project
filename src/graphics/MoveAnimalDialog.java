@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MoveAnimalDialog extends JDialog {
 
-    public MoveAnimalDialog(ArrayList<Animal> Animallist){
+    public MoveAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Move Animal");
         this.setSize(500, 300);
         this.setVisible(true);
@@ -78,15 +78,17 @@ public class MoveAnimalDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(textFieldx.getText().length()>3||textFieldx.getText().length()==0)
-                    JOptionPane.showMessageDialog(null, "The location x of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The location x of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(Integer.parseInt(textFieldx.getText())>800 || Integer.parseInt(textFieldx.getText())<0)
-                    JOptionPane.showMessageDialog(null, "The location x of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The location x of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(textFieldy.getText().length()>3||textFieldy.getText().length()==0)
-                    JOptionPane.showMessageDialog(null, "The location y of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The location y of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(Integer.parseInt(textFieldy.getText())>600 || Integer.parseInt(textFieldy.getText())<0)
-                    JOptionPane.showMessageDialog(null, "The location y of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The location y of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
                     Animallist.get(allanimalsCombo.getSelectedIndex()).setLocation(new Point(Integer.parseInt(textFieldx.getText()), Integer.parseInt(textFieldy.getText())));
+                    Animallist.get(allanimalsCombo.getSelectedIndex()).setChanges(true);
+                    zoopanel.manageZoo();
                     JOptionPane.showMessageDialog(null, "Animal moved", "Message",JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                 }

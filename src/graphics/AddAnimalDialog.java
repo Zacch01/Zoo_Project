@@ -110,17 +110,17 @@ public class AddAnimalDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(textField.getText().length()>3||textField.getText().length()==0)
-                    JOptionPane.showMessageDialog(null, "The size of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The size of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(Integer.parseInt(textField.getText())>300 || Integer.parseInt(textField.getText())<50)
-                    JOptionPane.showMessageDialog(null, "The size of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The size of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(textspeedField.getText().length()>3||textspeedField.getText().length()==0)
-                    JOptionPane.showMessageDialog(null, "The horizontal speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The horizontal speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(Integer.parseInt(textspeedField.getText())<1|| Integer.parseInt(textspeedField.getText())>10)
-                    JOptionPane.showMessageDialog(null, "The horizontal speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The horizontal speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(textspeedvField.getText().length()>3||textspeedvField.getText().length()==0)
-                    JOptionPane.showMessageDialog(null, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(Integer.parseInt(textspeedvField.getText())<1|| Integer.parseInt(textspeedvField.getText())>10)
-                    JOptionPane.showMessageDialog(null, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(zoopanel, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
                     switch (animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex())) {
                         case "Bear" -> Animallist.add(new Bear(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
@@ -129,8 +129,10 @@ public class AddAnimalDialog extends JDialog {
                         case "Lion" -> Animallist.add(new Lion(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
                         case "Turtle" -> Animallist.add(new Turtle(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
                     }
-                    JOptionPane.showMessageDialog(null, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
+                    zoopanel.manageZoo();
+                    JOptionPane.showMessageDialog(zoopanel, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     dispose();
+
                 }
             }
         });

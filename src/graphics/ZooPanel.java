@@ -18,11 +18,11 @@ public class ZooPanel extends JPanel implements  ActionListener {
     private JPanel actionPanel;
     private JDialog addAnimalDialog;
     private ArrayList<Animal> Animallist;
-    private JFrame f;
+    private ZooFrame f;
     private BufferedImage img = null;
     private Plant plant=null;
 
-    public ZooPanel(JFrame frame){
+    public ZooPanel(ZooFrame frame){
         this.f = frame;
         actionPanel = new JPanel();
         JButton addanimal = new JButton("Add Animal");
@@ -53,12 +53,14 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
 
         actionPanel.setBackground(Color.BLUE);
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
-        this.add(actionPanel);
+        actionPanel.setLayout(new FlowLayout());
 
 
-        //manageZoo();
+
+
+        this.setLayout(new BorderLayout());
+        this.add(actionPanel,BorderLayout.PAGE_END);
+        manageZoo();
     }
 
     public void actionPerformed(ActionEvent e)
@@ -68,26 +70,28 @@ public class ZooPanel extends JPanel implements  ActionListener {
                 break;
             case "Add Animal":
                 if(Animallist.size()==10)
-                    JOptionPane.showMessageDialog(null, "You cannot add more than 10 animals.", "Message", JOptionPane.WARNING_MESSAGE);
-                else {
-                    AddAnimalDialog addanimaldialog = new AddAnimalDialog(this,Animallist);
-                }
+                    JOptionPane.showMessageDialog(this, "You cannot add more than 10 animals.", "Message", JOptionPane.WARNING_MESSAGE);
+                else
+                    new AddAnimalDialog(this,Animallist);
                 break;
+
             case "Move Animal":
                 if(Animallist.size()==0)
-                    JOptionPane.showMessageDialog(null, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
-                else {
-                    MoveAnimalDialog moveanimaldialog = new MoveAnimalDialog(Animallist);
-                }
+                    JOptionPane.showMessageDialog(this, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
+                else
+                    new MoveAnimalDialog(this,Animallist);
                 break;
+
             case "Food": Object[] options = {"Lettuce", "Cabbage", "Meat"};
                 int foodchoice = JOptionPane.showOptionDialog(f, "Please choose food:", "Food for animal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                 if(foodchoice == 0)
                     this.plant = new Lettuce(this);
                 if(foodchoice == 1)
                     this.plant = new Cabbage(this);
+                repaint();
                 break;
-            case "Info":JFrame infoframe = new JFrame("Info");
+
+            case "Info": JFrame infoframe = new JFrame("Info");
                 Info model = new Info(Animallist);
                 JTable table = new JTable(model);
                 table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -113,7 +117,12 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
                 infoframe.pack();
                 infoframe.setVisible(true);
+                break;
 
+            case "Clear":
+                this.Animallist.clear();
+                this.plant = null;
+                repaint();
                 break;
         }
     }
@@ -121,19 +130,19 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
 
     public void manageZoo() {
-        while (true) {
-            if (isChange()){
-                System.out.println("!!");
-                repaint();}
-            for (Animal animalpreda : Animallist)
-            {
-                for (Animal animalpreay : Animallist) {
-                    if (animalpreda.equals(animalpreay))
-                        continue;
-                    if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) > animalpreay.getSize())) {
-                        animalpreda.eat(animalpreay);
-                        Animallist.remove(Animallist.remove(Animallist.indexOf(animalpreay)));
-                    }
+
+        if (isChange())
+            repaint();
+        for (Animal animalpreda : Animallist)
+        {
+            for (Animal animalpreay : Animallist) {
+                if (animalpreda.equals(animalpreay))
+                    continue;
+                if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
+                    animalpreda.eat(animalpreay);
+                    Animallist.remove(Animallist.indexOf(animalpreay));
+                    repaint();
+                    return;
                 }
             }
         }
@@ -149,14 +158,18 @@ public class ZooPanel extends JPanel implements  ActionListener {
         return false;
     }
 
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        System.out.print("test");
+        if(plant!= null){
+            System.out.print("plant");
+            plant.drawObject(g);
+        }
         if(Animallist.size()!=0){
+            System.out.print("\nanimal\n");
             for(Animal animal :Animallist)
                 animal.drawObject(g);
         }
-
     }
-
-
 }

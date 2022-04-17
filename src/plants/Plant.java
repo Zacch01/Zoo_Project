@@ -15,6 +15,7 @@ import mobility.Point;
 import utilities.MessageUtility;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * Abstract class that defines the attributes of the plants
@@ -49,11 +50,12 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 
 	public Plant(ZooPanel pan) {
 		Random rand = new Random();
-		this.location = new Point(pan.getWidth()/2, pan.getHeight()/2);
-		this.height = rand.nextInt(30);
-		this.weight = rand.nextInt(12);
+		this.height = rand.nextInt(90);//////////////////////////////////////////////////
+		this.weight = rand.nextInt(36);
+		this.location = new Point(pan.getWidth()/2-this.height/2, pan.getHeight()/2-this.weight/2-36);
 		MessageUtility.logConstractor("Plant", "Plant");
 		this.col = "Natural";
+		this.pan=pan;
 	}
 
 	/**

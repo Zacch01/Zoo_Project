@@ -53,12 +53,13 @@ public class ZooFrame extends JFrame implements  ActionListener{
         label = new JLabel();
         this.add(label);
         this.setLayout(new BorderLayout());
-        this.setSize(800,600);
+        this.setSize(814,636);
         this.add(menuBar,BorderLayout.PAGE_START);
         this.setResizable(false);
 
         zooPanel = new ZooPanel(this);
-        this.add(zooPanel, BorderLayout.SOUTH);
+        zooPanel.setOpaque(false);
+        this.add(zooPanel);
 
     }
 
@@ -66,7 +67,7 @@ public class ZooFrame extends JFrame implements  ActionListener{
     {
         switch (e.getActionCommand()) {
             case "Exit" -> System.exit(0);
-            case "Help" -> JOptionPane.showMessageDialog(null, "Home Work 2\nGUI", "Message", JOptionPane.INFORMATION_MESSAGE);
+            case "Help" -> JOptionPane.showMessageDialog(this, "Home Work 2\nGUI", "Message", JOptionPane.INFORMATION_MESSAGE);
             case "Green" -> {
                 this.remove(label);
                 this.getContentPane().setBackground(Color.green);
@@ -119,7 +120,6 @@ public class ZooFrame extends JFrame implements  ActionListener{
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.zooPanel.manageZoo();
     }
 }
 
