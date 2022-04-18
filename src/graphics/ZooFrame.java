@@ -103,13 +103,28 @@ public class ZooFrame extends JFrame implements  ActionListener{
                 } catch (IOException a) {
                     throw new RuntimeException(a);
                 }*/
-                this.remove(label);
-                // Image imgtt = new ImageIcon(this.getClass().getResource("savanna.png")).getImage();
+                /*this.remove(label);
                 this.getContentPane().setBackground(null);
-                //label = new JLabel("", new ImageIcon("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png"), SwingConstants.CENTER);
-                label = new JLabel("", new ImageIcon(this.getClass().getResource("/savanna.png")), SwingConstants.CENTER);
+                label = new JLabel();
                 label.setBounds(0, 0, 800, 600);
-                this.add(label);
+                label.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/savanna.png")).getImage().getScaledInstance(label.getWidth(), label.getHeight()-, Image.SCALE_DEFAULT)));
+                this.repaint();
+                this.add(label);*/
+
+
+                try {
+                    this.remove(label);
+                    this.getContentPane().setBackground(null);
+                    img = ImageIO.read(new File(IDrawable.PICTURE_PATH + "savanna.png"));
+                    label = new JLabel();
+                    label.setBounds(0, 0, 800, 600);
+                    Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon imageIcon = new ImageIcon(dimg);
+                    label.setIcon(imageIcon);
+                    this.getContentPane().add(label);
+                }
+                catch (IOException a) { System.out.println("Cannot load image");
+                    System.out.println(a.toString());}
             }
         }
 
