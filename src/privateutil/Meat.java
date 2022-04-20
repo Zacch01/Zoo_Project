@@ -41,8 +41,8 @@ public class Meat implements IEdible, Ilocatable, IDrawable
 
     public Meat(ZooPanel pan) {
         Random rand = new Random();
-        this.height = rand.nextInt(90);//////////////////////////////////////////////////
-        this.weight = rand.nextInt(36);
+        this.height = 25;
+        this.weight = 25;
         this.location = new Point(pan.getWidth()/2-this.height/2, pan.getHeight()/2-this.weight/2-36);
         MessageUtility.logConstractor("Meat", "Meat");
         this.col = "Natural";

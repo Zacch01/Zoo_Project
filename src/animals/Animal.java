@@ -68,7 +68,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
         else //left side
             g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
-
     }
 
     public String getColor(){return this.col; }

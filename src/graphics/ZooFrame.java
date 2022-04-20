@@ -77,47 +77,12 @@ public class ZooFrame extends JFrame implements  ActionListener{
                 this.getContentPane().setBackground(null);
             }
             case "Image" -> {
-
-                /*ImageIcon background=new ImageIcon("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png");
-                Image img=background.getImage();
-                Image temp=img.getScaledInstance(1920,800,Image.SCALE_SMOOTH);
-                background=new ImageIcon(temp);
-                JLabel back=new JLabel(background);
-                back.setLayout(new BorderLayout());
-
-                back.setBounds(0,0,1920,800);
-                this.add(back);*/
-                /*t
-                try {
-                    final Image backgroundImage = javax.imageio.ImageIO.read(new File("C:\\Users\\zacch\\OneDrive\\Documents\\savanna.png"));
-                    this.setContentPane(new JPanel() {
-                    @Override
-                    public void paintComponent(Graphics g) {
-                        super.paintComponent(g);
-                        g.drawImage(backgroundImage, 0, 0, null);
-                    }
-                });
-                    this.setLayout(new BorderLayout());
-                    this.add(zooPanel, BorderLayout.PAGE_END);
-                    this.add(menuBar,BorderLayout.PAGE_START);
-                } catch (IOException a) {
-                    throw new RuntimeException(a);
-                }*/
-                /*this.remove(label);
-                this.getContentPane().setBackground(null);
-                label = new JLabel();
-                label.setBounds(0, 0, 800, 600);
-                label.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/savanna.png")).getImage().getScaledInstance(label.getWidth(), label.getHeight()-, Image.SCALE_DEFAULT)));
-                this.repaint();
-                this.add(label);*/
-
-
                 try {
                     this.remove(label);
                     this.getContentPane().setBackground(null);
                     img = ImageIO.read(new File(IDrawable.PICTURE_PATH + "savanna.png"));
                     label = new JLabel();
-                    label.setBounds(0, 0, 800, 600);
+                    label.setBounds(0, 11, 800, 600);
                     Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(dimg);
                     label.setIcon(imageIcon);

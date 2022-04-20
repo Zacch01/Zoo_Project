@@ -26,7 +26,7 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
     public ZooPanel(ZooFrame frame){
         this.f = frame;
-        actionPanel = new JPanel();
+        actionPanel = new JPanel(new FlowLayout());
         JButton addanimal = new JButton("Add Animal");
         JButton moveanimal = new JButton("Move Animal");
         JButton clear = new JButton("Clear");
@@ -55,7 +55,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
 
         actionPanel.setBackground(Color.BLUE);
-        actionPanel.setLayout(new FlowLayout());
 
 
 

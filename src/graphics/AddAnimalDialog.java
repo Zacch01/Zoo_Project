@@ -36,6 +36,7 @@ public class AddAnimalDialog extends JDialog {
             }
         });
 
+
         //JPanel animalTypesPanel = new JPanel();
         JComboBox<String> animalTypesCombo = new JComboBox<>(animalTypes);
         TitledBorder animalChoiceBorder = BorderFactory.createTitledBorder("Choose Animal: ");
@@ -45,7 +46,7 @@ public class AddAnimalDialog extends JDialog {
 
         //JPanel sizePanel = new JPanel();
         JTextField textField = new JTextField(500);
-        TitledBorder sizechoice = BorderFactory.createTitledBorder("Write the animal's size: ");
+        TitledBorder sizechoice = BorderFactory.createTitledBorder("Write the animal's size (50-300): ");
         textField.setBorder(sizechoice);
         //sizePanel.add(textField);
         this.getContentPane().add(textField );
@@ -67,7 +68,7 @@ public class AddAnimalDialog extends JDialog {
 
         //JPanel horizontalspeedPanel = new JPanel();
         JTextField textspeedField = new JTextField(500);
-        TitledBorder horizontalspeedhchoice = BorderFactory.createTitledBorder("Write the animal's horizontal speed: ");
+        TitledBorder horizontalspeedhchoice = BorderFactory.createTitledBorder("Write the animal's horizontal speed (1-10): ");
         textspeedField.setBorder(horizontalspeedhchoice);
         //sizePanel.add(textField);
         this.getContentPane().add(textspeedField);
@@ -82,7 +83,7 @@ public class AddAnimalDialog extends JDialog {
 
         //JPanel verticalspeedPanel = new JPanel();
         JTextField textspeedvField = new JTextField(500);
-        TitledBorder verticalspeedchoice = BorderFactory.createTitledBorder("Write the animal's vertical speed: ");
+        TitledBorder verticalspeedchoice = BorderFactory.createTitledBorder("Write the animal's vertical speed (1-10): ");
         textspeedvField.setBorder(verticalspeedchoice);
 
         //sizePanel.add(textField);

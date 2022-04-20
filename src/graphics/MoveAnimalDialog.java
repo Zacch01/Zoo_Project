@@ -12,11 +12,11 @@ public class MoveAnimalDialog extends JDialog {
 
     public MoveAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Move Animal");
-        this.setSize(500, 300);
+        this.setSize(500, 200);
         this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        this.setLocation(150, 150);
+        this.setLocation(150, 250);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 
         this.addWindowListener(new WindowAdapter() {
@@ -46,7 +46,7 @@ public class MoveAnimalDialog extends JDialog {
         this.getContentPane().add(allanimalsCombo);
 
         JTextField textFieldx = new JTextField(500);
-        TitledBorder xchoice = BorderFactory.createTitledBorder("Write the animal's new location on the axis x: ");
+        TitledBorder xchoice = BorderFactory.createTitledBorder("Write the animal's new location on the axis x (0-800): ");
         textFieldx.setBorder(xchoice);
         this.getContentPane().add(textFieldx );
         textFieldx.addKeyListener(new KeyAdapter() {
@@ -59,7 +59,7 @@ public class MoveAnimalDialog extends JDialog {
         });
 
         JTextField textFieldy = new JTextField(500);
-        TitledBorder ychoice = BorderFactory.createTitledBorder("Write the animal's new location on the axis y: ");
+        TitledBorder ychoice = BorderFactory.createTitledBorder("Write the animal's new location on the axis y (0-600): ");
         textFieldy.setBorder(ychoice);
         this.getContentPane().add(textFieldy );
         textFieldy.addKeyListener(new KeyAdapter() {
