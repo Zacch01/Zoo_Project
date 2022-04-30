@@ -1,10 +1,12 @@
 package graphics;
 
 import animals.*;
+import mobility.Point;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 public class AddAnimalDialog extends JDialog {
@@ -21,6 +23,8 @@ public class AddAnimalDialog extends JDialog {
         this.setLocation(150,150);
         this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.PAGE_AXIS));
         this.zoopanel = zoopanel;
+        this.zoopanel.getF().setEnabled(false);
+
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -37,18 +41,14 @@ public class AddAnimalDialog extends JDialog {
         });
 
 
-        //JPanel animalTypesPanel = new JPanel();
         JComboBox<String> animalTypesCombo = new JComboBox<>(animalTypes);
         TitledBorder animalChoiceBorder = BorderFactory.createTitledBorder("Choose Animal: ");
         animalTypesCombo.setBorder(animalChoiceBorder);
-        //animalTypesPanel.add(animalTypesCombo);
         this.getContentPane().add(animalTypesCombo);
 
-        //JPanel sizePanel = new JPanel();
         JTextField textField = new JTextField(500);
         TitledBorder sizechoice = BorderFactory.createTitledBorder("Write the animal's size (50-300): ");
         textField.setBorder(sizechoice);
-        //sizePanel.add(textField);
         this.getContentPane().add(textField );
 
         textField.addKeyListener(new KeyAdapter() {
@@ -60,17 +60,9 @@ public class AddAnimalDialog extends JDialog {
             }
         });
 
-
-
-
-
-
-
-        //JPanel horizontalspeedPanel = new JPanel();
         JTextField textspeedField = new JTextField(500);
         TitledBorder horizontalspeedhchoice = BorderFactory.createTitledBorder("Write the animal's horizontal speed (1-10): ");
         textspeedField.setBorder(horizontalspeedhchoice);
-        //sizePanel.add(textField);
         this.getContentPane().add(textspeedField);
         textspeedField.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -81,12 +73,10 @@ public class AddAnimalDialog extends JDialog {
             }
         });
 
-        //JPanel verticalspeedPanel = new JPanel();
         JTextField textspeedvField = new JTextField(500);
         TitledBorder verticalspeedchoice = BorderFactory.createTitledBorder("Write the animal's vertical speed (1-10): ");
         textspeedvField.setBorder(verticalspeedchoice);
 
-        //sizePanel.add(textField);
         this.getContentPane().add(textspeedvField);
         textspeedvField.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -97,7 +87,6 @@ public class AddAnimalDialog extends JDialog {
             }
         });
 
-        //JPanel animalTypesPanel = new JPanel();
         JComboBox<String> animalcolorsCombo = new JComboBox<>(animalColors);
         TitledBorder animalcolorChoiceBorder = BorderFactory.createTitledBorder("Choose the animal's color: ");
         animalcolorsCombo.setBorder(animalcolorChoiceBorder);
@@ -123,15 +112,18 @@ public class AddAnimalDialog extends JDialog {
                 else if(Integer.parseInt(textspeedvField.getText())<1|| Integer.parseInt(textspeedvField.getText())>10)
                     JOptionPane.showMessageDialog(zoopanel, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
-                    switch (animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex())) {
-                        case "Bear" -> Animallist.add(new Bear(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
-                        case "Elephant" -> Animallist.add(new Elephant(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
-                        case "Giraffe" -> Animallist.add(new Giraffe(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
-                        case "Lion" -> Animallist.add(new Lion(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
-                        case "Turtle" -> Animallist.add(new Turtle(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                    Class c;
+                    ClassLoader cl = ClassLoader.getSystemClassLoader();
+                    try {
+                        c = cl.loadClass("animals."+animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()));
+                        Constructor con = c.getConstructor(int.class, int.class, int.class, String.class,ZooPanel.class);
+                        Animallist.add((Animal) con.newInstance(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                    } catch (Exception a) {
+                        a.printStackTrace();
                     }
                     zoopanel.manageZoo();
                     JOptionPane.showMessageDialog(zoopanel, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
+                    zoopanel.getF().setEnabled(true);
                     dispose();
 
                 }

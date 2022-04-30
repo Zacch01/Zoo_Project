@@ -15,7 +15,6 @@ import mobility.Point;
 import utilities.MessageUtility;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 /**
  * Abstract class that defines the attributes of the plants
@@ -26,7 +25,7 @@ import javax.swing.*;
  */
 public abstract class Plant implements IEdible, Ilocatable, IDrawable
 {
-	private int height;////////////////////////////////////////////////////////////
+	private int height;
 	private Point location;
 	private int weight;
 	private BufferedImage img;

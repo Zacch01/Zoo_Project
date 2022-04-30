@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -55,10 +53,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
 
 
         actionPanel.setBackground(Color.BLUE);
-
-
-
-
         this.setLayout(new BorderLayout());
         this.add(actionPanel,BorderLayout.PAGE_END);
         manageZoo();
@@ -194,4 +188,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
             for(Animal animal :Animallist)
                 animal.drawObject(g);
     }
+
+    public ZooFrame getF(){return this.f;}
 }

@@ -53,7 +53,7 @@ public class MessageUtility {
 	 */
 	public static void logGetter(String name, String funcName, Object value) {
 		String str = "[g]" + name + ":  \t" + funcName + "() => " + value;
-		System.out.println(str);
+		//System.out.println(str);
 	}
 
 	/**

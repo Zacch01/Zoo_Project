@@ -9,6 +9,7 @@ import mobility.Point;
 import utilities.MessageUtility;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,16 +21,14 @@ public class Meat implements IEdible, Ilocatable, IDrawable
     private int height;////////////////////////////////////////////////////////////
     private Point location;
     private int weight;
-    private BufferedImage img;
+    private Image img;
     private ZooPanel pan;
     private String col;
 
 
 
     public void loadImages(String nm) {
-        try { img = ImageIO.read(new File(PICTURE_PATH + nm)); }
-        catch (IOException e) { System.out.println("Cannot load image");
-            System.out.println(e.toString());}
+        this.img = new ImageIcon(PICTURE_PATH + nm).getImage();
     }
 
     public void drawObject (Graphics g) {
@@ -144,7 +143,6 @@ public class Meat implements IEdible, Ilocatable, IDrawable
             this.weight = 0;
         }
         MessageUtility.logSetter(this.getClass().getSimpleName(), "setWeight", weight, isSuccess);
-
         return isSuccess;
     }
 

@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class MoveAnimalDialog extends JDialog {
+    private ZooPanel zoopanel;
 
     public MoveAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Move Animal");
@@ -18,6 +19,8 @@ public class MoveAnimalDialog extends JDialog {
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         this.setLocation(150, 250);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+        this.zoopanel =zoopanel;
+        this.zoopanel.getF().setEnabled(false);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -90,6 +93,7 @@ public class MoveAnimalDialog extends JDialog {
                     Animallist.get(allanimalsCombo.getSelectedIndex()).setChanges(true);
                     zoopanel.manageZoo();
                     JOptionPane.showMessageDialog(null, "Animal moved", "Message",JOptionPane.INFORMATION_MESSAGE);
+                    zoopanel.getF().setEnabled(true);
                     dispose();
                 }
             }
