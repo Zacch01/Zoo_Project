@@ -5,7 +5,6 @@ import plants.Cabbage;
 import plants.Lettuce;
 import plants.Plant;
 import privateutil.Meat;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +12,16 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
+/**
+ * A class representing the GUI main panel
+ * Note : It inherits from JPanel and implements from ActionListener
+ *
+ * @version 17.0.2
+ * @author Attias Zaccharie, Amar Yuval
+ * @see JPanel
+ * @see ActionListener
+ */
 public class ZooPanel extends JPanel implements  ActionListener {
     private JPanel actionPanel;
     private JDialog addAnimalDialog;
@@ -22,6 +31,10 @@ public class ZooPanel extends JPanel implements  ActionListener {
     private Plant plant=null;
     private Meat meat =null;
 
+    /**
+     * The constructor of the ZooPanel object: it sets the attributes of the object
+     * Note : ZooPanel contain two panels, one for control buttons, and the other for the visual board
+     */
     public ZooPanel(ZooFrame frame){
         this.f = frame;
         actionPanel = new JPanel(new FlowLayout());
@@ -58,6 +71,10 @@ public class ZooPanel extends JPanel implements  ActionListener {
         manageZoo();
     }
 
+    /**
+     * Invoked when an action occurs
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()){
@@ -126,8 +143,11 @@ public class ZooPanel extends JPanel implements  ActionListener {
         }
     }
 
-
-
+    /**
+     * The controller of the program, follow after all the user actions and update the program accordingly
+     * Check if one animal can eat another one
+     * Check if one animal can eat a plant or the meat
+     */
     public void manageZoo() {
 
         if (isChange())
@@ -137,7 +157,7 @@ public class ZooPanel extends JPanel implements  ActionListener {
             if(plant!=null) {
                 if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
                     animal.eat(plant);
-                    animal.setEatCount();
+                    animal.eatInc();
                     plant = null;
                     repaint();
                 }
@@ -145,7 +165,7 @@ public class ZooPanel extends JPanel implements  ActionListener {
             if(meat!=null) {
                 if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
                     animal.eat(meat);
-                    animal.setEatCount();
+                    animal.eatInc();
                     meat= null;
                     repaint();
                 }
@@ -158,7 +178,7 @@ public class ZooPanel extends JPanel implements  ActionListener {
                     continue;
                 if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
                     animalpreda.eat(animalpreay);
-                    animalpreda.setEatCount();
+                    animalpreda.eatInc();
                     Animallist.remove(Animallist.indexOf(animalpreay));
                     repaint();
                     return;
@@ -167,6 +187,11 @@ public class ZooPanel extends JPanel implements  ActionListener {
         }
     }
 
+
+    /**
+     * Check if anything has changed in our program
+     * @return True if something have changed, else False
+     */
     public boolean isChange(){
         for (Animal animal : Animallist)
             if(animal.getChanges())
@@ -177,6 +202,11 @@ public class ZooPanel extends JPanel implements  ActionListener {
         return false;
     }
 
+
+    /**
+     * Printing all the components in our frame
+     * @param g the graphics context
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -189,5 +219,9 @@ public class ZooPanel extends JPanel implements  ActionListener {
                 animal.drawObject(g);
     }
 
+    /**
+     * Getter method for the attribute f
+     * @return The frame where the panel is located
+     */
     public ZooFrame getF(){return this.f;}
 }

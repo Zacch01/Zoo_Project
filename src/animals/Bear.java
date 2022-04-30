@@ -18,7 +18,16 @@ import utilities.MessageUtility;
 public class Bear extends Roar {
     private String furColor;
 
-
+    /**
+     * The constructor of the object Bear, it sets the attributes of the object
+     * Note : Name, Location and the fur color have a default value
+     *
+     * @param animalSize A int that represent the size of the Bear
+     * @param horizontalspeed A int that represent the horizontal speed of the Bear
+     * @param verticalspeed A int that represent the vertical speed of the Bear
+     * @param animalColor A String that represent the color of the Bear image
+     * @param pan A Zoopanel that represent the parent panel of the Bear
+     */
     public Bear(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
         super("Bear", new Point(100, 5), animalSize, horizontalspeed, verticalspeed, animalSize * 1.5, animalColor, pan);
         this.furColor="GRAY";

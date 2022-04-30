@@ -12,6 +12,10 @@ import utilities.MessageUtility;
  */
 public class Lettuce extends Plant {
 
+	/**
+	 * Constructor of the object Lettuce
+	 * @param pan A Zoopanel that represent the parent panel of the Lettuce
+	 */
 	public Lettuce(ZooPanel pan){
 		super(pan);
 		this.loadImages("lettuce.png");

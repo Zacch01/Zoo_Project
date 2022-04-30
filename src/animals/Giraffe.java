@@ -18,7 +18,16 @@ import utilities.MessageUtility;
 public class Giraffe extends Chew {
     private double neckLength;
 
-
+    /**
+     * The constructor of the object Giraffe, it sets the attributes of the object
+     * Note : Name, Location and the neck length have a default value
+     *
+     * @param animalSize A int that represent the size of the Giraffe
+     * @param horizontalspeed A int that represent the horizontal speed of the Giraffe
+     * @param verticalspeed A int that represent the vertical speed of the Giraffe
+     * @param animalColor A String that represent the color of the Giraffe image
+     * @param pan A Zoopanel that represent the parent panel of the Giraffe
+     */
     public Giraffe(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
         super("Giraffe", new Point(50, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 2.2, animalColor,pan);
         this.neckLength =1.5;

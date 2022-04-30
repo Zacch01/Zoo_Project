@@ -32,21 +32,11 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 	private ZooPanel pan;
 	private String col;
 
-
-
-	public void loadImages(String nm) {
-		try { img = ImageIO.read(new File(PICTURE_PATH + nm)); }
-		catch (IOException e) { System.out.println("Cannot load image");
-			System.out.println(e.toString());}
-	}
-
-	public void drawObject (Graphics g) {
-		g.drawImage(img, getLocation().getx(), getLocation().gety(), this.getHeight(), this.getHeight(), pan);
-	}
-
-	public String getColor(){return this.col; }
-
-
+	/**
+	 * Constructor of the object Plant : it sets the attributes of the object
+	 * Note: the plants have an initial location, an initial height and an initial weight
+	 * @param pan A Zoopanel that represent the parent panel of the Plant
+	 */
 	public Plant(ZooPanel pan) {
 		Random rand = new Random();
 		this.height = 25;
@@ -72,7 +62,35 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 		this.col = "Natural";
 	}
 
+	/**
+	 * load image method for the attribute img
+	 * Note : catch error from IOException if cannot load the image
+	 *
+	 * @param nm is a String representing the name animal type
+	 */
 
+	public void loadImages(String nm) {
+		try { img = ImageIO.read(new File(PICTURE_PATH + nm)); }
+		catch (IOException e) { System.out.println("Cannot load image");
+			System.out.println(e.toString());}
+	}
+
+
+	/**
+	 * draw image method for the attribute img
+	 *
+	 * @param g is a Graphics object that return from repaint to paintComponent
+	 */
+	public void drawObject (Graphics g) {
+		g.drawImage(img, getLocation().getx(), getLocation().gety(), this.getHeight(), this.getHeight(), pan);
+	}
+
+	/**
+	 * Getter method for the attribute col
+	 *
+	 * @return The animal color
+	 */
+	public String getColor(){return this.col; }
 
 	/**
 	 * Getter method for know the food type of the Plants

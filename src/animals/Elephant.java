@@ -20,7 +20,16 @@ public class Elephant extends Chew {
     private double trunkLength;
 
 
-
+    /**
+     * The constructor of the object Elephant, it sets the attributes of the object
+     * Note : Name, Location and the trunk length have a default value,
+     *
+     * @param animalSize A int that represent the size of the Elephant
+     * @param horizontalspeed A int that represent the horizontal speed of the Elephant
+     * @param verticalspeed A int that represent the vertical speed of the Elephant
+     * @param animalColor A String that represent the color of the Elephant image
+     * @param pan A Zoopanel that represent the parent panel of the Elephant
+     */
     public Elephant(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
         super("Elephant", new Point(50, 90), animalSize, horizontalspeed, verticalspeed, animalSize * 10, animalColor,pan);
         this.trunkLength=1;

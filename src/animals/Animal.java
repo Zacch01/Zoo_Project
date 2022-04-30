@@ -40,10 +40,20 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private ZooPanel pan;
     private BufferedImage img1, img2;
 
-
+    /**
+     * Constructor of the object Animal : it sets the attributes of the object
+     *
+     * @param name A String that represent the name of the Animal
+     * @param p A Point object that represent the actual location of the Animal
+     * @param animalSize A String that represent the animal's size
+     * @param horizontalspeed An Integer that represent the animal's horizontal speed
+     * @param verticalspeed An Integer that represent the animal's vertical speed
+     * @param weight A Double that represent the animal's weight
+     * @param animalcolor A String that represent the animal's color
+     * @param pan is a ZooPanel representing the animal GUI Panel
+     */
     public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor,ZooPanel pan) {
         super(p);
-
         this.name = name;
         this.size = animalSize;
         this.horSpeed = horizontalspeed;
@@ -56,34 +66,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.eatCount=0;
         this.pan =pan;
     }
-
-    public void loadImages(String nm) {
-        try { img1 = ImageIO.read(new File(PICTURE_PATH + nm)); }
-        catch (IOException e) { System.out.println("Cannot load image");
-            System.out.println(e.toString());}
-    }
-
-    public void drawObject (Graphics g) {
-        if(x_dir==1)//right side
-            g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
-        else //left side
-            g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
-    }
-
-    public String getColor(){return this.col; }
-    public String getAnimalName() { return this.name; }
-    public int getSize() { return this.size; }
-    public void eatInc() {this.eatCount++; }
-    public int getEatCount() {return this.eatCount; }
-    public void setEatCount() { this.eatCount++; }
-    public boolean getChanges () {return this.coordChanged; }
-    public void setChanges (boolean state) {this.coordChanged = state; }
-    public int getHorSpeed() { return this.horSpeed; }
-    public int getVerSpeed() { return this.verSpeed; }
-
-    public String getanimal(){return this.name + ", "+this.size+ ", "+this.col ;}
-    public int geteatdistance(){return EAT_DISTANCE;}
-
 
 
     /**
@@ -134,6 +116,76 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return this.diet;
     }
 
+
+    /**
+     * Getter method for the attribute col
+     *
+     * @return The animal color
+     */
+    public String getColor(){return this.col; }
+
+    /**
+     * Getter method for the attribute name
+     *
+     * @return The animal's name
+     */
+    public String getAnimalName() { return this.name; }
+
+    /**
+     * Getter method for the attribute size
+     *
+     * @return The animal's size
+     */
+    public int getSize() { return this.size; }
+
+    /**
+     * Getter method for the attribute eatcount
+     *
+     * @return The animal's eat counter
+     */
+    public int getEatCount() {return this.eatCount; }
+
+    /**
+     * Increasing eat counter field eatcount of the animal by one
+     */
+    public void eatInc() { this.eatCount++; }
+
+    /**
+     * Getter method for the attribute coordChanged
+     * @return If the coordinate of the animal changed
+     */
+    public boolean getChanges () {return this.coordChanged; }
+
+    /**
+     * Change the status of coordChanged of the animal
+     *
+     * @param state is a Boolean representing the status coordChanged of the Animal
+     */
+    public void setChanges (boolean state) {this.coordChanged = state; }
+
+    /**
+     * Getter method for the attribute horSpeed
+     * @return The animal's horizontal speed
+     */
+    public int getHorSpeed() { return this.horSpeed; }
+
+    /**
+     * Getter method for the attribute verSpeed
+     * @return The animal's vertical speed
+     */
+    public int getVerSpeed() { return this.verSpeed; }
+
+    /**
+     * Getter method for the attributes of the animal
+     * @return The animal's attributes
+     */
+    public String getanimal(){return this.name + ", "+this.size+ ", "+this.col+ ", x="+this.getLocation().getx()+ ", y="+getLocation().gety() ;}
+
+    /**
+     * Getter method for the attributes EAT_DISTANCE
+     * @return The animal's EAT_DISTANCE
+     */
+    public int geteatdistance(){return EAT_DISTANCE;}
 
 
     /**
@@ -236,6 +288,34 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return true;
     }
 
+
+    /**
+     * load image method for the attribute img1
+     * Note : catch error from IOException if cannot load the image
+     *
+     * @param nm is a String representing the name animal type
+     */
+
+    public void loadImages(String nm) {
+        try { img1 = ImageIO.read(new File(PICTURE_PATH + nm)); }
+        catch (IOException e) { System.out.println("Cannot load image");
+            System.out.println(e.toString());}
+    }
+
+    /**
+     * draw image method for the attribute img1
+     * Note : draw the image in first time as default location , paint different image in case of different side
+     *
+     * @param g is a Graphics object that return from repaint to paintComponent
+     */
+
+    public void drawObject (Graphics g) {
+        if(x_dir==1)//right side
+            g.drawImage(img1, getLocation().getx()-size/2, getLocation().gety()-size/10, size/2, size, pan);
+        else //left side
+            g.drawImage(img2, getLocation().getx(), getLocation().gety()-size/10, size/2, size, pan);
+    }
+    
 
     /**
      * Representation of the object as a string

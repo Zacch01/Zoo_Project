@@ -14,6 +14,18 @@ import mobility.Point;
  */
 public abstract class Roar extends Animal {
 
+    /**
+     * The constructor of the object Roar, it sets the attributes of the object
+     *
+     * @param name A String that represent the animal's name
+     * @param location A Point that represent the animal's location
+     * @param animalSize An int that represent the size of the Roar
+     * @param horizontalspeed A int that represent the horizontal speed of the Roar
+     * @param verticalspeed A int that represent the vertical speed of the Roar
+     * @param weight A Double that represent the animal's weight
+     * @param animalColor A String that represent the color of the Roar image
+     * @param pan A Zoopanel that represent the parent panel of the Roar
+     */
     public Roar (String name, Point location, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalColor, ZooPanel pan) {
         super(name,location, animalSize, horizontalspeed, verticalspeed, weight, animalColor, pan);
     }

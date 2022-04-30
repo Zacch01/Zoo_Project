@@ -2,15 +2,30 @@ package graphics;
 
 import animals.*;
 import mobility.Point;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+
+/**
+ * A class representing the GUI Dialog in order to move an animal in our zoo program
+ * Note : It inherits from JDialog
+ *
+ * @version 17.0.2
+ * @author Attias Zaccharie, Amar Yuval
+ * @see JDialog
+ */
 public class MoveAnimalDialog extends JDialog {
     private ZooPanel zoopanel;
 
+    /**
+     * Constructor of the JDialog MoveAnimalDialog : it sets the attributes of the JDialog
+     * Note : Moves the animal to a new point in the zoo according to the user's choice
+     *
+     * @param Animallist  A ArrayList<Animal> that represent the animals in the zoo
+     * @param zoopanel A Zoopanel that represent the parent panel of the JDialog
+     */
     public MoveAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Move Animal");
         this.setSize(500, 200);

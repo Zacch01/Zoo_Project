@@ -10,19 +10,27 @@ import java.io.File;
 import java.io.IOException;
 
 
-
+/**
+ * A class representing the GUI main frame
+ * Note : It inherits from JFrame and implements from ActionListener
+ *
+ * @version 17.0.2
+ * @author Attias Zaccharie, Amar Yuval
+ * @see JFrame
+ * @see ActionListener
+ */
 public class ZooFrame extends JFrame implements  ActionListener{
     private final JMenuBar menuBar;
     private final ZooPanel zooPanel;
     private BufferedImage img = null;
     private JLabel label;
 
-
-
-
+    /**
+     * The constructor of the ZooFrame object: it sets the attributes of the object
+     * Note : ZooFrame is the main frame of the program
+     */
     public ZooFrame(){
         super("Zoo");
-
         menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
         JMenuItem exit = new JMenuItem("Exit");
@@ -41,14 +49,11 @@ public class ZooFrame extends JFrame implements  ActionListener{
         menuBar.add(background);
         menuBar.add(help);
 
-
         exit.addActionListener(this);
         image.addActionListener(this);
         green.addActionListener(this);
         none.addActionListener(this);
         help2.addActionListener(this);
-
-
 
         label = new JLabel();
         this.add(label);
@@ -60,9 +65,12 @@ public class ZooFrame extends JFrame implements  ActionListener{
         zooPanel = new ZooPanel(this);
         zooPanel.setOpaque(false);
         this.add(zooPanel);
-
     }
 
+    /**
+     * Invoked when an action occurs
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()) {
@@ -92,12 +100,14 @@ public class ZooFrame extends JFrame implements  ActionListener{
                     System.out.println(a.toString());}
             }
         }
-
     }
 
+    /**
+     * The main method of the project
+     * @param args Possible arguments that may be passed
+     */
     public static void main(String[] args){
         ZooFrame frame = new ZooFrame();
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

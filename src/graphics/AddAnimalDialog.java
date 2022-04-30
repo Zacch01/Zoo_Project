@@ -1,19 +1,33 @@
 package graphics;
 
 import animals.*;
-import mobility.Point;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
+
+/**
+ * A class representing the GUI Dialog in order to add an animal to our zoo program
+ * Note : It inherits from JDialog
+ *
+ * @version 17.0.2
+ * @author Attias Zaccharie, Amar Yuval
+ * @see JDialog
+ */
 public class AddAnimalDialog extends JDialog {
     private final String[] animalTypes = {"Lion", "Bear", "Giraffe", "Elephant", "Turtle"};
     private final String[] animalColors = {"Natural", "Red", "Blue"};
     private ZooPanel zoopanel;
 
+    /**
+     * Constructor of the JDialog AddAnimalDialog : it sets the attributes of the JDialog
+     * Note : Adds animals to a zoo according to the user's choice
+     *
+     * @param Animallist  A ArrayList<Animal> that represent the animals in the zoo
+     * @param zoopanel A Zoopanel that represent the parent panel of the JDialog
+     */
     public AddAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Add Animal");
         this.setSize(500,300);
@@ -24,7 +38,6 @@ public class AddAnimalDialog extends JDialog {
         this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.PAGE_AXIS));
         this.zoopanel = zoopanel;
         this.zoopanel.getF().setEnabled(false);
-
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -90,7 +103,6 @@ public class AddAnimalDialog extends JDialog {
         JComboBox<String> animalcolorsCombo = new JComboBox<>(animalColors);
         TitledBorder animalcolorChoiceBorder = BorderFactory.createTitledBorder("Choose the animal's color: ");
         animalcolorsCombo.setBorder(animalcolorChoiceBorder);
-        //animalTypesPanel.add(animalTypesCombo);
         this.getContentPane().add(animalcolorsCombo);
 
         JButton jButton = new JButton("Add");
@@ -129,8 +141,5 @@ public class AddAnimalDialog extends JDialog {
                 }
             }
         });
-
     }
-
-
 }

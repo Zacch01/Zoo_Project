@@ -12,6 +12,10 @@ import utilities.MessageUtility;
  */
 public class Cabbage extends Plant {
 
+	/**
+	 * Constructor of the object Cabbage
+	 * @param pan A Zoopanel that represent the parent panel of the Cabbage
+	 */
 	public Cabbage(ZooPanel pan){
 		super(pan);
 		this.loadImages("cabbage.png");
@@ -19,7 +23,7 @@ public class Cabbage extends Plant {
 
 
 	/**
-	 * Constructor of the object Lettuce
+	 * Constructor of the object Cabbage
 	 */
 	public Cabbage() {
 		MessageUtility.logConstractor("Cabbage", "Cabbage");

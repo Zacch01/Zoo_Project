@@ -21,6 +21,16 @@ import java.util.Random;
 public class Lion extends Roar {
     private int scarCount;
 
+    /**
+     * The constructor of the object Lion, it sets the attributes of the object
+     * Note : Name, Location and the scar count have a default value,
+     *
+     * @param animalSize A int that represent the size of the Lion
+     * @param horizontalspeed A int that represent the horizontal speed of the Lion
+     * @param verticalspeed A int that represent the vertical speed of the Lion
+     * @param animalColor A String that represent the color of the Lion image
+     * @param pan A Zoopanel that represent the parent panel of the Lion
+     */
     public Lion(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
         super("Lion", new Point(20, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.8, animalColor,pan);
         this.scarCount=0;

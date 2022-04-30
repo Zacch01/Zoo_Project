@@ -18,7 +18,16 @@ import utilities.MessageUtility;
 public class Turtle extends Chew {
     private int age;
 
-
+    /**
+     * The constructor of the object Turtle, it sets the attributes of the object
+     * Note : Name, Location and the age have a default value
+     *
+     * @param animalSize A int that represent the size of the Turtle
+     * @param horizontalspeed A int that represent the horizontal speed of the Turtle
+     * @param verticalspeed A int that represent the vertical speed of the Turtle
+     * @param animalColor A String that represent the color of the Turtle image
+     * @param pan A Zoopanel that represent the parent panel of the Turtle
+     */
     public Turtle(int animalSize, int horizontalspeed, int verticalspeed, String animalColor, ZooPanel pan) {
         super("Turtle", new Point(80, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.5, animalColor,pan);
         this.age=1;

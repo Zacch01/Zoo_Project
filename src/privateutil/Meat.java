@@ -25,19 +25,11 @@ public class Meat implements IEdible, Ilocatable, IDrawable
     private ZooPanel pan;
     private String col;
 
-
-
-    public void loadImages(String nm) {
-        this.img = new ImageIcon(PICTURE_PATH + nm).getImage();
-    }
-
-    public void drawObject (Graphics g) {
-        g.drawImage(img, getLocation().getx(), getLocation().gety(), this.getHeight(), this.getHeight(), pan);
-    }
-
-    public String getColor(){return this.col; }
-
-
+    /**
+     * Constructor of the object Meat : it sets the attributes of the object
+     * Note: the meat have an initial location, an initial height and an initial weight
+     * @param pan A Zoopanel that represent the parent panel of the Meat
+     */
     public Meat(ZooPanel pan) {
         Random rand = new Random();
         this.height = 25;
@@ -48,6 +40,34 @@ public class Meat implements IEdible, Ilocatable, IDrawable
         this.pan=pan;
         loadImages("meat.gif");
     }
+
+
+    /**
+     * load image method for the attribute img
+     * @param nm is a String representing the name animal type
+     */
+
+    public void loadImages(String nm) {
+        this.img = new ImageIcon(PICTURE_PATH + nm).getImage();
+    }
+
+
+    /**
+     * draw image method for the attribute img
+     * @param g is a Graphics object that return from repaint to paintComponent
+     */
+
+    public void drawObject (Graphics g) {
+        g.drawImage(img, getLocation().getx(), getLocation().gety(), this.getHeight(), this.getHeight(), pan);
+    }
+
+    /**
+     * Getter method for the attribute col
+     *
+     * @return The animal color
+     */
+    public String getColor(){return this.col; }
+
 
     /**
      * Getter method for know the food type of the Meat
