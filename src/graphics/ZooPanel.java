@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @see JPanel
  * @see ActionListener
  */
-public class ZooPanel extends JPanel implements  ActionListener {
+public class ZooPanel extends JPanel implements  ActionListener, Runnable {
     private JPanel actionPanel;
     private JDialog addAnimalDialog;
     private ArrayList<Animal> Animallist;
@@ -30,7 +30,7 @@ public class ZooPanel extends JPanel implements  ActionListener {
     private BufferedImage img = null;
     private Plant plant=null;
     private Meat meat =null;
-
+    private Thread controller;
     /**
      * The constructor of the ZooPanel object: it sets the attributes of the object
      * Note : ZooPanel contain two panels, one for control buttons, and the other for the visual board
@@ -224,4 +224,8 @@ public class ZooPanel extends JPanel implements  ActionListener {
      * @return The frame where the panel is located
      */
     public ZooFrame getF(){return this.f;}
+
+    @Override
+    public void run() {
+    }
 }

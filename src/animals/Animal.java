@@ -33,12 +33,28 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int horSpeed;
     private int verSpeed;
     private boolean coordChanged;
-    private Thread thread;
+    protected Thread thread;
+    protected boolean threadSuspended;
     private int x_dir;
     private int y_dir;
     private int eatCount;
     private ZooPanel pan;
     private BufferedImage img1, img2;
+
+
+    public void setSuspended(){
+        this.thread.suspend();
+    }
+
+    public void setResumed(){
+        this.thread.resume();
+    }
+
+
+
+
+
+
 
     /**
      * Constructor of the object Animal : it sets the attributes of the object
@@ -54,6 +70,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor,ZooPanel pan) {
         super(p);
+        this.thread = new Thread(pan);
+        this.threadSuspended = false;
         this.name = name;
         this.size = animalSize;
         this.horSpeed = horizontalspeed;
