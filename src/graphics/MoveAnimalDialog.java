@@ -46,6 +46,7 @@ public class MoveAnimalDialog extends JDialog {
                     setDefaultCloseOperation(
                             JFrame.DISPOSE_ON_CLOSE);
                     setVisible(false);
+                    zoopanel.getF().setEnabled(true);
                     dispose();
                 }
             }
@@ -106,7 +107,7 @@ public class MoveAnimalDialog extends JDialog {
                 else {
                     Animallist.get(allanimalsCombo.getSelectedIndex()).setLocation(new Point(Integer.parseInt(textFieldx.getText()), Integer.parseInt(textFieldy.getText())));
                     Animallist.get(allanimalsCombo.getSelectedIndex()).setChanges(true);
-                    zoopanel.manageZoo();
+                    //zoopanel.manageZoo();
                     JOptionPane.showMessageDialog(null, "Animal moved", "Message",JOptionPane.INFORMATION_MESSAGE);
                     zoopanel.getF().setEnabled(true);
                     dispose();

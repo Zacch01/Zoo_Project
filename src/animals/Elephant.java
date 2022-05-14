@@ -34,7 +34,7 @@ public class Elephant extends Chew {
         super("Elephant", new Point(50, 90), animalSize, horizontalspeed, verticalspeed, animalSize * 10, animalColor,pan);
         this.trunkLength=1;
         setDiet(new Herbivore());
-        this.loadImages("elf_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+        this.loadImages("elf_" + animalColor.toLowerCase().charAt(0));
     }
 
     /**

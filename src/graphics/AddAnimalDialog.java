@@ -48,6 +48,7 @@ public class AddAnimalDialog extends JDialog {
                     setDefaultCloseOperation(
                             JFrame.DISPOSE_ON_CLOSE);
                     setVisible(false);
+                    zoopanel.getF().setEnabled(true);
                     dispose();
                 }
             }
@@ -133,7 +134,7 @@ public class AddAnimalDialog extends JDialog {
                     } catch (Exception a) {
                         a.printStackTrace();
                     }
-                    zoopanel.manageZoo();
+                    //zoopanel.manageZoo();
                     JOptionPane.showMessageDialog(zoopanel, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     zoopanel.getF().setEnabled(true);
                     dispose();

@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
+
 /**
  * A class representing the GUI main panel
  * Note : It inherits from JPanel and implements from ActionListener
@@ -68,7 +69,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         actionPanel.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout());
         this.add(actionPanel,BorderLayout.PAGE_END);
-        manageZoo();
+        this.controller = new Thread(this);
+        this.controller.start();
     }
 
     /**
@@ -150,41 +152,41 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      */
     public void manageZoo() {
 
-        if (isChange())
-            repaint();
-        for(Animal animal :Animallist)
-        {
-            if(plant!=null) {
-                if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
-                    animal.eat(plant);
-                    animal.eatInc();
-                    plant = null;
-                    repaint();
+            if (isChange())
+                repaint();
+            for (Animal animal : Animallist) {
+                if (plant != null) {
+                    if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
+                        animal.eat(plant);
+                        animal.eatInc();
+                        plant = null;
+                        repaint();
+                    }
+                }
+                if (meat != null) {
+                    if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
+                        animal.eat(meat);
+                        animal.eatInc();
+                        meat = null;
+                        repaint();
+                    }
                 }
             }
-            if(meat!=null) {
-                if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
-                    animal.eat(meat);
-                    animal.eatInc();
-                    meat= null;
-                    repaint();
+            for (Animal animalpreda : Animallist) {
+                for (Animal animalpreay : Animallist) {
+                    if (animalpreda.equals(animalpreay))
+                        continue;
+                    if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
+                        animalpreda.eat(animalpreay);
+                        animalpreda.eatInc();
+                        Animallist.remove(Animallist.indexOf(animalpreay));
+                        animalpreay.stop();
+                        repaint();
+                        return;
+                    }
                 }
             }
-        }
-        for (Animal animalpreda : Animallist)
-        {
-            for (Animal animalpreay : Animallist) {
-                if (animalpreda.equals(animalpreay))
-                    continue;
-                if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
-                    animalpreda.eat(animalpreay);
-                    animalpreda.eatInc();
-                    Animallist.remove(Animallist.indexOf(animalpreay));
-                    repaint();
-                    return;
-                }
-            }
-        }
+
     }
 
 
@@ -227,5 +229,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
 
     @Override
     public void run() {
+        while(true)
+            manageZoo();
     }
 }

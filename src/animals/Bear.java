@@ -32,7 +32,7 @@ public class Bear extends Roar {
         super("Bear", new Point(100, 5), animalSize, horizontalspeed, verticalspeed, animalSize * 1.5, animalColor, pan);
         this.furColor="GRAY";
         setDiet(new Omnivore());
-        this.loadImages("bea_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+        this.loadImages("bea_" + animalColor.toLowerCase().charAt(0));
     }
 
     /**

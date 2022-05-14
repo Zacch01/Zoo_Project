@@ -32,7 +32,7 @@ public class Giraffe extends Chew {
         super("Giraffe", new Point(50, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 2.2, animalColor,pan);
         this.neckLength =1.5;
         setDiet(new Herbivore());
-        this.loadImages("grf_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+        this.loadImages("grf_" + animalColor.toLowerCase().charAt(0));
     }
 
     /**

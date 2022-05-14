@@ -32,7 +32,7 @@ public class Turtle extends Chew {
         super("Turtle", new Point(80, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.5, animalColor,pan);
         this.age=1;
         setDiet(new Herbivore());
-        this.loadImages("trt_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+        this.loadImages("trt_" + animalColor.toLowerCase().charAt(0));
     }
 
     /**

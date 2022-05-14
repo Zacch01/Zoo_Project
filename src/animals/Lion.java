@@ -35,7 +35,7 @@ public class Lion extends Roar {
         super("Lion", new Point(20, 0), animalSize, horizontalspeed, verticalspeed, animalSize * 0.8, animalColor,pan);
         this.scarCount=0;
         setDiet(new Carnivore());
-        this.loadImages("lio_" + animalColor.toLowerCase().charAt(0) + "_1.png");
+        this.loadImages("lio_" + animalColor.toLowerCase().charAt(0));
     }
 
 

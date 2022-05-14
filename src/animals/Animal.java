@@ -23,7 +23,7 @@ import java.io.IOException;
  * @author Attias Zaccharie, Amar Yuval
  * @see Mobile,IEdible
  */
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable {
     private String name;
     private double weight;
     private IDiet diet;
@@ -40,6 +40,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int eatCount;
     private ZooPanel pan;
     private BufferedImage img1, img2;
+    private boolean exitt = false;
 
 
     public void setSuspended(){
@@ -50,8 +51,33 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.thread.resume();
     }
 
+    public void stop(){exitt =true;}
 
+    @Override
+    public void run() {
+        synchronized (this) {
+            while (!exitt || !threadSuspended) {
 
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                int new_x = this.getLocation().getx() + horSpeed * x_dir;
+                int new_y = this.getLocation().gety() + verSpeed * y_dir;
+                if (new_x>=800)
+                    x_dir=-1;
+                if (new_x<=0)
+                    x_dir=1;
+                if (new_y>=600)
+                    y_dir=-1;
+                if (new_y<=0)
+                    y_dir=1;
+                this.move(new Point(new_x,new_y));
+            }
+        }
+
+    }
 
 
 
@@ -70,7 +96,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor,ZooPanel pan) {
         super(p);
-        this.thread = new Thread(pan);
+        this.thread = new Thread(this);
+        this.thread.start();
         this.threadSuspended = false;
         this.name = name;
         this.size = animalSize;
@@ -84,6 +111,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.eatCount=0;
         this.pan =pan;
     }
+
 
 
     /**
@@ -113,10 +141,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             double temp = getWeight();
             setWeight(temp-(d*temp*0.00025));
             setChanges(true);
-            if(getLocation().getx()<=p.getx())
-                this.x_dir=1;
-            else
-                this.x_dir=-1;
         }
         MessageUtility.logBooleanFunction(this.name,"move",p, d != 0);
         return d;
@@ -315,7 +339,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
 
     public void loadImages(String nm) {
-        try { img1 = ImageIO.read(new File(PICTURE_PATH + nm)); }
+        try { img1 = ImageIO.read(new File(PICTURE_PATH + nm+ "_1.png"));
+            img2 = ImageIO.read(new File(PICTURE_PATH + nm+ "_2.png"));}
         catch (IOException e) { System.out.println("Cannot load image");
             System.out.println(e.toString());}
     }
