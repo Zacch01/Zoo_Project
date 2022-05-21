@@ -40,7 +40,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         this.f = frame;
         actionPanel = new JPanel(new FlowLayout());
         JButton addanimal = new JButton("Add Animal");
-        JButton moveanimal = new JButton("Move Animal");
+        JButton sleep = new JButton("Sleep");
+        JButton wakeup = new JButton("Wake up");
         JButton clear = new JButton("Clear");
         JButton food = new JButton("Food");
         JButton info = new JButton("Info");
@@ -49,7 +50,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         Animallist = new ArrayList<Animal>();
 
         addanimal.addActionListener(this);
-        moveanimal.addActionListener(this);
+        sleep.addActionListener(this);
+        wakeup.addActionListener(this);
         clear.addActionListener(this);
         food.addActionListener(this);
         info.addActionListener(this);
@@ -59,7 +61,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
 
 
         actionPanel.add(addanimal);
-        actionPanel.add(moveanimal);
+        actionPanel.add(sleep);
+        actionPanel.add(wakeup);
         actionPanel.add(clear);
         actionPanel.add(food);
         actionPanel.add(info);
@@ -89,13 +92,21 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                     new AddAnimalDialog(this,Animallist);
                 break;
 
-            case "Move Animal":
+            case "Sleep":
                 if(Animallist.size()==0)
                     JOptionPane.showMessageDialog(this, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
                 else
-                    new MoveAnimalDialog(this,Animallist);
+                    for (int i = 0; i < Animallist.size(); i++)
+                        Animallist.get(i).setSuspended();
                 break;
 
+            case "Wake up":
+                if(Animallist.size()==0)
+                    JOptionPane.showMessageDialog(this, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
+                else
+                    for (int i = 0; i < Animallist.size(); i++)
+                        Animallist.get(i).setResumed();
+                break;
             case "Food": Object[] options = {"Lettuce", "Cabbage", "Meat"};
                 int foodchoice = JOptionPane.showOptionDialog(f, "Please choose food:", "Food for animal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                 if(foodchoice == 0)
@@ -137,6 +148,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                 break;
 
             case "Clear":
+                for (int i = 0; i < Animallist.size(); i++)
+                    Animallist.get(i).setSuspended();
                 this.Animallist.clear();
                 this.plant = null;
                 this.meat = null;
@@ -151,42 +164,49 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      * Check if one animal can eat a plant or the meat
      */
     public void manageZoo() {
-
-            if (isChange())
-                repaint();
-            for (Animal animal : Animallist) {
-                if (plant != null) {
-                    if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
+        repaint();
+        if (plant != null) {
+            for (int i=0;i<Animallist.size();i++) {
+                Animal animal= Animallist.get(i);
+                if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
                         animal.eat(plant);
                         animal.eatInc();
                         plant = null;
                         repaint();
-                    }
+                    return;
                 }
-                if (meat != null) {
-                    if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
+            }
+        }
+        if (meat != null) {
+            for (int i=0;i<Animallist.size();i++) {
+                Animal animal= Animallist.get(i);
+                if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
                         animal.eat(meat);
                         animal.eatInc();
                         meat = null;
                         repaint();
-                    }
+                    return;
                 }
             }
-            for (Animal animalpreda : Animallist) {
-                for (Animal animalpreay : Animallist) {
-                    if (animalpreda.equals(animalpreay))
-                        continue;
-                    if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
-                        animalpreda.eat(animalpreay);
-                        animalpreda.eatInc();
-                        Animallist.remove(Animallist.indexOf(animalpreay));
-                        animalpreay.stop();
-                        repaint();
-                        return;
-                    }
-                }
-            }
+        }
 
+        for (int i=0;i<Animallist.size();i++) {
+            Animal animalpreda = Animallist.get(i);
+            for (int j=0;j<Animallist.size();j++) {
+                Animal animalpreay = Animallist.get(j);
+                if (animalpreda.equals(animalpreay))
+                    continue;
+                if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
+
+                            animalpreda.eat(animalpreay);
+                            animalpreda.eatInc();
+                            animalpreay.interrupt();
+                            Animallist.remove(Animallist.indexOf(animalpreay));
+                            repaint();
+                    return;
+                }
+            }
+        }
     }
 
 
@@ -217,8 +237,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         if(meat!=null)
             meat.drawObject(g);
         if(Animallist.size()!=0)
-            for(Animal animal :Animallist)
-                animal.drawObject(g);
+            for(int i = 0; i < Animallist.size(); i++)
+                Animallist.get(i).drawObject(g);
     }
 
     /**
@@ -226,6 +246,10 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      * @return The frame where the panel is located
      */
     public ZooFrame getF(){return this.f;}
+
+    public Meat getmeat(){return this.meat;}
+
+    public Plant getplant(){return this.plant;}
 
     @Override
     public void run() {

@@ -41,7 +41,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 		Random rand = new Random();
 		this.height = 25;
 		this.weight = 25;
-		this.location = new Point(pan.getWidth()/2-this.height/2, pan.getHeight()/2-this.weight/2-36);
+		this.location = new Point(pan.getWidth()/2,pan.getHeight()/2);
 		MessageUtility.logConstractor("Plant", "Plant");
 		this.col = "Natural";
 		this.pan=pan;
@@ -122,7 +122,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 	@Override
 	public Point getLocation() {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getLocation", this.location);
-		return this.location;
+		return location;
 	}
 
 

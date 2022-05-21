@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class Meat implements IEdible, Ilocatable, IDrawable
 {
-    private int height;////////////////////////////////////////////////////////////
+    private int height;
     private Point location;
     private int weight;
     private Image img;
@@ -34,7 +34,7 @@ public class Meat implements IEdible, Ilocatable, IDrawable
         Random rand = new Random();
         this.height = 25;
         this.weight = 25;
-        this.location = new Point(pan.getWidth()/2-this.height/2, pan.getHeight()/2-this.weight/2-36);
+        this.location = new Point(pan.getWidth()/2,pan.getHeight()/2);
         MessageUtility.logConstractor("Meat", "Meat");
         this.col = "Natural";
         this.pan=pan;
@@ -98,7 +98,7 @@ public class Meat implements IEdible, Ilocatable, IDrawable
     @Override
     public Point getLocation() {
         MessageUtility.logGetter(this.getClass().getSimpleName(), "getLocation", this.location);
-        return this.location;
+        return location;
     }
 
 
