@@ -47,7 +47,6 @@ public class AddAnimalDialog extends JDialog {
                 if (result == JOptionPane.OK_OPTION) {
                     setDefaultCloseOperation(
                             JFrame.DISPOSE_ON_CLOSE);
-                    setVisible(false);
                     zoopanel.getF().setEnabled(true);
                     dispose();
                 }

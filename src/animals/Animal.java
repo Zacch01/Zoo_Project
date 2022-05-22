@@ -56,68 +56,66 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 
     @Override
     public synchronized void run() {
-
-            while (true) {
-                if (this.threadSuspended)
-                    try { wait(50); }
-                    catch (InterruptedException a) { System.out.println(getName()+ "  is sleeping"); }
-                else if ((this.pan.getmeat()!=null && this.getDiet().canEat(EFoodType.MEAT))||this.pan.getplant()!=null && this.getDiet().canEat(EFoodType.VEGETABLE))
+        while (true) {
+            if (this.threadSuspended)
+                try { wait(50); }
+            catch (InterruptedException a) { System.out.println(getName()+ "  is sleeping"); }
+            else if ((this.pan.getmeat()!=null && this.getDiet().canEat(EFoodType.MEAT))||this.pan.getplant()!=null && this.getDiet().canEat(EFoodType.VEGETABLE))
+            {
+                double oldSpead = Math.sqrt(horSpeed*horSpeed+verSpeed*verSpeed);
+                double newHorSpeed = oldSpead*(location.getx() - pan.getWidth()/2)/(Math.sqrt(Math.pow(location.getx() - pan.getWidth()/2,2)+ Math.pow(location.gety() - pan.getHeight()/2,2)));
+                double newVerSpeed = oldSpead*(location.gety() - pan.getHeight()/2)/ (Math.sqrt(Math.pow(location.getx() - pan.getWidth()/2,2)+ Math.pow(location.gety() - pan.getHeight()/2,2)));
+                int v = 1;
+                if(newVerSpeed<0)
                 {
-                    double oldSpead = Math.sqrt(horSpeed*horSpeed+verSpeed*verSpeed);
-                    double newHorSpeed = oldSpead*(location.getx() - pan.getWidth()/2)/(Math.sqrt(Math.pow(location.getx() - pan.getWidth()/2,2)+ Math.pow(location.gety() - pan.getHeight()/2,2)));
-                    double newVerSpeed = oldSpead*(location.gety() - pan.getHeight()/2)/ (Math.sqrt(Math.pow(location.getx() - pan.getWidth()/2,2)+ Math.pow(location.gety() - pan.getHeight()/2,2)));
-                    int v = 1;
-                    if(newVerSpeed<0)
-                    {
-                        v=-1;
-                        newVerSpeed = -newVerSpeed;
-                    }
-                    if(newVerSpeed > 10)
-                        newVerSpeed = 10;
-                    else if(newVerSpeed < 1) {
-                        if(location.gety() != pan.getHeight()/2)
-                            newVerSpeed = 1;
-                        else
-                            newVerSpeed = 0;
-                    }
-                    int h = 1;
-                    if(newHorSpeed<0) { h=-1; newHorSpeed = -newHorSpeed; }
-                    if(newHorSpeed > 10)
-                        newHorSpeed = 10;
-                    else if(newHorSpeed < 1) {
-                        if(location.getx() != pan.getWidth()/2)
-                            newHorSpeed = 1;
-                        else
-                            newHorSpeed = 0;
-                    }
-                    location.setpoint((int)(location.getx() - newHorSpeed*h), (int)(location.gety() - newVerSpeed*v));
-                    if(location.getx()<pan.getWidth()/2)
-                        x_dir = 1;
+                    v=-1;
+                    newVerSpeed = -newVerSpeed;
+                }
+                if(newVerSpeed > 10)
+                    newVerSpeed = 10;
+                else if(newVerSpeed < 1) {
+                    if(location.gety() != pan.getHeight()/2)
+                        newVerSpeed = 1;
                     else
-                        x_dir = -1;
-                    this.move(location);
+                        newVerSpeed = 0;
                 }
+                int h = 1;
+                if(newHorSpeed<0) { h=-1; newHorSpeed = -newHorSpeed; }
+                if(newHorSpeed > 10)
+                    newHorSpeed = 10;
+                else if(newHorSpeed < 1) {
+                    if(location.getx() != pan.getWidth()/2)
+                        newHorSpeed = 1;
+                    else
+                        newHorSpeed = 0;
+                }
+                location.setpoint((int)(location.getx() - newHorSpeed*h), (int)(location.gety() - newVerSpeed*v));
+                if(location.getx()<pan.getWidth()/2)
+                    x_dir = 1;
                 else
-                {
-                    if (location.getx() + horSpeed*x_dir>=800)
-                        x_dir=-1;
-                    if (location.getx() + horSpeed*x_dir<=0)
-                        x_dir=1;
-                    if (location.gety() + verSpeed*y_dir>=600)
-                        y_dir=-1;
-                    if (location.gety() + verSpeed*y_dir<=0)
-                        y_dir=1;
-                    location.setpoint(location.getx() + horSpeed*x_dir,location.gety() + verSpeed*y_dir);
-                    this.move(location);
-                }
-                try {
-                    Thread.sleep(10);
-
-                } catch (InterruptedException e) {
-                    System.out.println(getName()+ "  is dead...");
-                    return;}
-
+                    x_dir = -1;
+                this.move(location);
             }
+            else
+            {
+                if (location.getx() + horSpeed*x_dir>=800)
+                    x_dir=-1;
+                if (location.getx() + horSpeed*x_dir<=0)
+                    x_dir=1;
+                if (location.gety() + verSpeed*y_dir>=600-getSize())
+                    y_dir=-1;
+                if (location.gety() + verSpeed*y_dir<=0)
+                    y_dir=1;
+                location.setpoint(location.getx() + horSpeed*x_dir,location.gety() + verSpeed*y_dir);
+                this.move(location);
+            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                System.out.println(getName()+ "  is dead...");
+                return;
+            }
+        }
     }
 
 

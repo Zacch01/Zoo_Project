@@ -108,12 +108,12 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                         Animallist.get(i).setResumed();
                 break;
             case "Food": Object[] options = {"Lettuce", "Cabbage", "Meat"};
-                int foodchoice = JOptionPane.showOptionDialog(f, "Please choose food:", "Food for animal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                int foodchoice = JOptionPane.showOptionDialog(f, "Please choose food:", "Food for animal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
                 if(foodchoice == 0)
                     this.plant = new Lettuce(this);
                 else if(foodchoice == 1)
                     this.plant = new Cabbage(this);
-                else
+                else if(foodchoice ==2)
                     this.meat =new Meat(this);
 
                 repaint();
@@ -169,10 +169,10 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             for (int i=0;i<Animallist.size();i++) {
                 Animal animal= Animallist.get(i);
                 if (animal.calcDistance(plant.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(plant.getFoodType()))) {
-                        animal.eat(plant);
-                        animal.eatInc();
-                        plant = null;
-                        repaint();
+                    animal.eat(plant);
+                    animal.eatInc();
+                    plant = null;
+                    repaint();
                     return;
                 }
             }
@@ -181,10 +181,10 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             for (int i=0;i<Animallist.size();i++) {
                 Animal animal= Animallist.get(i);
                 if (animal.calcDistance(meat.getLocation()) <= animal.geteatdistance() && (animal.getDiet().canEat(meat.getFoodType()))) {
-                        animal.eat(meat);
-                        animal.eatInc();
-                        meat = null;
-                        repaint();
+                    animal.eat(meat);
+                    animal.eatInc();
+                    meat = null;
+                    repaint();
                     return;
                 }
             }
@@ -197,12 +197,11 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                 if (animalpreda.equals(animalpreay))
                     continue;
                 if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
-
-                            animalpreda.eat(animalpreay);
-                            animalpreda.eatInc();
-                            animalpreay.interrupt();
-                            Animallist.remove(Animallist.indexOf(animalpreay));
-                            repaint();
+                    animalpreda.eat(animalpreay);
+                    animalpreda.eatInc();
+                    animalpreay.interrupt();
+                    Animallist.remove(Animallist.indexOf(animalpreay));
+                    repaint();
                     return;
                 }
             }
