@@ -362,6 +362,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 
 
     /**
+     * Getter method for the attribute threadSuspended
+     *
+     * @return threadSuspended
+     */
+    public  boolean getThreadSuspended(){return this.threadSuspended;}
+
+
+    /**
      * Run method
      * @see Thread
      */

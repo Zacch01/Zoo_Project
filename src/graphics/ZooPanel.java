@@ -210,7 +210,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                     Animal animalpreay = Animallist.get(j);
                     if (animalpreda.equals(animalpreay))
                         continue;
-                    if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())) {
+                    if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())&&!animalpreda.getThreadSuspended()) {
                         animalpreda.eat(animalpreay);
                         animalpreda.eatInc();
                         animalpreay.interrupt();
