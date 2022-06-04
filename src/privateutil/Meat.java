@@ -6,6 +6,7 @@ import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Ilocatable;
 import mobility.Point;
+import plants.Cabbage;
 import utilities.MessageUtility;
 
 import javax.imageio.ImageIO;
@@ -18,6 +19,7 @@ import java.util.Random;
 
 public class Meat implements IEdible, Ilocatable, IDrawable
 {
+    private static Meat instance = null;
     private int height;
     private Point location;
     private int weight;
@@ -30,8 +32,7 @@ public class Meat implements IEdible, Ilocatable, IDrawable
      * Note: the meat have an initial location, an initial height and an initial weight
      * @param pan A Zoopanel that represent the parent panel of the Meat
      */
-    public Meat(ZooPanel pan) {
-        Random rand = new Random();
+    private Meat(ZooPanel pan) {
         this.height = 25;
         this.weight = 25;
         this.location = new Point(pan.getWidth()/2,pan.getHeight()/2);
@@ -177,4 +178,9 @@ public class Meat implements IEdible, Ilocatable, IDrawable
         return "[" + this.getClass().getSimpleName() + "] ";
     }
 
+    public static Meat getInstance(ZooPanel pan){
+        if(instance == null)
+            instance = new Meat(pan);
+        return instance;
+    }
 }

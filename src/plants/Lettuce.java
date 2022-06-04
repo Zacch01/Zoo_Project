@@ -11,21 +11,21 @@ import utilities.MessageUtility;
  * @see Plant
  */
 public class Lettuce extends Plant {
+	private static Lettuce instance = null;
 
 	/**
 	 * Constructor of the object Lettuce
 	 * @param pan A Zoopanel that represent the parent panel of the Lettuce
 	 */
-	public Lettuce(ZooPanel pan){
+	private Lettuce(ZooPanel pan){
 		super(pan);
 		this.loadImages("lettuce.png");
+		MessageUtility.logConstractor("Lettuce", "Lettuce");
 	}
 
-
-	/**
-	 * Constructor of the object Lettuce
-	 */
-	public Lettuce() {
-		MessageUtility.logConstractor("Lettuce", "Lettuce");
+	public static Lettuce getInstance(ZooPanel pan){
+		if(instance == null)
+			instance = new Lettuce(pan);
+		return instance;
 	}
 }

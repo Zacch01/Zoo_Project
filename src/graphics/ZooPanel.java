@@ -25,6 +25,7 @@ import java.util.ArrayList;
  * @see ActionListener
  */
 public class ZooPanel extends JPanel implements  ActionListener, Runnable {
+    private static ZooPanel instance = null;
     private JPanel actionPanel;
     private ArrayList<Animal> Animallist;
     private ZooFrame f;
@@ -37,7 +38,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      * The constructor of the ZooPanel object: it sets the attributes of the object
      * Note : ZooPanel contain two panels, one for control buttons, and the other for the visual board
      */
-    public ZooPanel(ZooFrame frame){
+    private ZooPanel(ZooFrame frame){
         this.f = frame;
         actionPanel = new JPanel(new FlowLayout());
         JButton addanimal = new JButton("Add Animal");
@@ -122,11 +123,11 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             case "Food": Object[] options = {"Lettuce", "Cabbage", "Meat"};
                 int foodchoice = JOptionPane.showOptionDialog(f, "Please choose food:", "Food for animal", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
                 if(foodchoice == 0)
-                    this.plant = new Lettuce(this);
+                    this.plant = Lettuce.getInstance(this);
                 else if(foodchoice == 1)
-                    this.plant = new Cabbage(this);
+                    this.plant = Cabbage.getInstance(this);
                 else if(foodchoice ==2)
-                    this.meat =new Meat(this);
+                    this.meat =Meat.getInstance(this);
 
                 //Animallist.get(5).interrupt();
                 //Animallist.remove(5);
@@ -173,6 +174,12 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                 repaint();
                 break;
         }
+    }
+
+    public static ZooPanel getInstance(ZooFrame frame){
+        if(instance == null)
+            instance = new ZooPanel(frame);
+        return instance;
     }
 
     /**

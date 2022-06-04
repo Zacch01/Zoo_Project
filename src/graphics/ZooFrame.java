@@ -62,7 +62,7 @@ public class ZooFrame extends JFrame implements  ActionListener{
         this.add(menuBar,BorderLayout.PAGE_START);
         this.setResizable(false);
 
-        zooPanel = new ZooPanel(this);
+        zooPanel = ZooPanel.getInstance(this);
         zooPanel.setOpaque(false);
         this.add(zooPanel);
     }

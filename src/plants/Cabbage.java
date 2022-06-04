@@ -11,23 +11,21 @@ import utilities.MessageUtility;
  * @see Plant
  */
 public class Cabbage extends Plant {
+	private static Cabbage instance = null;
 
 	/**
 	 * Constructor of the object Cabbage
 	 * @param pan A Zoopanel that represent the parent panel of the Cabbage
 	 */
-	public Cabbage(ZooPanel pan){
+	private Cabbage(ZooPanel pan){
 		super(pan);
 		this.loadImages("cabbage.png");
-	}
-
-
-	/**
-	 * Constructor of the object Cabbage
-	 */
-	public Cabbage() {
 		MessageUtility.logConstractor("Cabbage", "Cabbage");
 	}
 
-
+	public static Cabbage getInstance(ZooPanel pan){
+		if(instance == null)
+			instance = new Cabbage(pan);
+		return instance;
+	}
 }

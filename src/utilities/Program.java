@@ -81,7 +81,7 @@ public class Program {
 		animals.add(new Bear("Ted", "BROWN"));
 
 		food = new LinkedList<>();
-		food.add(new Cabbage());
+		//food.add(new Cabbage());
 		food.add(animals.get(0)); // Lion
 		food.add(animals.get(3)); // Giraffe
 
