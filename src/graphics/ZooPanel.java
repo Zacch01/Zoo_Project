@@ -1,5 +1,6 @@
 package graphics;
 
+import DesignPatterns.ThreadPool;
 import animals.Animal;
 import plants.Cabbage;
 import plants.Lettuce;
@@ -25,13 +26,13 @@ import java.util.ArrayList;
  */
 public class ZooPanel extends JPanel implements  ActionListener, Runnable {
     private JPanel actionPanel;
-    private JDialog addAnimalDialog;
     private ArrayList<Animal> Animallist;
     private ZooFrame f;
     private BufferedImage img = null;
     private Plant plant=null;
     private Meat meat =null;
     private Thread controller;
+    private ThreadPool threadpool;
     /**
      * The constructor of the ZooPanel object: it sets the attributes of the object
      * Note : ZooPanel contain two panels, one for control buttons, and the other for the visual board
@@ -86,13 +87,15 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             case "Exit":System.exit(0);
                 break;
             case "Add Animal":
-                if(Animallist.size()==10)
-                    JOptionPane.showMessageDialog(this, "You cannot add more than 10 animals.", "Message", JOptionPane.WARNING_MESSAGE);
+                if(Animallist.size()==15)
+                    JOptionPane.showMessageDialog(this, "You cannot add more than 15 animals.", "Message", JOptionPane.WARNING_MESSAGE);
                 else{
                     synchronized (this.Animallist) {
                         new AddAnimalDialog(this, Animallist);
                     }
                 }
+                if(Animallist.size()>10)
+                    JOptionPane.showMessageDialog(this, "The new animal enter in the queue", "Message", JOptionPane.WARNING_MESSAGE);
                 break;
 
             case "Sleep":
@@ -124,6 +127,9 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                     this.plant = new Cabbage(this);
                 else if(foodchoice ==2)
                     this.meat =new Meat(this);
+
+                //Animallist.get(5).interrupt();
+                //Animallist.remove(5);
                 repaint();
                 break;
 
@@ -158,11 +164,12 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             case "Clear":
                 synchronized (this.Animallist) {
                     for (int i = 0; i < Animallist.size(); i++)
-                        Animallist.get(i).setSuspended();
+                        Animallist.get(i).interrupt();
                     this.Animallist.clear();
                 }
                 this.plant = null;
                 this.meat = null;
+                threadpool.end();
                 repaint();
                 break;
         }
@@ -206,8 +213,12 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         synchronized (this.Animallist) {
             for (int i = 0; i < Animallist.size(); i++) {
                 Animal animalpreda = Animallist.get(i);
+                if(!animalpreda.getisalive())
+                    continue;
                 for (int j = 0; j < Animallist.size(); j++) {
                     Animal animalpreay = Animallist.get(j);
+                    if(!animalpreay.getisalive())
+                        continue;
                     if (animalpreda.equals(animalpreay))
                         continue;
                     if ((animalpreda.getDiet().canEat(animalpreay.getFoodType())) && (animalpreda.getWeight() > animalpreay.getWeight() * 2) && (animalpreda.calcDistance(animalpreay.getLocation()) < animalpreay.getSize())&&!animalpreda.getThreadSuspended()) {
@@ -252,7 +263,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
             meat.drawObject(g);
         if(Animallist.size()!=0)
             for(int i = 0; i < Animallist.size(); i++)
-                Animallist.get(i).drawObject(g);
+                if(Animallist.get(i).getisalive())
+                    Animallist.get(i).drawObject(g);
     }
 
     /**
@@ -281,7 +293,10 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      */
     @Override
     public void run() {
+        threadpool = new ThreadPool();
         while(true)
             manageZoo();
     }
+
+    public ThreadPool getThreadpool(){return threadpool;}
 }

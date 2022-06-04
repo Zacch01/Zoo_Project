@@ -33,7 +33,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private int horSpeed;
     private int verSpeed;
     private boolean coordChanged;
-    protected Thread thread;
+    //protected Thread thread;
     protected boolean threadSuspended;
     private int x_dir;
     private int y_dir;
@@ -41,6 +41,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private ZooPanel pan;
     private BufferedImage img1, img2;
     protected Point location;
+    private boolean isalive = false;
 
 
     /**
@@ -57,7 +58,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public Animal(String name, Point p, int animalSize, int horizontalspeed, int verticalspeed, double weight, String animalcolor,ZooPanel pan) {
         super(p);
-        this.thread = new Thread(this);
+        //this.thread = new Thread(this);
         this.threadSuspended = false;
         this.name = name;
         this.size = animalSize;
@@ -73,14 +74,9 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.location = new Point(p);
     }
 
-    public void start()
-    {
-        this.thread.start();
-    }
-
     public void interrupt()
     {
-        this.thread.interrupt();
+        this.isalive = false;
     }
 
     /**
@@ -368,6 +364,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     public  boolean getThreadSuspended(){return this.threadSuspended;}
 
+    public  boolean getisalive(){return this.isalive;}
+
 
     /**
      * Run method
@@ -375,7 +373,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      */
     @Override
     public void run() {
-        while (true) {
+        this.isalive = true;
+        while (isalive) {
             if (this.threadSuspended) {
                 synchronized(this) {
                     try {

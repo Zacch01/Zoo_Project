@@ -130,7 +130,9 @@ public class AddAnimalDialog extends JDialog {
                         c = cl.loadClass("animals."+animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()));
                         Constructor con = c.getConstructor(int.class, int.class, int.class, String.class,ZooPanel.class);
                         Animallist.add((Animal) con.newInstance(Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
-                        Animallist.get(Animallist.size()-1).start();
+
+                        //Animallist.get(Animallist.size()-1).start();
+                        zoopanel.getThreadpool().addtopoll(Animallist.get(Animallist.size()-1));
                     } catch (Exception a) {
                         a.printStackTrace();
                     }
