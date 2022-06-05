@@ -1,11 +1,17 @@
 package graphics;
 
+import DesignPatterns.AbstractZooFactory;
+import DesignPatterns.CarnivoreFactory;
+import DesignPatterns.HerbivoreFactory;
+import DesignPatterns.OmnivoreFactory;
 import animals.*;
+import mobility.Point;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+import java.util.*;
 
 
 /**
@@ -17,9 +23,11 @@ import java.util.ArrayList;
  * @see JDialog
  */
 public class AddAnimalDialog extends JDialog {
-    private final String[] animalTypes = {"Lion", "Bear", "Giraffe", "Elephant", "Turtle"};
+    private List<String> animalTypes = new ArrayList<String>();
     private final String[] animalColors = {"Natural", "Red", "Blue"};
+    private final String[] dietTypes = {"Carnivore", "Herbivore", "Omnivore"};
     private ZooPanel zoopanel;
+    private Map<String, List<String>> modelNameTermName = new LinkedHashMap<String, List<String>>();
 
     /**
      * Constructor of the JDialog AddAnimalDialog : it sets the attributes of the JDialog
@@ -30,7 +38,7 @@ public class AddAnimalDialog extends JDialog {
      */
     public AddAnimalDialog(ZooPanel zoopanel, ArrayList<Animal> Animallist){
         this.setTitle("Add Animal");
-        this.setSize(500,300);
+        this.setSize(500,325);
         this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -53,11 +61,51 @@ public class AddAnimalDialog extends JDialog {
             }
         });
 
+        modelNameTermName.put("Carnivore", Arrays.asList("Lion"));
+        modelNameTermName.put("Omnivore", Arrays.asList("Bear"));
+        modelNameTermName.put("Herbivore", Arrays.asList("Elephant", "Giraffe", "Turtle"));
 
-        JComboBox<String> animalTypesCombo = new JComboBox<>(animalTypes);
+        JComboBox<String> dietTypesCombo = new JComboBox<>(dietTypes);
+        TitledBorder dietChoiceBorder = BorderFactory.createTitledBorder("Choose the diet: ");
+        dietTypesCombo.setBorder(dietChoiceBorder);
+        this.getContentPane().add(dietTypesCombo);
+
+        JComboBox<String> animalTypesCombo = new JComboBox<>();
         TitledBorder animalChoiceBorder = BorderFactory.createTitledBorder("Choose Animal: ");
         animalTypesCombo.setBorder(animalChoiceBorder);
+        animalTypesCombo.addItem("Lion");
         this.getContentPane().add(animalTypesCombo);
+
+
+        dietTypesCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox<String> source = (JComboBox<String>) e.getSource();;
+                String selecteddiet = source.getSelectedItem().toString();
+                List<String> termNames = modelNameTermName.get(selecteddiet);
+                animalTypesCombo.removeAllItems();
+                for (String name : termNames) {
+                        animalTypesCombo.addItem(name);
+
+                }
+            }
+        });
+        /*switch (dietTypesCombo.getItemAt(dietTypesCombo.getSelectedIndex())) {
+            case "Carnivore" -> animalTypes.add("Lion");
+            case "Omnivore" -> animalTypes.add("Bear");
+            case "Herbivore" -> {
+                animalTypes.add("Elephant");
+                animalTypes.add("Giraffe");
+                animalTypes.add("Turtle");
+            }
+        }
+
+        String[] stockArr = new String[animalTypes.size()];
+        stockArr = animalTypes.toArray(stockArr);
+        JComboBox<String> animalTypesCombo = new JComboBox<>(stockArr);
+        TitledBorder animalChoiceBorder = BorderFactory.createTitledBorder("Choose Animal: ");
+        animalTypesCombo.setBorder(animalChoiceBorder);
+        this.getContentPane().add(animalTypesCombo);*/
 
         JTextField textField = new JTextField(500);
         TitledBorder sizechoice = BorderFactory.createTitledBorder("Write the animal's size (50-300): ");
@@ -124,7 +172,19 @@ public class AddAnimalDialog extends JDialog {
                 else if(Integer.parseInt(textspeedvField.getText())<1|| Integer.parseInt(textspeedvField.getText())>10)
                     JOptionPane.showMessageDialog(zoopanel, "The vertical speed of your animal isn't correct.\nTry again.", "Error", JOptionPane.ERROR_MESSAGE);
                 else {
-                    Class c;
+                    AbstractZooFactory zooFactory = null;
+                    switch (dietTypesCombo.getItemAt(dietTypesCombo.getSelectedIndex())) {
+                        case "Carnivore" -> zooFactory = new CarnivoreFactory();
+                        case "Omnivore" -> zooFactory = new OmnivoreFactory();
+                        case "Herbivore" -> zooFactory = new HerbivoreFactory();
+                    }
+                    Animallist.add(zooFactory.createAnimal(animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()),Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                    zoopanel.getThreadpool().addtopoll(Animallist.get(Animallist.size()-1));
+
+
+
+
+                    /*Class c;
                     ClassLoader cl = ClassLoader.getSystemClassLoader();
                     try {
                         c = cl.loadClass("animals."+animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()));
@@ -136,7 +196,7 @@ public class AddAnimalDialog extends JDialog {
                     } catch (Exception a) {
                         a.printStackTrace();
                     }
-                    //zoopanel.manageZoo();
+                    //zoopanel.manageZoo();*/
                     JOptionPane.showMessageDialog(zoopanel, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     zoopanel.getF().setEnabled(true);
                     dispose();
