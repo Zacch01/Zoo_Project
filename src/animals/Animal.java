@@ -1,4 +1,6 @@
 package animals;
+import DesignPatterns.AnimalColor;
+import DesignPatterns.AnimalColorDecorator;
 import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
@@ -23,7 +25,7 @@ import java.io.IOException;
  * @author Attias Zaccharie, Amar Yuval
  * @see Mobile,IEdible
  */
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, AnimalColor, Runnable {
     private String name;
     private double weight;
     private IDiet diet;
@@ -64,7 +66,8 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.size = animalSize;
         this.horSpeed = horizontalspeed;
         this.verSpeed = verticalspeed;
-        this.col = animalcolor;
+        //this.col = animalcolor;
+        PaintAnimal(animalcolor);
         this.weight = weight;
         this.coordChanged = true;
         this.x_dir = 1;
@@ -73,6 +76,20 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.pan =pan;
         this.location = new Point(p);
     }
+
+    @Override
+    public void PaintAnimal(String color){
+        AnimalColorDecorator decorator = new AnimalColorDecorator(this);
+        decorator.PaintAnimal(color);
+    }
+
+    /**
+     * Change the color of the animal
+     *
+     * @param color is a String representing the color of the Animal
+     */
+    public void setColor (String color) {this.col = color; }
+
 
     public void interrupt()
     {

@@ -5,12 +5,10 @@ import DesignPatterns.CarnivoreFactory;
 import DesignPatterns.HerbivoreFactory;
 import DesignPatterns.OmnivoreFactory;
 import animals.*;
-import mobility.Point;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
-import java.lang.reflect.Constructor;
 import java.util.*;
 
 

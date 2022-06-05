@@ -1,5 +1,6 @@
 package graphics;
 
+import DesignPatterns.ChangeColorDialog;
 import DesignPatterns.ThreadPool;
 import animals.Animal;
 import plants.Cabbage;
@@ -44,6 +45,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         JButton addanimal = new JButton("Add Animal");
         JButton sleep = new JButton("Sleep");
         JButton wakeup = new JButton("Wake up");
+        JButton changecolor = new JButton("Change Color");
         JButton clear = new JButton("Clear");
         JButton food = new JButton("Food");
         JButton info = new JButton("Info");
@@ -54,6 +56,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         addanimal.addActionListener(this);
         sleep.addActionListener(this);
         wakeup.addActionListener(this);
+        changecolor.addActionListener(this);
         clear.addActionListener(this);
         food.addActionListener(this);
         info.addActionListener(this);
@@ -65,6 +68,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         actionPanel.add(addanimal);
         actionPanel.add(sleep);
         actionPanel.add(wakeup);
+        actionPanel.add(changecolor);
         actionPanel.add(clear);
         actionPanel.add(food);
         actionPanel.add(info);
@@ -97,6 +101,16 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                 }
                 if(Animallist.size()>10)
                     JOptionPane.showMessageDialog(this, "The new animal enter in the queue", "Message", JOptionPane.WARNING_MESSAGE);
+                break;
+
+            case "Change Color":
+                if(Animallist.size()==0)
+                    JOptionPane.showMessageDialog(this, "There are no animals in the zoo.", "Message", JOptionPane.WARNING_MESSAGE);
+                else{
+                    synchronized (this.Animallist) {
+                        new ChangeColorDialog(this, Animallist);
+                    }
+                }
                 break;
 
             case "Sleep":
