@@ -2,6 +2,9 @@ package mobility;
 
 
 
+import java.util.Observable;
+
+
 /**
  * Abstract class that defines the mobility
  *
@@ -9,9 +12,10 @@ package mobility;
  * @author Attias Zaccharie, Amar Yuval
  * @see Ilocatable
  */
-public abstract class Mobile implements Ilocatable {
+public abstract class Mobile extends Observable implements Ilocatable {
     private Point location;
     private double totaldistance;
+    private boolean flag;
 
 
     /**
@@ -55,9 +59,13 @@ public abstract class Mobile implements Ilocatable {
      */
     public double move(Point p)
     {
+        flag = false;
         double distance = calcDistance(p);
         if (setLocation(p)) {
+            flag = true;
             addTotalDistance(distance);
+            setChanged();
+            notifyObservers();
             return distance;
         }
         return 0;
@@ -98,5 +106,10 @@ public abstract class Mobile implements Ilocatable {
     @Override
     public Point getLocation() {
         return this.location;
+    }
+
+    @Override
+    public boolean hasChanged() {
+        return flag;
     }
 }

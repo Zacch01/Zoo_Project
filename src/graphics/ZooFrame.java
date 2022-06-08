@@ -24,12 +24,13 @@ public class ZooFrame extends JFrame implements  ActionListener{
     private final ZooPanel zooPanel;
     private BufferedImage img = null;
     private JLabel label;
+    private static ZooFrame instance = null;
 
     /**
      * The constructor of the ZooFrame object: it sets the attributes of the object
      * Note : ZooFrame is the main frame of the program
      */
-    public ZooFrame(){
+    private ZooFrame(){
         super("Zoo");
         menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -107,9 +108,15 @@ public class ZooFrame extends JFrame implements  ActionListener{
      * @param args Possible arguments that may be passed
      */
     public static void main(String[] args){
-        ZooFrame frame = new ZooFrame();
+        ZooFrame frame = ZooFrame.getInstance();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    public static ZooFrame getInstance(){
+        if(instance == null)
+            instance = new ZooFrame();
+        return instance;
     }
 }
 

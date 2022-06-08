@@ -66,8 +66,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.size = animalSize;
         this.horSpeed = horizontalspeed;
         this.verSpeed = verticalspeed;
-        //this.col = animalcolor;
-        PaintAnimal(animalcolor);
+        this.col = animalcolor;
         this.weight = weight;
         this.coordChanged = true;
         this.x_dir = 1;
@@ -79,8 +78,14 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 
     @Override
     public void PaintAnimal(String color){
-        AnimalColorDecorator decorator = new AnimalColorDecorator(this);
-        decorator.PaintAnimal(color);
+        this.setColor(col);
+        switch (this.getAnimalName()) {
+            case "Bear" -> this.loadImages("bea_" + color.toLowerCase().charAt(0));
+            case "Elephant" -> this.loadImages("elf_" + color.toLowerCase().charAt(0));
+            case "Giraffe" -> this.loadImages("grf_" + color.toLowerCase().charAt(0));
+            case "Lion" -> this.loadImages("lio_" + color.toLowerCase().charAt(0));
+            case "Turtle" -> this.loadImages("trt_" + color.toLowerCase().charAt(0));
+        }
     }
 
     /**
@@ -116,7 +121,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
      * @return the distance traveled by the animal
      */
     @Override
-    public synchronized double move(Point p)
+    public double move(Point p)
     {
         double d = super.move(p);
         if(d!=0) {
@@ -450,12 +455,16 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 location.setpoint(location.getx() + horSpeed*x_dir,location.gety() + verSpeed*y_dir);
                 this.move(location);
             }
+
+
+
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 System.out.println(getName()+ "  is dead...");
                 return;
             }
+            setChanged();
         }
     }
 }

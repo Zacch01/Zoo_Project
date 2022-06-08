@@ -2,6 +2,7 @@ package graphics;
 
 import DesignPatterns.ChangeColorDialog;
 import DesignPatterns.ThreadPool;
+import DesignPatterns.ZooController;
 import animals.Animal;
 import plants.Cabbage;
 import plants.Lettuce;
@@ -11,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -25,15 +25,14 @@ import java.util.ArrayList;
  * @see JPanel
  * @see ActionListener
  */
-public class ZooPanel extends JPanel implements  ActionListener, Runnable {
+public class ZooPanel extends JPanel implements  ActionListener {
     private static ZooPanel instance = null;
     private JPanel actionPanel;
     private ArrayList<Animal> Animallist;
     private ZooFrame f;
-    private BufferedImage img = null;
     private Plant plant=null;
     private Meat meat =null;
-    private Thread controller;
+    private ZooController controller;
     private ThreadPool threadpool;
     /**
      * The constructor of the ZooPanel object: it sets the attributes of the object
@@ -78,7 +77,8 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
         actionPanel.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout());
         this.add(actionPanel,BorderLayout.PAGE_END);
-        this.controller = new Thread(this);
+        this.threadpool = new ThreadPool();
+        this.controller = new ZooController();
         this.controller.start();
     }
 
@@ -97,10 +97,10 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
                 else{
                     synchronized (this.Animallist) {
                         new AddAnimalDialog(this, Animallist);
+                        if(Animallist.size()>10)
+                            JOptionPane.showMessageDialog(this, "The new animal enter in the queue", "Message", JOptionPane.WARNING_MESSAGE);
                     }
                 }
-                if(Animallist.size()>10)
-                    JOptionPane.showMessageDialog(this, "The new animal enter in the queue", "Message", JOptionPane.WARNING_MESSAGE);
                 break;
 
             case "Change Color":
@@ -307,17 +307,7 @@ public class ZooPanel extends JPanel implements  ActionListener, Runnable {
      */
     public Plant getplant(){return this.plant;}
 
-
-    /**
-     * Run method
-     * @see Thread
-     */
-    @Override
-    public void run() {
-        threadpool = new ThreadPool();
-        while(true)
-            manageZoo();
-    }
-
     public ThreadPool getThreadpool(){return threadpool;}
+
+    public ZooController getController(){return controller;}
 }

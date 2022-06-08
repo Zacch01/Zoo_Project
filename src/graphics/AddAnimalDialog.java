@@ -177,6 +177,7 @@ public class AddAnimalDialog extends JDialog {
                         case "Herbivore" -> zooFactory = new HerbivoreFactory();
                     }
                     Animallist.add(zooFactory.createAnimal(animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()),Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
+                    Animallist.get(Animallist.size()-1).addObserver(zoopanel.getController());
                     zoopanel.getThreadpool().addtopoll(Animallist.get(Animallist.size()-1));
 
 

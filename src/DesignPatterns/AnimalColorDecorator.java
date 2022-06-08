@@ -3,22 +3,15 @@ package DesignPatterns;
 import animals.Animal;
 
 public class AnimalColorDecorator implements AnimalColor{
-    private Animal animal;
+    private AnimalColor anicol;
 
-    public AnimalColorDecorator(Animal animal){
-        super();
-        this.animal = animal;
+
+    public AnimalColorDecorator(AnimalColor anicol){
+        this.anicol = anicol;
     }
 
     @Override
     public void PaintAnimal(String col){
-        animal.setColor(col);
-        switch (animal.getAnimalName()) {
-            case "Bear" -> animal.loadImages("bea_" + animal.getColor().toLowerCase().charAt(0));
-            case "Elephant" -> animal.loadImages("elf_" + animal.getColor().toLowerCase().charAt(0));
-            case "Giraffe" -> animal.loadImages("grf_" + animal.getColor().toLowerCase().charAt(0));
-            case "Lion" -> animal.loadImages("lio_" + animal.getColor().toLowerCase().charAt(0));
-            case "Turtle" -> animal.loadImages("trt_" + animal.getColor().toLowerCase().charAt(0));
-        }
+        anicol.PaintAnimal(col);
     }
 }
