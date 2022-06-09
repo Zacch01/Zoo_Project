@@ -73,7 +73,8 @@ public class ChangeColorDialog extends JDialog {
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Animallist.get(allanimalsCombo.getSelectedIndex()).PaintAnimal(animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()));
+                AnimalColorDecorator decorator = new AnimalColorDecorator(Animallist.get(allanimalsCombo.getSelectedIndex()));
+                decorator.PaintAnimal(animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()));
                 for (int i = 0; i < Animallist.size(); i++)
                     Animallist.get(i).setResumed();
                 JOptionPane.showMessageDialog(zoopanel, "Color changed", "Message", JOptionPane.INFORMATION_MESSAGE);
