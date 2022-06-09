@@ -3,6 +3,7 @@ package graphics;
 import DesignPatterns.ChangeColorDialog;
 import DesignPatterns.ThreadPool;
 import DesignPatterns.ZooController;
+import DesignPatterns.ZooMemento;
 import animals.Animal;
 import plants.Cabbage;
 import plants.Lettuce;
@@ -30,16 +31,19 @@ public class ZooPanel extends JPanel implements  ActionListener {
     private JPanel actionPanel;
     private ArrayList<Animal> Animallist;
     private ZooFrame f;
-    private Plant plant=null;
-    private Meat meat =null;
+    private Plant plant = null;
+    private Meat meat = null;
     private ZooController controller;
     private ThreadPool threadpool;
+    private ArrayList<ZooMemento> memento;
+    private int background;
     /**
      * The constructor of the ZooPanel object: it sets the attributes of the object
      * Note : ZooPanel contain two panels, one for control buttons, and the other for the visual board
      */
     private ZooPanel(ZooFrame frame){
         this.f = frame;
+        this.background = 0;
         actionPanel = new JPanel(new FlowLayout());
         JButton addanimal = new JButton("Add Animal");
         JButton sleep = new JButton("Sleep");
@@ -48,9 +52,12 @@ public class ZooPanel extends JPanel implements  ActionListener {
         JButton clear = new JButton("Clear");
         JButton food = new JButton("Food");
         JButton info = new JButton("Info");
+        JButton save = new JButton("Save");
+        JButton restore = new JButton("Restore");
         JButton exit = new JButton("Exit");
 
         Animallist = new ArrayList<Animal>();
+        memento = new ArrayList<ZooMemento>();
 
         addanimal.addActionListener(this);
         sleep.addActionListener(this);
@@ -59,6 +66,8 @@ public class ZooPanel extends JPanel implements  ActionListener {
         clear.addActionListener(this);
         food.addActionListener(this);
         info.addActionListener(this);
+        save.addActionListener(this);
+        restore.addActionListener(this);
         exit.addActionListener(this);
 
 
@@ -71,6 +80,8 @@ public class ZooPanel extends JPanel implements  ActionListener {
         actionPanel.add(clear);
         actionPanel.add(food);
         actionPanel.add(info);
+        actionPanel.add(save);
+        actionPanel.add(restore);
         actionPanel.add(exit);
 
 
@@ -89,7 +100,9 @@ public class ZooPanel extends JPanel implements  ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()){
-            case "Exit":System.exit(0);
+            case "Exit":
+                System.exit(0);
+                threadpool.end();
                 break;
             case "Add Animal":
                 if(Animallist.size()==15)
@@ -184,8 +197,19 @@ public class ZooPanel extends JPanel implements  ActionListener {
                 }
                 this.plant = null;
                 this.meat = null;
-                threadpool.end();
+                threadpool.restart();
                 repaint();
+                break;
+            case "Save":
+                saveSate();
+                JOptionPane.showMessageDialog(this,"The state has been saved");
+                break;
+            case "Restore":
+                if(memento.size() == 0)
+                    JOptionPane.showMessageDialog(this,"You haven't saved states");
+                else{
+                    restoreState();
+                JOptionPane.showMessageDialog(this,"The state has been restored");}
                 break;
         }
     }
@@ -310,4 +334,47 @@ public class ZooPanel extends JPanel implements  ActionListener {
     public ThreadPool getThreadpool(){return threadpool;}
 
     public ZooController getController(){return controller;}
+
+    public void saveSate(){
+        ZooMemento state;
+        try {
+            state = new ZooMemento(Animallist, meat, plant, background);
+            if(memento.size() == 3)
+                memento.remove(0);
+            memento.add(state);
+        }
+        catch (CloneNotSupportedException e) {e.printStackTrace();}
+    }
+
+    public void restoreState(){
+        synchronized (this.Animallist) {
+            for (int i = 0; i < Animallist.size(); i++)
+                Animallist.get(i).interrupt();
+            this.Animallist.clear();
+        }
+        this.plant = null;
+        this.meat = null;
+        repaint();
+
+        background = memento.get(memento.size() - 1).getbackground();
+        switch (background) {
+            case 0 -> this.f.setnone();
+            case 1 -> this.f.setgreen();
+            case 2 -> this.f.setimage();
+        }
+        threadpool.restart();
+        ArrayList<Animal> restoredAnimallist = memento.get(memento.size()-1).getAnimalList();
+        for (int i = 0; i < restoredAnimallist.size(); i++)
+            Animallist.add(restoredAnimallist.get(i));
+        for (int i = 0; i < Animallist.size(); i++){
+            threadpool.addtopoll(Animallist.get(i));
+            Animallist.get(i).setLocation(Animallist.get(i).getLocation());
+            }
+        plant= memento.get(memento.size()-1).getplant();
+        meat = memento.get(memento.size()-1).getmeat();
+        memento.remove(memento.size()-1);
+        repaint();
+    }
+
+    public void setbackground(int nbr){this.background=nbr;}
 }

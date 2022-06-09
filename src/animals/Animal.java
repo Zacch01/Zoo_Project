@@ -25,7 +25,7 @@ import java.io.IOException;
  * @author Attias Zaccharie, Amar Yuval
  * @see Mobile,IEdible
  */
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, AnimalColor, Runnable {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, AnimalColor, Cloneable, Runnable {
     private String name;
     private double weight;
     private IDiet diet;
@@ -43,7 +43,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     private ZooPanel pan;
     private BufferedImage img1, img2;
     protected Point location;
-    private boolean isalive = false;
+    private boolean isalive;
 
 
     /**
@@ -74,11 +74,13 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         this.eatCount=0;
         this.pan =pan;
         this.location = new Point(p);
+        this.isalive = false;
+        this.addObserver(pan.getController());
     }
 
     @Override
     public void PaintAnimal(String color){
-        this.setColor(col);
+        this.setColor(color);
         switch (this.getAnimalName()) {
             case "Bear" -> this.loadImages("bea_" + color.toLowerCase().charAt(0));
             case "Elephant" -> this.loadImages("elf_" + color.toLowerCase().charAt(0));
@@ -86,6 +88,30 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
             case "Lion" -> this.loadImages("lio_" + color.toLowerCase().charAt(0));
             case "Turtle" -> this.loadImages("trt_" + color.toLowerCase().charAt(0));
         }
+    }
+
+    /**
+     * Clone method
+     */
+    public Object clone()throws CloneNotSupportedException{
+        Animal copy = (Animal)super.clone();
+        copy.location = new Point(location);
+        copy.setLocation(new Point(copy.location));
+        copy.threadSuspended = threadSuspended;
+        copy.name = name;
+        copy.size = size;
+        copy.horSpeed =horSpeed;
+        copy.verSpeed = verSpeed;
+        copy.col = col;
+        copy.weight = weight;
+        copy.coordChanged = coordChanged;
+        copy.x_dir = x_dir;
+        copy.y_dir = y_dir;
+        copy.eatCount = eatCount;
+        copy.pan = pan;
+        copy.isalive = isalive;
+        copy.addObserver(pan.getController());
+        return copy;
     }
 
     /**
@@ -99,6 +125,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
     public void interrupt()
     {
         this.isalive = false;
+        notifyObservers();
     }
 
     /**
@@ -305,6 +332,9 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
         return EFoodType.MEAT;
     }
 
+    public  ZooPanel getpanel(){
+        return pan;
+    }
 
     /**
      * Setter method for the attribute name

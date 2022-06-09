@@ -12,6 +12,7 @@ import graphics.IDrawable;
 import graphics.ZooPanel;
 import mobility.Ilocatable;
 import mobility.Point;
+import privateutil.Meat;
 import utilities.MessageUtility;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,7 @@ import javax.imageio.ImageIO;
  * @author Attias Zaccharie, Amar Yuval
  * @see Ilocatable
  */
-public abstract class Plant implements IEdible, Ilocatable, IDrawable
+public abstract class Plant implements IEdible, Ilocatable, IDrawable, Cloneable
 {
 	private int height;
 	private Point location;
@@ -203,4 +204,17 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable
 		return "[" + this.getClass().getSimpleName() + "] ";
 	}
 
+	/**
+	 * Clone method
+	 */
+	public Object clone()throws CloneNotSupportedException{
+		Plant copy = (Plant)super.clone();
+		copy.height = 25;
+		copy.weight = 25;
+		copy.location = new Point(pan.getWidth()/2,pan.getHeight()/2);
+		MessageUtility.logConstractor("Plant", "Plant");
+		copy.col = "Natural";
+		copy.pan=pan;
+		return copy;
+	}
 }

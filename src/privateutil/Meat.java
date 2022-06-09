@@ -1,5 +1,6 @@
 package privateutil;
 
+import animals.Animal;
 import food.EFoodType;
 import food.IEdible;
 import graphics.IDrawable;
@@ -17,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class Meat implements IEdible, Ilocatable, IDrawable
+public class Meat implements IEdible, Ilocatable, IDrawable, Cloneable
 {
     private static Meat instance = null;
     private int height;
@@ -182,5 +183,20 @@ public class Meat implements IEdible, Ilocatable, IDrawable
         if(instance == null)
             instance = new Meat(pan);
         return instance;
+    }
+
+    /**
+     * Clone method
+     */
+    public Object clone()throws CloneNotSupportedException{
+        Meat copy = (Meat)super.clone();
+        copy.height = 25;
+        copy.weight = 25;
+        copy.location = new Point(location);
+        MessageUtility.logConstractor("Meat", "Meat");
+        copy.col = "Natural";
+        copy.pan=pan;
+        loadImages("meat.gif");
+        return copy;
     }
 }

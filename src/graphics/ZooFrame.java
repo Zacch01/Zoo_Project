@@ -78,27 +78,14 @@ public class ZooFrame extends JFrame implements  ActionListener{
             case "Exit" -> System.exit(0);
             case "Help" -> JOptionPane.showMessageDialog(this, "Home Work 2\nGUI", "Message", JOptionPane.INFORMATION_MESSAGE);
             case "Green" -> {
-                this.remove(label);
-                this.getContentPane().setBackground(Color.green);
+                setgreen();
             }
             case "None" -> {
-                this.remove(label);
-                this.getContentPane().setBackground(null);
+                setnone();
             }
             case "Image" -> {
-                try {
-                    this.remove(label);
-                    this.getContentPane().setBackground(null);
-                    img = ImageIO.read(new File(IDrawable.PICTURE_PATH + "savanna.png"));
-                    label = new JLabel();
-                    label.setBounds(0, 11, 800, 600);
-                    Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-                    ImageIcon imageIcon = new ImageIcon(dimg);
-                    label.setIcon(imageIcon);
-                    this.getContentPane().add(label);
-                }
-                catch (IOException a) { System.out.println("Cannot load image");
-                    System.out.println(a.toString());}
+                setimage();
+                this.zooPanel.setbackground(2);
             }
         }
     }
@@ -117,6 +104,36 @@ public class ZooFrame extends JFrame implements  ActionListener{
         if(instance == null)
             instance = new ZooFrame();
         return instance;
+    }
+
+    public BufferedImage getImg(){return img;}
+
+    public void setimage(){
+        try {
+            this.remove(label);
+            this.getContentPane().setBackground(null);
+            img = ImageIO.read(new File(IDrawable.PICTURE_PATH + "savanna.png"));
+            label = new JLabel();
+            label.setBounds(0, 11, 800, 600);
+            Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            label.setIcon(imageIcon);
+            this.getContentPane().add(label);
+        }
+        catch (IOException a) { System.out.println("Cannot load image");
+            System.out.println(a.toString());}
+    }
+
+    public void setnone(){
+        this.remove(label);
+        this.getContentPane().setBackground(null);
+        this.zooPanel.setbackground(0);
+    }
+
+    public void setgreen(){
+        this.remove(label);
+        this.getContentPane().setBackground(Color.green);
+        this.zooPanel.setbackground(1);
     }
 }
 

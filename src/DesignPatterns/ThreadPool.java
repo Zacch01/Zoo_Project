@@ -21,4 +21,9 @@ public class ThreadPool {
     public void end(){
         ((ExecutorService) executor).shutdown();
     }
+
+    public void restart(){
+        ((ExecutorService) executor).shutdownNow();
+        executor = Executors.newFixedThreadPool (NUMBER_OF_ANIMALS);
+    }
 }

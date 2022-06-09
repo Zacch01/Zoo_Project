@@ -32,6 +32,7 @@ public class ZooController extends Thread implements Observer {
 
     @Override
     public void update(Observable arg0, Object arg1) {
-        ZooPanel.getInstance(ZooFrame.getInstance()).manageZoo();
+        synchronized (this){
+        ZooPanel.getInstance(ZooFrame.getInstance()).manageZoo();}
     }
 }

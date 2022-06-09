@@ -40,7 +40,6 @@ public abstract class Mobile extends Observable implements Ilocatable {
         this.totaldistance+=distance;
     }
 
-
     /**
      * Getting an object Point and calculate the distance between them
      * @param p Object Point that indicate a location
