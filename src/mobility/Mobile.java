@@ -1,7 +1,5 @@
 package mobility;
 
-
-
 import java.util.Observable;
 
 

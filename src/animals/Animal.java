@@ -1,6 +1,6 @@
 package animals;
+
 import DesignPatterns.AnimalColor;
-import DesignPatterns.AnimalColorDecorator;
 import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
@@ -10,7 +10,6 @@ import graphics.ZooPanel;
 import mobility.Mobile;
 import mobility.Point;
 import utilities.MessageUtility;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
