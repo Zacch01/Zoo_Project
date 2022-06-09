@@ -3,7 +3,6 @@ package DesignPatterns;
 import animals.Animal;
 import animals.Lion;
 import graphics.ZooPanel;
-import mobility.Point;
 
 
 public class CarnivoreFactory implements AbstractZooFactory{

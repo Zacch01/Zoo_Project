@@ -3,8 +3,6 @@ package DesignPatterns;
 import animals.Animal;
 import plants.Plant;
 import privateutil.Meat;
-
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class ZooMemento {

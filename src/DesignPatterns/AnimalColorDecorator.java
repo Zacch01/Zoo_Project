@@ -1,7 +1,5 @@
 package DesignPatterns;
 
-import animals.Animal;
-
 public class AnimalColorDecorator implements AnimalColor{
     private AnimalColor anicol;
 

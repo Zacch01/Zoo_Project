@@ -486,8 +486,6 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
                 this.move(location);
             }
 
-
-
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {

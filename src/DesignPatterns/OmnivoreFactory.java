@@ -3,7 +3,6 @@ package DesignPatterns;
 import animals.Animal;
 import animals.Bear;
 import graphics.ZooPanel;
-import mobility.Point;
 
 public class OmnivoreFactory implements AbstractZooFactory{
     @Override

@@ -2,8 +2,6 @@ package DesignPatterns;
 
 import animals.Animal;
 import graphics.ZooPanel;
-import mobility.Point;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;

@@ -70,9 +70,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
         restore.addActionListener(this);
         exit.addActionListener(this);
 
-
-
-
         actionPanel.add(addanimal);
         actionPanel.add(sleep);
         actionPanel.add(wakeup);
@@ -83,7 +80,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
         actionPanel.add(save);
         actionPanel.add(restore);
         actionPanel.add(exit);
-
 
         actionPanel.setBackground(Color.BLUE);
         this.setLayout(new BorderLayout());
@@ -155,9 +151,6 @@ public class ZooPanel extends JPanel implements  ActionListener {
                     this.plant = Cabbage.getInstance(this);
                 else if(foodchoice ==2)
                     this.meat =Meat.getInstance(this);
-
-                //Animallist.get(5).interrupt();
-                //Animallist.remove(5);
                 repaint();
                 break;
 

@@ -178,10 +178,6 @@ public class AddAnimalDialog extends JDialog {
                     }
                     Animallist.add(zooFactory.createAnimal(animalTypesCombo.getItemAt(animalTypesCombo.getSelectedIndex()),Integer.parseInt(textField.getText()), Integer.parseInt(textspeedField.getText()), Integer.parseInt(textspeedvField.getText()), animalcolorsCombo.getItemAt(animalcolorsCombo.getSelectedIndex()),zoopanel));
                     zoopanel.getThreadpool().addtopoll(Animallist.get(Animallist.size()-1));
-
-
-
-
                     /*Class c;
                     ClassLoader cl = ClassLoader.getSystemClassLoader();
                     try {
@@ -194,11 +190,10 @@ public class AddAnimalDialog extends JDialog {
                     } catch (Exception a) {
                         a.printStackTrace();
                     }
-                    //zoopanel.manageZoo();*/
+                    zoopanel.manageZoo();*/
                     JOptionPane.showMessageDialog(zoopanel, "Animal added", "Message",JOptionPane.INFORMATION_MESSAGE);
                     zoopanel.getF().setEnabled(true);
                     dispose();
-
                 }
             }
         });
